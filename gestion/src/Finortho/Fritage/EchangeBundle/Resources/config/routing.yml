@@ -1,0 +1,3 @@
+finortho_fritage_echange_data:
+    path:     /fritage
+    defaults: { _controller: FinorthoFritageEchangeBundle:Echange:index }
