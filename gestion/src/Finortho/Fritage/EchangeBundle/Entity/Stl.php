@@ -173,6 +173,9 @@ class Stl
             }
         }
 
+        $this->name = $this->renomme($this->name);
+        $this->nameEntreprise = $this->renomme($this->nameEntreprise);
+
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
             $this->getUploadRootDir(), // Le répertoire de destination

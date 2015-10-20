@@ -17,6 +17,7 @@ class StlType extends AbstractType
         $builder
             ->add('file', 'file')
             ->add('name', 'text')
+            ->add('nameEntreprise', 'text')
         ;
     }
     
