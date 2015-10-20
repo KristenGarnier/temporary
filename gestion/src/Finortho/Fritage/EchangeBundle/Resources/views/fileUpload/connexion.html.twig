@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Bonjour, veuillez entrer le nom de votre entreprise :</h2>
+        <form method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" name="entreprise">
+            </div>
+            <button type="submit" class="btn btn-primary" role="button">Envoyer</button>
+        </form>
+    </div>
+{% endblock %}
+

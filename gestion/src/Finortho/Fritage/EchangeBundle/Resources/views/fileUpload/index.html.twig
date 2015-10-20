@@ -5,12 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    Hello!
-    <form method="post" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
-        {{ form_widget(form) }}
-        {{ form_rest(form) }}
-        <button type="submit" role="button">Envoyer</button>
-    </form>
+    <div class="container">
+        <h2>Bonjour {{ app.session.entreprise }}</h2>
+
+        <form method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+            {{ form_rest(form) }}
+            <button type="submit" role="button">Envoyer</button>
+        </form>
+    </div>
 {% endblock %}
 
