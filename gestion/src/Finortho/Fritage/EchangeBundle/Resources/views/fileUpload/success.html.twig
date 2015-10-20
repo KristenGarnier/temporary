@@ -1,23 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
 {% endblock %}
 
 {% block body %}
-    La pièce {{ name }}.stl a bien été ajoutée : <br><br>
+    <div class="container">
+        <h2>La pièce {{ name }}.stl a bien été ajoutée :</h2>
+        <div id="3D">
+
+        </div>
+        <h3>Les dernières pièces ajoutées</h3>
+
+    </div>
 {% endblock %}
 
 
 
 
 {% block javascripts %}
-    <script src="node_modules/three.js/build/three.min.js"></script>
-    <script src="js/STLLOADER.js"></script>
-    <script src="js/Detector.js"></script>
-    <script src="js/3D_render.js"></script>
+    <script src="{{ asset('node_modules/three.js/build/three.min.js') }}"></script>
+    <script src="{{ asset('js/STLLOADER.js') }}"></script>
+    <script src="{{ asset('js/Detector.js') }}"></script>
+    <script src="{{ asset('js/3D_render.js') }}"></script>
 
     <script>
-        init_render("{{ name }}");
+        init_render("{{ path }}");
     </script>
 {% endblock %}

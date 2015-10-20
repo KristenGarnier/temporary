@@ -19,7 +19,7 @@ class EchangeController extends Controller
 
     public function indexAction(Request $request)
     {
-        if ($this->session->get('entreprise') != null) {
+        if (array_key_exists('entreprise', $this->session->all())) {
             $stl_file = new Stl();
             $form = $this->createForm(new StlType(), $stl_file);
 
@@ -37,11 +37,11 @@ class EchangeController extends Controller
                     return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('name' => 'zerzerte', 'form' => $form->createView()));
                 }
 
-                return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('name' => $stl_file->getName()));
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName()));
             }
 
 
-            return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('name' => 'diamond', 'form' => $form->createView()));
+            return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
         }
 
         return new $this->redirect($this->generateUrl('finortho_fritage_echange_identification_entreprise'));
@@ -53,6 +53,10 @@ class EchangeController extends Controller
     {
         if ($this->get('request')->getMethod() == 'POST') {
             $this->session->set('entreprise', $request->get('entreprise'));
+            return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
+        }
+
+        if(array_key_exists('entreprise', $this->session->all())){
             return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
         }
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:connexion.html.twig');

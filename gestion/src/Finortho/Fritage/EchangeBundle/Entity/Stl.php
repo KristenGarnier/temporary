@@ -37,12 +37,18 @@ class Stl
     private $name;
 
     /**
-     * @var string vatiable stockant le nom de l'image
+     * @var string vatiable stockant le nom de l'entreprise qui a déposé l'image
      *
      * @ORM\Column(name="name_entreprise", type="string", length=255)
      */
     private $nameEntreprise;
 
+    /**
+     * @var string date d'upload du ficher
+     *
+     * @ORM\Column(name="date", type="datetime", length=255)
+     */
+    private $date;
 
 
     /**
@@ -92,7 +98,7 @@ class Stl
 
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     /**
-     * @var string $tempFilename  Variable permettant de stocker temporairement le nom de l'image
+     * @var string $tempFilename Variable permettant de stocker temporairement le nom de l'image
      */
     private $tempFilename;
 
@@ -163,7 +169,7 @@ class Stl
 
         // Si on avait un ancien fichier, on le supprime
         if (null !== $this->tempFilename) {
-            $oldFile = $this->getUploadRootDir().'/'.$this->name.'.'.$this->tempFilename;
+            $oldFile = $this->getUploadRootDir() . '/' . $this->name . '.' . $this->tempFilename;
             if (file_exists($oldFile)) {
                 unlink($oldFile);
             }
@@ -175,7 +181,7 @@ class Stl
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
             $this->getUploadRootDir(), // Le répertoire de destination
-            $this->name.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
+            $this->name . '.' . $this->url   // Le nom du fichier à créer, ici « id.extension »
         );
 
 
@@ -191,7 +197,7 @@ class Stl
     public function preRemoveUpload()
     {
         // On sauvegarde temporairement le nom du fichier, car il dépend de l'id
-        $this->tempFilename = $this->getUploadRootDir().'/'.$this->id.'.'.$this->url;
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->url;
     }
 
     /**
@@ -219,8 +225,9 @@ class Stl
      */
     public function getUploadDir()
     {
+
         // On retourne le chemin relatif vers l'image pour un navigateur
-        return 'image/stl/'.$this->getNameEntreprise();
+        return 'image/stl/' . $this->getNameEntreprise() . '/' . $this->getDate()->format('d-m-Y');
     }
 
     /**
@@ -232,7 +239,7 @@ class Stl
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
+        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
 
     /**
@@ -240,8 +247,9 @@ class Stl
      *
      * @return string
      */
-    public function getWebPath(){
-        return $this->getUploadDir().'/'.$this->getId().'.'.$this->getUrl();
+    public function getWebPath()
+    {
+        return $this->getUploadDir() . '/' . $this->getId() . '.' . $this->getUrl();
     }
 
     /**
@@ -249,16 +257,34 @@ class Stl
      *
      * @return string
      */
-    public function getAbsolutePath(){
-        return $this->getUploadRootDir().'/'.$this->getId().'.'.$this->getUrl();
+    public function getAbsolutePath()
+    {
+        return $this->getUploadRootDir() . '/' . $this->getId() . '.' . $this->getUrl();
     }
 
-    public function renomme($string){
+    /**
+     * Récupération du fichier pour le rendu 3D
+     *
+     * @return string
+     */
+    public function get3DPath()
+    {
+        return '../' . $this->getUploadDir() . '/' . $this->getName() . '.' . $this->getUrl();
+    }
+
+    /**
+     * Conversion d'une chaine de caractère ( enlève majuscule, espace, et caractères accentues )
+     *
+     * @param $string Chaine de caractères à convertir
+     * @return mixed|string Chaine de caractères convertie
+     */
+    public function renomme($string)
+    {
         $string = strtolower(htmlentities($string, ENT_QUOTES, 'utf-8'));
         $string = preg_replace('#\&(.)(?:uml|circ|tilde|acute|grave|cedil|ring)\;#', '\1', $string);
         $string = preg_replace('#\&(.{2})(?:lig)\;#', '\1', $string); // pour '&oelig;'...
         $string = preg_replace('#\&[a-z]+\;#', '', $string);
-        $string = preg_replace('# #', "_" , $string);
+        $string = preg_replace('# #', "_", $string);
 
         return $string;
     }
@@ -309,5 +335,29 @@ class Stl
     public function getNameEntreprise()
     {
         return $this->nameEntreprise;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Stl
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

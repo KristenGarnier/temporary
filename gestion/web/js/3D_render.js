@@ -6,12 +6,11 @@ var camera, cameraTarget, scene, renderer;
 
 animate();
 
-function init_render(name) {
-    console.log(name);
+function init_render(path) {
 
     container = document.createElement( 'div' );
-    container.setAttribute('id', '3D');
     document.body.appendChild( container );
+    document.getElementById("3D").appendChild(container);
 
     camera = new THREE.PerspectiveCamera( 20, window.innerWidth / window.innerHeight, 1, 15 );
     camera.position.set( 3, 0, 3 );
@@ -25,7 +24,7 @@ function init_render(name) {
     // ASCII file
 
     var loader = new THREE.STLLoader();
-    loader.load( './image/stl/'+ name +'.stl', function ( geometry ) {
+    loader.load( path , function ( geometry ) {
 
         var material = new THREE.MeshPhongMaterial( { color: 0xDED5C9, specular: 0xDED5C9, shininess: 200 } );
         var mesh = new THREE.Mesh( geometry, material );

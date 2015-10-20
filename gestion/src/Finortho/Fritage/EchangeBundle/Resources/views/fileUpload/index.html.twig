@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2>Bonjour {{ app.session.entreprise }}</h2>
+        <h2>Bonjour {{ app.session.get('entreprise') }}</h2>
 
         <form method="post" {{ form_enctype(form) }}>
             {{ form_errors(form) }}
