@@ -1,8 +1,8 @@
 finortho_fritage_echange_data:
-    path:     /fritage
+    path:     /fritage/upload
     defaults: { _controller: FinorthoFritageEchangeBundle:Echange:index }
 
 
-finortho_fritage_echange_home:
-    path:     /
-    defaults: { _controller: FinorthoFritageEchangeBundle:Echange:test }
+finortho_fritage_echange_identification_entreprise:
+    path:     /fritage
+    defaults: { _controller: FinorthoFritageEchangeBundle:Echange:connexion}

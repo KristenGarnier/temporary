@@ -143,11 +143,7 @@ class Stl
         }
         // Le nom du fichier est son id, on doit juste stocker également son extension
         // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
-        $this->url = $this->file->guessExtension();
-
-        if($this->url == 'bin'){
-            $this->url = 'stl';
-        }
+        $this->url = 'stl';
     }
 
     /**
