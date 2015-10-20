@@ -7,6 +7,7 @@ use Finortho\Fritage\EchangeBundle\Form\StlType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class EchangeController extends Controller
 {
@@ -28,16 +29,19 @@ class EchangeController extends Controller
                 if ($form->isValid()) {
                     $em = $this->getDoctrine()->getManager();
                     $stl_file->setNameEntreprise($this->session->get('entreprise'));
+                    $stl_file->setDate(new \DateTime());
                     $stl_file->preUpload();
                     $stl_file->upload();
 
                     $em->persist($stl_file);
                     $em->flush();
                 } else {
-                    return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('name' => 'zerzerte', 'form' => $form->createView()));
+                    return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
                 }
 
-                return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName()));
+                $uploads = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->findByNameEntreprise($stl_file->getNameEntreprise());
+
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName(), 'uploads' => $uploads));
             }
 
 
@@ -61,5 +65,16 @@ class EchangeController extends Controller
         }
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:connexion.html.twig');
 
+    }
+
+    public function downloadAction($id){
+
+        $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
+
+        $response = new Response();
+        $response->setContent(file_get_contents($stl_file->getWebPath()));
+        $response->headers->set('Content-Type', 'application/force-download'); // modification du content-type pour forcer le téléchargement (sinon le navigateur internet essaie d'afficher le document)
+        $response->headers->set('Content-disposition', 'filename='. $stl_file->getName().'.'.$stl_file->getUrl());
+        return $response;
     }
 }

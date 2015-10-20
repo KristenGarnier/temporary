@@ -249,7 +249,7 @@ class Stl
      */
     public function getWebPath()
     {
-        return $this->getUploadDir() . '/' . $this->getId() . '.' . $this->getUrl();
+        return $this->getUploadDir() . '/' . $this->getName() . '.' . $this->getUrl();
     }
 
     /**
@@ -259,7 +259,7 @@ class Stl
      */
     public function getAbsolutePath()
     {
-        return $this->getUploadRootDir() . '/' . $this->getId() . '.' . $this->getUrl();
+        return $this->getUploadRootDir() . '/' . $this->getName() . '.' . $this->getUrl();
     }
 
     /**

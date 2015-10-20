@@ -11,7 +11,18 @@
 
         </div>
         <h3>Les dernières pièces ajoutées</h3>
-
+        <table class="table">
+            <tr>
+                <th>Fichier</th>
+                <th>Date d'envoi</th>
+            </tr>
+            {% for upload in uploads %}
+                <tr>
+                    <td><a href="{{ upload.webPath }}">{{ upload.name }}.{{ upload.url}}</a></td>
+                    <td>{{ upload.date | date('d-m-Y') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}
 

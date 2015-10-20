@@ -6,3 +6,7 @@ finortho_fritage_echange_data:
 finortho_fritage_echange_identification_entreprise:
     path:     /fritage
     defaults: { _controller: FinorthoFritageEchangeBundle:Echange:connexion}
+
+finortho_fritage_echange_download:
+    path:     /fritage/download/{id}
+    defaults: { _controller: FinorthoFritageEchangeBundle:Echange:download}
