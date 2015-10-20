@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+{% endblock %}
+
+{% block body %}
+    La pièce {{ name }}.stl a bien été ajoutée : <br><br>
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+    <script src="node_modules/three.js/build/three.min.js"></script>
+    <script src="js/STLLOADER.js"></script>
+    <script src="js/Detector.js"></script>
+    <script src="js/3D_render.js"></script>
+
+    <script>
+        init_render("{{ name }}");
+    </script>
+{% endblock %}

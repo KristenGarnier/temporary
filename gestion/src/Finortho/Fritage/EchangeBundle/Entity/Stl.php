@@ -3,6 +3,7 @@
 namespace Finortho\Fritage\EchangeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Stl
@@ -29,11 +30,18 @@ class Stl
     private $url;
 
     /**
-     * @var string nom de l'image pour l'attribut alt
+     * @var string vatiable stockant le nom de l'image
      *
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $alt;
+    private $name;
+
+    /**
+     * @var string vatiable stockant le nom de l'image
+     *
+     * @ORM\Column(name="name_entreprise", type="string", length=255)
+     */
+    private $nameEntreprise;
 
 
 
@@ -54,7 +62,7 @@ class Stl
      *
      * @param string $url
      *
-     * @return Image
+     * @return Stl
      */
     public function setUrl($url)
     {
@@ -73,34 +81,6 @@ class Stl
     public function getUrl()
     {
         return $this->url;
-    }
-
-    /**
-     * Set alt
-     *
-     * Permet de définir l'attribut alt
-     *
-     * @param string $alt
-     *
-     * @return Image
-     */
-    public function setAlt($alt)
-    {
-        $this->alt = $alt;
-
-        return $this;
-    }
-
-    /**
-     * Get alt
-     *
-     * Permet de récupérer l'attribut alt
-     *
-     * @return string
-     */
-    public function getAlt()
-    {
-        return $this->alt;
     }
 
 
@@ -161,13 +141,13 @@ class Stl
         if (null === $this->file) {
             return;
         }
-
         // Le nom du fichier est son id, on doit juste stocker également son extension
         // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
         $this->url = $this->file->guessExtension();
 
-        // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-        $this->alt = $this->file->getClientOriginalName();
+        if($this->url == 'bin'){
+            $this->url = 'stl';
+        }
     }
 
     /**
@@ -187,7 +167,7 @@ class Stl
 
         // Si on avait un ancien fichier, on le supprime
         if (null !== $this->tempFilename) {
-            $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
+            $oldFile = $this->getUploadRootDir().'/'.$this->name.'.'.$this->tempFilename;
             if (file_exists($oldFile)) {
                 unlink($oldFile);
             }
@@ -196,8 +176,9 @@ class Stl
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
             $this->getUploadRootDir(), // Le répertoire de destination
-            $this->id.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
+            $this->name.'.'.$this->url   // Le nom du fichier à créer, ici « id.extension »
         );
+
 
     }
 
@@ -240,7 +221,7 @@ class Stl
     public function getUploadDir()
     {
         // On retourne le chemin relatif vers l'image pour un navigateur
-        return 'image/stl';
+        return 'image/stl/'.$this->getNameEntreprise();
     }
 
     /**
@@ -252,7 +233,7 @@ class Stl
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
     }
 
     /**
@@ -271,5 +252,63 @@ class Stl
      */
     public function getAbsolutePath(){
         return $this->getUploadRootDir().'/'.$this->getId().'.'.$this->getUrl();
+    }
+
+    public function renomme($string){
+        $string = strtolower(htmlentities($string, ENT_QUOTES, 'utf-8'));
+        $string = preg_replace('#\&(.)(?:uml|circ|tilde|acute|grave|cedil|ring)\;#', '\1', $string);
+        $string = preg_replace('#\&(.{2})(?:lig)\;#', '\1', $string); // pour '&oelig;'...
+        $string = preg_replace('#\&[a-z]+\;#', '', $string);
+        $string = preg_replace('# #', "_" , $string);
+
+        return $string;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Stl
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set nameEntreprise
+     *
+     * @param string $nameEntreprise
+     *
+     * @return Stl
+     */
+    public function setNameEntreprise($nameEntreprise)
+    {
+        $this->nameEntreprise = $nameEntreprise;
+
+        return $this;
+    }
+
+    /**
+     * Get nameEntreprise
+     *
+     * @return string
+     */
+    public function getNameEntreprise()
+    {
+        return $this->nameEntreprise;
     }
 }
