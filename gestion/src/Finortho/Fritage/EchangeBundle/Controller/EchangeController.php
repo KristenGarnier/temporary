@@ -11,11 +11,15 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class EchangeController extends Controller
 {
 
+    private $session;
+
+    public function __construct(){
+        $this->session = new Session();
+    }
+
     public function indexAction(Request $request)
     {
-
-        $session = new Session();
-        if ($session->get('entreprise') != null) {
+        if ($this->session->get('entreprise') != null) {
             $stl_file = new Stl();
             $form = $this->createForm(new StlType(), $stl_file);
 
@@ -23,6 +27,7 @@ class EchangeController extends Controller
                 $form->handleRequest($request);
                 if ($form->isValid()) {
                     $em = $this->getDoctrine()->getManager();
+                    $stl_file->setNameEntreprise($this->session->get('entreprise'));
                     $stl_file->preUpload();
                     $stl_file->upload();
 
@@ -37,17 +42,20 @@ class EchangeController extends Controller
 
 
             return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('name' => 'diamond', 'form' => $form->createView()));
-        }else {
-            return new $this->redirect($this->generateUrl('finortho_fritage_echange_identification_entreprise'));
         }
 
+        return new $this->redirect($this->generateUrl('finortho_fritage_echange_identification_entreprise'));
+
 
     }
 
-    public function testAction()
+    public function connexionAction(Request $request)
     {
-        return $this->render('FinorthoFritageEchangeBundle:Default:test.html.twig');
+        if ($this->get('request')->getMethod() == 'POST') {
+            $this->session->set('entreprise', $request->get('entreprise'));
+            return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
+        }
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:connexion.html.twig');
+
     }
-
-
 }
