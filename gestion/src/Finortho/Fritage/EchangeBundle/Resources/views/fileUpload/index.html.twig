@@ -6,14 +6,35 @@
 
 {% block body %}
     <div class="container">
-        <h2>Bonjour {{ app.session.get('entreprise') }}</h2>
+        <h2>Bonjour {{ app.user.username | capitalize }}</h2>
 
         <form method="post" {{ form_enctype(form) }}>
+
+            {% if error is defined %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+            {% endif %}
+
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
             <button type="submit" role="button">Envoyer</button>
         </form>
+        <h3>Les dernières pièces ajoutées</h3>
+        <table class="table">
+            <tr>
+                <th>Fichier</th>
+                <th>Date d'envoi</th>
+            </tr>
+            {% for upload in uploads %}
+                <tr>
+                    <td><a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}
+                            .{{ upload.url }}</a></td>
+                    <td>{{ upload.date | date('d-m-Y') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}
 

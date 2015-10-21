@@ -6,75 +6,74 @@ use Finortho\Fritage\EchangeBundle\Entity\Stl;
 use Finortho\Fritage\EchangeBundle\Form\StlType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class EchangeController extends Controller
 {
 
     private $session;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->session = new Session();
     }
 
     public function indexAction(Request $request)
     {
-        if (array_key_exists('entreprise', $this->session->all())) {
-            $stl_file = new Stl();
-            $form = $this->createForm(new StlType(), $stl_file);
+        $user_uploads = $this->get('finortho_fritage_echange.user_uploads');
+        $stl_file = new Stl();
+        $form = $this->createForm(new StlType(), $stl_file);
 
-            if ($this->get('request')->getMethod() == 'POST') {
-                $form->handleRequest($request);
-                if ($form->isValid()) {
-                    $em = $this->getDoctrine()->getManager();
-                    $stl_file->setNameEntreprise($this->session->get('entreprise'));
-                    $stl_file->setDate(new \DateTime());
-                    $stl_file->preUpload();
-                    $stl_file->upload();
+        if ($this->get('request')->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $double = $this->get('finortho_fritage_echange.check_double');
+                try {
+                    $double->check($stl_file->getName(), $this->getUser()->getUsername());
 
-                    $em->persist($stl_file);
-                    $em->flush();
-                } else {
-                    return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
+                } catch (\Exception $e) {
+
+                    $uploads = $user_uploads->get();
+
+                    return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads, 'error' => $e->getMessage()));
                 }
 
-                $uploads = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->findByNameEntreprise($stl_file->getNameEntreprise());
+                $em = $this->getDoctrine()->getManager();
+                $stl_file->setNameEntreprise($this->getUser()->getUsername());
+                $stl_file->setDate(new \DateTime());
+                $stl_file->preUpload();
+                $stl_file->upload();
 
-                return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName(), 'uploads' => $uploads));
+                $em->persist($stl_file);
+                $em->flush();
+            } else {
+
+                $uploads = $user_uploads->get();
+
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads));
             }
 
+            $uploads = $user_uploads->get();
 
-            return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
+            return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName(), 'uploads' => $uploads));
         }
 
-        return new $this->redirect($this->generateUrl('finortho_fritage_echange_identification_entreprise'));
+        $uploads = $user_uploads->get();
 
-
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads));
     }
 
-    public function connexionAction(Request $request)
+
+    public function downloadAction($id)
     {
-        if ($this->get('request')->getMethod() == 'POST') {
-            $this->session->set('entreprise', $request->get('entreprise'));
-            return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
-        }
-
-        if(array_key_exists('entreprise', $this->session->all())){
-            return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
-        }
-        return $this->render('FinorthoFritageEchangeBundle:fileUpload:connexion.html.twig');
-
-    }
-
-    public function downloadAction($id){
 
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
 
         $response = new Response();
         $response->setContent(file_get_contents($stl_file->getWebPath()));
         $response->headers->set('Content-Type', 'application/force-download'); // modification du content-type pour forcer le téléchargement (sinon le navigateur internet essaie d'afficher le document)
-        $response->headers->set('Content-disposition', 'filename='. $stl_file->getName().'.'.$stl_file->getUrl());
+        $response->headers->set('Content-disposition', 'filename=' . $stl_file->getName() . '.' . $stl_file->getUrl());
         return $response;
     }
 }
