@@ -18,6 +18,11 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\Column(name="tarif", type="string", length=255)
+     */
+    protected $tarif = 1;
+
 
 
     public function __construct()
