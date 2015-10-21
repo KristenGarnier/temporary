@@ -17,7 +17,7 @@ class LastUploads
     }
 
     public function get(){
-        $uploads = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findByNameEntreprise($this->user->getUsername());
+        $uploads = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findByNameEntreprise($this->user->getUsername(), array('date' => 'DESC'));
         return $uploads;
     }
 }
