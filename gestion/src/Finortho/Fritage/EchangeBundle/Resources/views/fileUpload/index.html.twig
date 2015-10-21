@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/font-awesome/css/font-awesome.min.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -9,6 +10,14 @@
         <h2>Bonjour {{ app.user.username | capitalize }}</h2>
 
         <form method="post" {{ form_enctype(form) }}>
+
+            {% for flashMessage in app.session.flashbag.get('erase') %}
+
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
 
             {% if error is defined %}
                 <div class="alert alert-danger">
@@ -26,12 +35,14 @@
             <tr>
                 <th>Fichier</th>
                 <th>Date d'envoi</th>
+                <th>Suprimer</th>
             </tr>
             {% for upload in uploads %}
                 <tr>
                     <td><a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}
                             .{{ upload.url }}</a></td>
                     <td>{{ upload.date | date('d-m-Y') }}</td>
+                    <td><a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                 </tr>
             {% endfor %}
         </table>

@@ -76,4 +76,20 @@ class EchangeController extends Controller
         $response->headers->set('Content-disposition', 'filename=' . $stl_file->getName() . '.' . $stl_file->getUrl());
         return $response;
     }
+
+    public function eraseAction($id){
+
+        $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
+
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $name = $stl_file->getName().'.'.$stl_file->getUrl();
+
+        $em->remove($stl_file);
+        $em->flush();
+
+        $this->session->getFlashBag()->add('erase', "Le ficher $name a bien été suprimmé");
+
+        return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
+    }
 }
