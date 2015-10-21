@@ -14,7 +14,7 @@ class CheckDouble
     }
 
     public function check($entityName, $enterpriseName){
-        $check = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findOneBy(array('name' => $entityName, 'nameEntreprise' => $enterpriseName));
+        $check = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findOneBy(array('name' => $entityName, 'utilisateur' => $enterpriseName));
 
         if( !empty($check)){
             Throw new \Exception('Il existe déjà un fichier sous ce nom');

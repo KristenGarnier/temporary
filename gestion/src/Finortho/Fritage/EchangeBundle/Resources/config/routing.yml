@@ -9,3 +9,7 @@ finortho_fritage_echange_download:
 finortho_fritage_echange_erase:
     path:     /erase/{id}
     defaults: { _controller: FinorthoFritageEchangeBundle:Echange:erase}
+
+finortho_fritage_echange_modify:
+    path:     /modify/{id}
+    defaults: { _controller: FinorthoFritageEchangeBundle:Echange:modify}

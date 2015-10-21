@@ -30,4 +30,28 @@ class User extends BaseUser
         parent::__construct();
         // your own logic
     }
+
+    /**
+     * Set tarif
+     *
+     * @param string $tarif
+     * @return User
+     */
+    public function setTarif($tarif)
+    {
+        $this->tarif = $tarif;
+
+        return $this;
+    }
+
+    /**
+     * Get tarif
+     *
+     * @return string 
+     */
+    public function getTarif()
+    {
+        return $this->tarif;
+    }
+
 }

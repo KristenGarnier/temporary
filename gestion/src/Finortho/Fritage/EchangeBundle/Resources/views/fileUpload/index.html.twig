@@ -30,6 +30,7 @@
             {{ form_rest(form) }}
             <button type="submit" role="button">Envoyer</button>
         </form>
+        {% if uploads is defined %}
         <h3>Les dernières pièces ajoutées</h3>
         <table class="table">
             <tr>
@@ -37,15 +38,26 @@
                 <th>Date d'envoi</th>
                 <th>Suprimer</th>
             </tr>
-            {% for upload in uploads %}
-                <tr>
-                    <td><a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}
-                            .{{ upload.url }}</a></td>
-                    <td>{{ upload.date | date('d-m-Y') }}</td>
-                    <td><a href="{{ path('finortho_fritage_echange_erase', {'id': upload.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
-                </tr>
-            {% endfor %}
+
+                {% for upload in uploads %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}.{{ upload.url }}</a></td>
+                        <td>{{ upload.date | date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('finortho_fritage_echange_erase', {'id': upload.id}) }}"
+                               class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <a href="{{ path('finortho_fritage_echange_modify', {'id': upload.id}) }}"
+                               class="btn btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
         </table>
+        {% endif %}
     </div>
 {% endblock %}
 

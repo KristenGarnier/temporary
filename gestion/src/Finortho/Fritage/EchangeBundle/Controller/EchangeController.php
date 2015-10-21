@@ -30,7 +30,7 @@ class EchangeController extends Controller
             if ($form->isValid()) {
                 $double = $this->get('finortho_fritage_echange.check_double');
                 try {
-                    $double->check($stl_file->getName(), $this->getUser()->getUsername());
+                    $double->check($stl_file->getName(), $this->getUser());
 
                 } catch (\Exception $e) {
 
@@ -40,7 +40,7 @@ class EchangeController extends Controller
                 }
 
                 $em = $this->getDoctrine()->getManager();
-                $stl_file->setNameEntreprise($this->getUser()->getUsername());
+                $stl_file->setUtilisateur($this->getUser());
                 $stl_file->setDate(new \DateTime());
                 $stl_file->preUpload();
                 $stl_file->upload();
@@ -77,14 +77,15 @@ class EchangeController extends Controller
         return $response;
     }
 
-    public function eraseAction($id){
+    public function eraseAction($id)
+    {
 
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
 
         $em = $this->getDoctrine()->getEntityManager();
 
         $path = $stl_file->getWebPath();
-        $name = $stl_file->getName().'.'.$stl_file->getUrl();
+        $name = $stl_file->getName() . '.' . $stl_file->getUrl();
 
         $em->remove($stl_file);
         $em->flush();
@@ -95,4 +96,47 @@ class EchangeController extends Controller
 
         return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
     }
+
+    public function modifyAction(Request $request, $id)
+    {
+        $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
+        $name = $stl_file->getName();
+        $path = $stl_file->getWebPath();
+        $form = $this->createForm(new StlType(), $stl_file);
+
+        if ($this->get('request')->getMethod() == 'POST') {
+
+            $user_uploads = $this->get('finortho_fritage_echange.user_uploads');
+
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                if($name != $stl_file->getName() && $form['file']->getData() == null){
+                    rename($path, $stl_file->getWebPath());
+                }
+
+                $em = $this->getDoctrine()->getManager();
+                $stl_file->setDate(new \DateTime());
+                $stl_file->preUpload();
+                $stl_file->upload();
+
+                $em->persist($stl_file);
+                $em->flush();
+            } else {
+
+                $uploads = $user_uploads->get();
+
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads));
+            }
+
+            $uploads = $user_uploads->get();
+
+            return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName(), 'uploads' => $uploads));
+        }
+
+
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
+
+    }
+
 }

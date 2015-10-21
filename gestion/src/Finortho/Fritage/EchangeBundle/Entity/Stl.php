@@ -37,18 +37,19 @@ class Stl
     private $name;
 
     /**
-     * @var string vatiable stockant le nom de l'entreprise qui a déposé l'image
-     *
-     * @ORM\Column(name="name_entreprise", type="string", length=255)
-     */
-    private $nameEntreprise;
-
-    /**
      * @var string date d'upload du ficher
      *
      * @ORM\Column(name="date", type="datetime", length=255)
      */
     private $date;
+
+    /**
+     * @var $utilisateur Utilisateur attaché à la piece
+     *
+     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User", cascade={"remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $utilisateur;
 
 
     /**
@@ -176,7 +177,7 @@ class Stl
         }
 
         $this->name = $this->renomme($this->name);
-        $this->nameEntreprise = $this->renomme($this->nameEntreprise);
+        $this->nameEntreprise = $this->renomme($this->getUtilisateur()->getUsernameCanonical());
 
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
@@ -227,7 +228,7 @@ class Stl
     {
 
         // On retourne le chemin relatif vers l'image pour un navigateur
-        return 'image/stl/' . $this->getNameEntreprise() . '/' . $this->getDate()->format('d-m-Y');
+        return 'image/stl/' . $this->getUtilisateur()->getUsernameCanonical() . '/' . $this->getDate()->format('d-m-Y');
     }
 
     /**
@@ -313,29 +314,6 @@ class Stl
         return $this->name;
     }
 
-    /**
-     * Set nameEntreprise
-     *
-     * @param string $nameEntreprise
-     *
-     * @return Stl
-     */
-    public function setNameEntreprise($nameEntreprise)
-    {
-        $this->nameEntreprise = $nameEntreprise;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEntreprise
-     *
-     * @return string
-     */
-    public function getNameEntreprise()
-    {
-        return $this->nameEntreprise;
-    }
 
     /**
      * Set date
@@ -359,5 +337,28 @@ class Stl
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \Finortho\Fritage\EchangeBundle\Entity\User $utilisateur
+     * @return Stl
+     */
+    public function setUtilisateur(\Finortho\Fritage\EchangeBundle\Entity\User $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \Finortho\Fritage\EchangeBundle\Entity\User 
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }
