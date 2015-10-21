@@ -83,10 +83,13 @@ class EchangeController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
+        $path = $stl_file->getWebPath();
         $name = $stl_file->getName().'.'.$stl_file->getUrl();
 
         $em->remove($stl_file);
         $em->flush();
+
+        unlink($path);
 
         $this->session->getFlashBag()->add('erase', "Le ficher $name a bien été suprimmé");
 

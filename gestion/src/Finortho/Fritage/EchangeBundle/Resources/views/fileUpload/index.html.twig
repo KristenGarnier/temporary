@@ -42,7 +42,7 @@
                     <td><a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}
                             .{{ upload.url }}</a></td>
                     <td>{{ upload.date | date('d-m-Y') }}</td>
-                    <td><a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                    <td><a href="{{ path('finortho_fritage_echange_erase', {'id': upload.id}) }}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                 </tr>
             {% endfor %}
         </table>
