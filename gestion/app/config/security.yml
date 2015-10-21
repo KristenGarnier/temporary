@@ -20,10 +20,10 @@ security:
             security: false
 
         fritage:
-            pattern: ^/fritage/
+            pattern: ^/
             form_login:
-                check_path: /fritage/login_check
-                login_path: /fritage/login
+                check_path: /login_check
+                login_path: login
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider # Use form.csrf_provider instead for Symfony <2.4
 
@@ -43,7 +43,6 @@ security:
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
     access_control:
-        - { path: ^/fritage/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/fritage/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/fritage/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/fritage, role: ROLE_USER }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: ROLE_USER }
