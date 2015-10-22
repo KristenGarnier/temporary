@@ -11,7 +11,14 @@
 
         <form method="post" {{ form_enctype(form) }}>
 
-            {% for flashMessage in app.session.flashbag.get('erase') %}
+            {% for flashMessage in app.session.flashbag.get('erase')%}
+
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('success')%}
 
                 <div class="alert alert-success">
                     {{ flashMessage }}
@@ -19,24 +26,54 @@
 
             {% endfor %}
 
-            {% if error is defined %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+
                 <div class="alert alert-danger">
-                    {{ error }}
+                    {{ flashMessage }}
                 </div>
-            {% endif %}
+
+            {% endfor %}
 
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
             <button type="submit" role="button">Envoyer</button>
         </form>
+        {% if commands is defined and commands != null %}
+            <h3>Les pièces pour cette commande</h3>
+            <table class="table">
+                <tr>
+                    <th>Fichier</th>
+                    <th>Date d'envoi</th>
+                    <th>Actions</th>
+                </tr>
+
+                {% for command in commands %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : command.id}) }}">{{ command.name }}.{{ command.url }}</a></td>
+                        <td>{{ command.date | date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('finortho_fritage_echange_erase', {'id': command.id}) }}"
+                               class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <a href="{{ path('finortho_fritage_echange_modify', {'id': command.id}) }}"
+                               class="btn btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
         {% if uploads is defined %}
         <h3>Les dernières pièces ajoutées</h3>
         <table class="table">
             <tr>
                 <th>Fichier</th>
                 <th>Date d'envoi</th>
-                <th>Suprimer</th>
+                <th>Actions</th>
             </tr>
 
                 {% for upload in uploads %}

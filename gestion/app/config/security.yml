@@ -23,7 +23,7 @@ security:
             pattern: ^/
             form_login:
                 check_path: /login_check
-                login_path: login
+                login_path: /login
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider # Use form.csrf_provider instead for Symfony <2.4
 

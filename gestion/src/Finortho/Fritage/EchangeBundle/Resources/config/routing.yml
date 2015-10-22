@@ -13,3 +13,7 @@ finortho_fritage_echange_erase:
 finortho_fritage_echange_modify:
     path:     /modify/{id}
     defaults: { _controller: FinorthoFritageEchangeBundle:Echange:modify}
+
+finortho_fritage_commande_index:
+    path:     /commande
+    defaults: { _controller: FinorthoFritageEchangeBundle:Commande:index}

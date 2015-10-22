@@ -6,3 +6,7 @@ services:
     finortho_fritage_echange.user_uploads:
         class: Finortho\Fritage\EchangeBundle\Services\LastUploads
         arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+
+    finortho_fritage_echange.session_handler:
+        class: Finortho\Fritage\EchangeBundle\Services\SessionHandler
+        arguments: [@session, @doctrine.orm.entity_manager]

@@ -21,6 +21,7 @@ class EchangeController extends Controller
 
     public function indexAction(Request $request)
     {
+        $session_handler = $this->get('finortho_fritage_echange.session_handler');
         $user_uploads = $this->get('finortho_fritage_echange.user_uploads');
         $stl_file = new Stl();
         $form = $this->createForm(new StlType(), $stl_file);
@@ -35,8 +36,9 @@ class EchangeController extends Controller
                 } catch (\Exception $e) {
 
                     $uploads = $user_uploads->get();
-
-                    return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads, 'error' => $e->getMessage()));
+                    $currentCommand = $session_handler->getUploads();
+                    $this->session->getFlashBag()->add('error', $e->getMessage());
+                    return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads,'commands' => $currentCommand));
                 }
 
                 $em = $this->getDoctrine()->getManager();
@@ -50,18 +52,25 @@ class EchangeController extends Controller
             } else {
 
                 $uploads = $user_uploads->get();
+                $currentCommand = $session_handler->getUploads();
 
-                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads));
+                $this->session->getFlashBag()->add('error', "Veuilez remplir le formulaire comme il le faut");
+
+
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads, 'commands' => $currentCommand));
             }
 
             $uploads = $user_uploads->get();
-
-            return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName(), 'uploads' => $uploads));
+            $session_handler->setUploads($stl_file);
+            $name = $stl_file->getName() . '.' . $stl_file->getUrl();
+            $this->session->getFlashBag()->add('success', "Le fichier ".$name." a bien été ajouté");
+            $currentCommand = $session_handler->getUploads();
+            return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array( 'name' => $stl_file->getName(), 'uploads' => $uploads, 'form' => $form->createView(), 'commands' => $currentCommand));
         }
 
         $uploads = $user_uploads->get();
-
-        return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads));
+        $currentCommand = $session_handler->getUploads();
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads, 'commands' => $currentCommand));
     }
 
 
@@ -79,9 +88,8 @@ class EchangeController extends Controller
 
     public function eraseAction($id)
     {
-
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
-
+        $this->get('finortho_fritage_echange.session_handler')->unsetUpload($id);
         $em = $this->getDoctrine()->getEntityManager();
 
         $path = $stl_file->getWebPath();
@@ -99,6 +107,7 @@ class EchangeController extends Controller
 
     public function modifyAction(Request $request, $id)
     {
+        $session_handler = $this->get('finortho_fritage_echange.session_handler');
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
         $name = $stl_file->getName();
         $path = $stl_file->getWebPath();
@@ -124,16 +133,15 @@ class EchangeController extends Controller
                 $em->flush();
             } else {
 
-                $uploads = $user_uploads->get();
+                $this->session->getFlashBag()->add('error', "Veuilez remplir le formulaire comme il le faut");
 
-                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'uploads' => $uploads));
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
             }
 
-            $uploads = $user_uploads->get();
+            $this->session->getFlashBag()->add('success', "Le fichier a bien été modifié");
+            return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
 
-            return $this->render('FinorthoFritageEchangeBundle:fileUpload:success.html.twig', array('path' => $stl_file->get3DPath(), 'name' => $stl_file->getName(), 'uploads' => $uploads));
         }
-
 
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
 

@@ -46,7 +46,7 @@ class Stl
     /**
      * @var $utilisateur Utilisateur attaché à la piece
      *
-     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
     private $utilisateur;
