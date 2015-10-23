@@ -51,6 +51,13 @@ class Stl
      */
     private $utilisateur;
 
+    /**
+     * @var string angle de la pièce ( remplacement du Z )
+     *
+     * @ORM\Column(name="axis", type="string", length=1)
+     */
+    private $axis;
+
 
     /**
      * Get id
@@ -65,7 +72,7 @@ class Stl
     /**
      * Set url
      *
-     * Permet de définir l'extension du ficher
+     * Permet de définir l'extension du fichier
      *
      * @param string $url
      *
@@ -360,5 +367,28 @@ class Stl
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    /**
+     * Set axis
+     *
+     * @param string $axis
+     * @return Stl
+     */
+    public function setAxis($axis)
+    {
+        $this->axis = $axis;
+
+        return $this;
+    }
+
+    /**
+     * Get axis
+     *
+     * @return string 
+     */
+    public function getAxis()
+    {
+        return $this->axis;
     }
 }

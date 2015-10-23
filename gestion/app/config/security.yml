@@ -28,7 +28,7 @@ security:
                 csrf_provider: form.csrf_provider # Use form.csrf_provider instead for Symfony <2.4
 
             logout:
-                path: /fritage/logout
+                path: /logout
             anonymous:    true
 
 

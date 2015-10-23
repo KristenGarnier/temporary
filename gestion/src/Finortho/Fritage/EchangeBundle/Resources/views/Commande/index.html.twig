@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h3>Coucou</h3>
+        {% if uploads is defined %}
+            <h3>Contenu de votre commande</h3>
+            <table class="table">
+                <tr>
+                    <th>Fichier</th>
+                    <th>Date d'envoi</th>
+                    <th>Actions</th>
+                </tr>
+
+                {% for upload in uploads %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}
+                                .{{ upload.url }}</a></td>
+                        <td>{{ upload.date | date('d-m-Y') }}</td>
+                        <td>
+                            <a href="{{ path('finortho_fritage_echange_erase', {'id': upload.id}) }}"
+                               class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                            <a href="{{ path('finortho_fritage_echange_modify', {'id': upload.id}) }}"
+                               class="btn btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+
+{% endblock %}

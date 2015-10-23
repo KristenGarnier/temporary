@@ -1,43 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('node_modules/font-awesome/css/font-awesome.min.css') }}">
-{% endblock %}
-
 {% block body %}
     <div class="container">
         <h2>Bonjour {{ app.user.username | capitalize }}</h2>
 
+        {% for flashMessage in app.session.flashbag.get('erase')%}
+
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('success')%}
+
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('error') %}
+
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+
+        {% endfor %}
+
+
         <form method="post" {{ form_enctype(form) }}>
 
-            {% for flashMessage in app.session.flashbag.get('erase')%}
-
-                <div class="alert alert-success">
-                    {{ flashMessage }}
-                </div>
-
-            {% endfor %}
-            {% for flashMessage in app.session.flashbag.get('success')%}
-
-                <div class="alert alert-success">
-                    {{ flashMessage }}
-                </div>
-
-            {% endfor %}
-
-            {% for flashMessage in app.session.flashbag.get('error') %}
-
-                <div class="alert alert-danger">
-                    {{ flashMessage }}
-                </div>
-
-            {% endfor %}
 
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
-            <button type="submit" role="button">Envoyer</button>
+            <button class="btn btn-primary" type="submit" role="button">Envoyer</button>
         </form>
         {% if commands is defined and commands != null %}
             <h3>Les pièces pour cette commande</h3>
@@ -66,34 +63,9 @@
                     </tr>
                 {% endfor %}
             </table>
-        {% endif %}
-        {% if uploads is defined %}
-        <h3>Les dernières pièces ajoutées</h3>
-        <table class="table">
-            <tr>
-                <th>Fichier</th>
-                <th>Date d'envoi</th>
-                <th>Actions</th>
-            </tr>
-
-                {% for upload in uploads %}
-                    <tr>
-                        <td>
-                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : upload.id}) }}">{{ upload.name }}.{{ upload.url }}</a></td>
-                        <td>{{ upload.date | date('d-m-Y') }}</td>
-                        <td>
-                            <a href="{{ path('finortho_fritage_echange_erase', {'id': upload.id}) }}"
-                               class="btn btn-danger">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                            <a href="{{ path('finortho_fritage_echange_modify', {'id': upload.id}) }}"
-                               class="btn btn-warning">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-        </table>
+            <a href="{{ path('finortho_fritage_commande_index') }}" class="btn btn-default" > Commander <i class="fa fa-chevron-right"></i></a>
+        {% else %}
+            <h3>Vous n'avez pas encore importé de produit, ils s'ajouteront ici.</h3>
         {% endif %}
     </div>
 {% endblock %}
