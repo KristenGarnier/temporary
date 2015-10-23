@@ -17,3 +17,7 @@ finortho_fritage_echange_modify:
 finortho_fritage_commande_index:
     path:     /commande
     defaults: { _controller: FinorthoFritageEchangeBundle:Commande:index}
+
+finortho_fritage_axis_define:
+    path:   /axis/{id}
+    defaults: {_controller: FinorthoFritageEchangeBundle:Axis:define}

@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="container">
+        <h3>Renseignez l'axe vertical dans la machine</h3>
+
+        <div class="row">
+            <div class="col col-md-6">
+
+            </div>
+            <div class="col col-md-6">
+                <form method="post" {{ form_enctype(form) }}>
+                    {{ form_errors(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_rest(form) }}
+
+                    <button type="submit" class="btn btn-primary">
+                        Confirmer l'axe
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

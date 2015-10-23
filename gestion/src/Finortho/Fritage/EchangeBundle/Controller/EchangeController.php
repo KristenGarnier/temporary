@@ -60,8 +60,7 @@ class EchangeController extends Controller
             $session_handler->setUploads($stl_file);
             $name = $stl_file->getName() . '.' . $stl_file->getUrl();
             $this->session->getFlashBag()->add('success', "Le fichier ".$name." a bien été ajouté");
-            $currentCommand = $session_handler->getUploads();
-            return $this->render('FinorthoFritageEchangeBundle:fileUpload:axis.html.twig', array( 'name' => $stl_file->getName(), 'form' => $form->createView(), 'commands' => $currentCommand));
+            return $this->redirect($this->generateUrl('finortho_fritage_axis_define' , array('id' => $stl_file->getId())));
         }
 
         $currentCommand = $session_handler->getUploads();

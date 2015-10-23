@@ -54,7 +54,7 @@ class Stl
     /**
      * @var string angle de la pièce ( remplacement du Z )
      *
-     * @ORM\Column(name="axis", type="string", length=1)
+     * @ORM\Column(name="axis", type="string", length=1, nullable=true)
      */
     private $axis;
 
