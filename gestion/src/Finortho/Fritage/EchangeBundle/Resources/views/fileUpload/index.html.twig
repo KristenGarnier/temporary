@@ -27,14 +27,14 @@
 
         {% endfor %}
 
-
+        <h3>Ajoutez un nouveau produit</h3>
         <form method="post" {{ form_enctype(form) }}>
 
 
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
-            <button class="btn btn-primary" type="submit" role="button">Envoyer</button>
+            <button class="btn btn-primary" type="submit" role="button"><i class="fa fa-plus"></i> Ajouter un produit</button>
         </form>
         {% if commands is defined and commands != null %}
             <h3>Les pièces pour cette commande</h3>
