@@ -26,6 +26,7 @@ class EchangeController extends Controller
         $form = $this->createForm(new StlType(), $stl_file);
 
         if ($this->get('request')->getMethod() == 'POST') {
+            $checked = false;
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $double = $this->get('finortho_fritage_echange.check_double');
@@ -37,6 +38,18 @@ class EchangeController extends Controller
                     $currentCommand = $session_handler->getUploads();
                     $this->session->getFlashBag()->add('error', $e->getMessage());
                     return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
+                }
+
+                if ($request->get('same') == 'on') {
+                    $params = $this->session->get('params');
+                    $stl_file->setAxis($params['axis']);
+                    $stl_file->setQuantite($params['quantite']);
+                    $stl_file->setFonctionnel($params['fonctionnel']);
+                    $stl_file->setClinique($params['clinique']);
+                    $stl_file->setVerification3($params['verification']);
+                    $stl_file->setAssemblage($params['assemblage']);
+
+                    $checked = true;
                 }
 
                 $em = $this->getDoctrine()->getManager();
@@ -60,6 +73,11 @@ class EchangeController extends Controller
             $session_handler->setUploads($stl_file);
             $name = $stl_file->getName() . '.' . $stl_file->getUrl();
             $this->session->getFlashBag()->add('success', "Le fichier ".$name." a bien été ajouté");
+
+            if($checked){
+                $currentCommand = $session_handler->getUploads();
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
+            }
             return $this->redirect($this->generateUrl('finortho_fritage_axis_define' , array('id' => $stl_file->getId())));
         }
 

@@ -58,6 +58,40 @@ class Stl
      */
     private $axis;
 
+    /**
+     * @var integer quantité de pièces sur ce modèle
+     *
+     * @ORM\Column(name="quantite", type="integer", nullable=true)
+     */
+    private $quantite;
+
+    /**
+     * @var boolean si la pièce doit être fonctionnelle ou non)
+     *
+     * @ORM\Column(name="fonctionel", type="boolean", nullable=true)
+     */
+    private $fonctionnel;
+
+    /**
+     * @var boolean si la pièce est destiné à un usage clinique
+     *
+     * @ORM\Column(name="clinique", type="boolean", nullable=true)
+     */
+    private $clinique;
+
+    /**
+     * @var boolean si la pièce est destiné à un usage clinique
+     *
+     * @ORM\Column(name="verif_3", type="boolean", nullable=true)
+     */
+    private $verification_3;
+
+    /**
+     * @var boolean si la pièce doit être assemblée
+     *
+     * @ORM\Column(name="assemble", type="boolean", nullable=true)
+     */
+    private $assemblage;
 
     /**
      * Get id
@@ -390,5 +424,120 @@ class Stl
     public function getAxis()
     {
         return $this->axis;
+    }
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     * @return Stl
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer 
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
+    }
+
+    /**
+     * Set fonctionnel
+     *
+     * @param boolean $fonctionnel
+     * @return Stl
+     */
+    public function setFonctionnel($fonctionnel)
+    {
+        $this->fonctionnel = $fonctionnel;
+
+        return $this;
+    }
+
+    /**
+     * Get fonctionnel
+     *
+     * @return boolean 
+     */
+    public function getFonctionnel()
+    {
+        return $this->fonctionnel;
+    }
+
+    /**
+     * Set clinique
+     *
+     * @param boolean $clinique
+     * @return Stl
+     */
+    public function setClinique($clinique)
+    {
+        $this->clinique = $clinique;
+
+        return $this;
+    }
+
+    /**
+     * Get clinique
+     *
+     * @return boolean 
+     */
+    public function getClinique()
+    {
+        return $this->clinique;
+    }
+
+    /**
+     * Set verification_3
+     *
+     * @param boolean $verification3
+     * @return Stl
+     */
+    public function setVerification3($verification3)
+    {
+        $this->verification_3 = $verification3;
+
+        return $this;
+    }
+
+    /**
+     * Get verification_3
+     *
+     * @return boolean 
+     */
+    public function getVerification3()
+    {
+        return $this->verification_3;
+    }
+
+    /**
+     * Set assemblage
+     *
+     * @param boolean $assemblage
+     * @return Stl
+     */
+    public function setAssemblage($assemblage)
+    {
+        $this->assemblage = $assemblage;
+
+        return $this;
+    }
+
+    /**
+     * Get assemblage
+     *
+     * @return boolean 
+     */
+    public function getAssemblage()
+    {
+        return $this->assemblage;
     }
 }

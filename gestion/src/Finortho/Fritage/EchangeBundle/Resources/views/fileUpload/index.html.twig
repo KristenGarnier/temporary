@@ -4,14 +4,14 @@
     <div class="container">
         <h2>Bonjour {{ app.user.username | capitalize }}</h2>
 
-        {% for flashMessage in app.session.flashbag.get('erase')%}
+        {% for flashMessage in app.session.flashbag.get('erase') %}
 
             <div class="alert alert-success">
                 {{ flashMessage }}
             </div>
 
         {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('success')%}
+        {% for flashMessage in app.session.flashbag.get('success') %}
 
             <div class="alert alert-success">
                 {{ flashMessage }}
@@ -28,28 +28,74 @@
         {% endfor %}
 
         <h3>Ajoutez un nouveau produit</h3>
+
         <form method="post" {{ form_enctype(form) }}>
 
 
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
-            <button class="btn btn-primary" type="submit" role="button"><i class="fa fa-plus"></i> Ajouter un produit</button>
+            {% if app.session.get('params') %}
+                <div class="checkbox">
+                    <label for="same">
+                        <input type="checkbox" id="same" name="same" onclick="switchForm()"/> Mêmes paramètres que le produit précédent
+                    </label>
+                </div>
+                <div id="hide" style="display: none;">
+                    <div class="form-group">
+                        <label for="qty">Quantité ( si différente ) </label>
+                        <input type="number" id="qty" name="quantity" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="axis">Axe vertical ( si différente ) </label>
+                        <input type="text" id="axis" name="axis" class="form-control">
+                    </div>
+                </div>
+            {% endif %}
+            <button class="btn btn-primary" type="submit" role="button"><i class="fa fa-plus"></i> Ajouter un produit
+            </button>
+
         </form>
         {% if commands is defined and commands != null %}
             <h3>Les pièces pour cette commande</h3>
             <table class="table">
                 <tr>
                     <th>Fichier</th>
-                    <th>Date d'envoi</th>
+                    <th>Visuel</th>
+                    <th>Axe vertical</th>
+                    <th>Quantité</th>
+                    <th>Caractéristiques</th>
                     <th>Actions</th>
                 </tr>
 
                 {% for command in commands %}
                     <tr>
                         <td>
-                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : command.id}) }}">{{ command.name }}.{{ command.url }}</a></td>
-                        <td>{{ command.date | date('d-m-Y') }}</td>
+                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : command.id}) }}">{{ command.name }}
+                                .{{ command.url }}</a></td>
+                        <td width="col-md-1">
+                            <button class="btn btn-default" id="show{{ loop.index }}" onclick="show{{ loop.index }}()">
+                                Voir image
+                            </button>
+                        </td>
+                        <td>{{ command.axis }}</td>
+                        <td>{{ command.quantite }}</td>
+                        <td>
+                            <ul>
+                                {% if  command.fonctionnel %}
+                                    <li>Démo fonctionnelle</li>
+                                {% endif %}
+                                {% if  command.clinique %}
+                                    <li>Usage clinique</li>
+                                {% endif %}
+                                {% if  command.verification3 %}
+                                    <li>Vérification 4 points</li>
+                                {% endif %}
+                                {% if  command.assemblage %}
+                                    <li>Assemblé</li>
+                                {% endif %}
+                            </ul>
+                        </td>
                         <td>
                             <a href="{{ path('finortho_fritage_echange_erase', {'id': command.id}) }}"
                                class="btn btn-danger">
@@ -67,5 +113,40 @@
             <h3>Vous n'avez pas encore importé de produit, ils s'ajouteront ici.</h3>
         {% endif %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('js/master.min2.js') }}"></script>
+
+    <script>
+        {% for command in commands %}
+        function show{{ loop.index }}() {
+            var parent = document.querySelector('#show{{ loop.index }}').parentNode;
+            parent.removeChild(document.querySelector('#show{{ loop.index }}'));
+            var canvas = document.createElement('div');
+            canvas.setAttribute('id', 'canvas{{ loop.index }}');
+            canvas.setAttribute('style', 'width: 100px');
+            parent.appendChild(canvas);
+
+            init("{{ command.WebPath }}", 'canvas{{ loop.index }}');
+        }
+
+        {% endfor %}
+    </script>
+    <script>
+        function switchForm(){
+            if(document.querySelector('#same').checked){
+                document.getElementById('hide').style.display = 'block';
+
+            }else {
+                document.getElementById('hide').style.display = 'none';
+            }
+
+        }
+
+    </script>
+
+
 {% endblock %}
 

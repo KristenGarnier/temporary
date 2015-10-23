@@ -3,7 +3,13 @@
 {% block body %}
     <div class="container">
         <h3>Renseignez l'axe vertical dans la machine</h3>
+        {% for flashMessage in app.session.flashbag.get('error') %}
 
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+
+        {% endfor %}
         <div class="row">
             <div class="col col-md-6">
                 <div id="canvas" style="overflow: hidden; border: 2px grey solid">
