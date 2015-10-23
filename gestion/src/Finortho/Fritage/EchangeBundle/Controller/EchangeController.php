@@ -42,8 +42,19 @@ class EchangeController extends Controller
 
                 if ($request->get('same') == 'on') {
                     $params = $this->session->get('params');
-                    $stl_file->setAxis($params['axis']);
-                    $stl_file->setQuantite($params['quantite']);
+
+                    if($request->get('axis') != null && $request->get('axis') != $stl_file->setAxis($params['axis'])){
+                        $stl_file->setAxis($request->get('axis'));
+                    }else {
+                        $stl_file->setAxis($params['axis']);
+                    }
+
+                    if($request->get('quantite') != null){
+                        $stl_file->setQuantite($request->get('quantite'));
+                    }else{
+                        $stl_file->setQuantite($params['quantite']);
+                    }
+
                     $stl_file->setFonctionnel($params['fonctionnel']);
                     $stl_file->setClinique($params['clinique']);
                     $stl_file->setVerification3($params['verification']);
@@ -76,6 +87,7 @@ class EchangeController extends Controller
 
             if($checked){
                 $currentCommand = $session_handler->getUploads();
+                $this->session->set('params', array('axis' => $stl_file->getAxis(), 'quantite' => $stl_file->getQuantite(), 'fonctionnel' => $stl_file->getFonctionnel(), 'clinique' => $stl_file->getClinique(), 'verification' => $stl_file->getVerification3(), 'assemblage' => $stl_file->getAssemblage()));
                 return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
             }
             return $this->redirect($this->generateUrl('finortho_fritage_axis_define' , array('id' => $stl_file->getId())));
