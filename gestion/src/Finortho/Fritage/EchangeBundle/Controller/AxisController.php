@@ -21,6 +21,6 @@ class AxisController extends Controller
                 $em->flush();
             }
         }
-        return $this->render('FinorthoFritageEchangeBundle:fileUpload:axis.html.twig', array('form' => $form->createView()));
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:axis.html.twig', array('form' => $form->createView(), 'path' => $stl_file->get3DPath()));
     }
 }

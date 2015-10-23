@@ -27,15 +27,10 @@
 {% endblock %}
 
 
-
-
 {% block javascripts %}
-    <script src="{{ asset('node_modules/three.js/build/three.min.js') }}"></script>
-    <script src="{{ asset('js/STLLOADER.js') }}"></script>
-    <script src="{{ asset('js/Detector.js') }}"></script>
-    <script src="{{ asset('js/3D_render.js') }}"></script>
+    <script src="{{ asset('js/master.min.js') }}"></script>
 
     <script>
-        init_render("{{ path }}");
+        init("{{ path }}", 'canvas');
     </script>
 {% endblock %}
