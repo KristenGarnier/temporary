@@ -25,3 +25,7 @@ finortho_fritage_axis_define:
 finortho_fritage_exigences_define:
     path:   /exigences/{id}
     defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:define}
+
+finortho_fritage_test:
+    path:   /test
+    defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:test}

@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Finortho\Fritage\EchangeBundle\FinorthoFritageEchangeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -29,4 +29,8 @@ class ExigencesController extends Controller
         }
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:exigences.html.twig', array('form' => $form->createView()));
     }
+
+    public function testAction(){
+
+    }
 }
