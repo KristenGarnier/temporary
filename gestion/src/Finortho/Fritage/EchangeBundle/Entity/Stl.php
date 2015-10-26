@@ -4,6 +4,7 @@ namespace Finortho\Fritage\EchangeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Stl
@@ -134,7 +135,11 @@ class Stl
 
     /**
      * Variable allant stocker l'image
-     *
+     *@Assert\File(
+     *     maxSize = "3072k",
+     *     mimeTypes = {"application/sla", "application/vnd.ms-pki.stl", "application/x-navistyle"},
+     *     mimeTypesMessage = "Veuillez insérer un fichier de type st,  s'il vous plait."
+     * )
      */
     private $file;
 
