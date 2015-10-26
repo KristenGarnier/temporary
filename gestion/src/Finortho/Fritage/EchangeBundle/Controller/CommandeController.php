@@ -9,7 +9,6 @@ class CommandeController extends Controller
 {
     public function indexAction()
     {
-        $uploads = $this->get('finortho_fritage_echange.session_handler')->getUploads();
-        return $this->render('FinorthoFritageEchangeBundle:Commande:index.html.twig', array('uploads' => $uploads));
+        
     }
 }

@@ -114,6 +114,9 @@
                     </tr>
                 {% endfor %}
             </table>
+            <a class="btn btn-default pull-right" href="{{ path('finortho_fritage_commande_index') }}">
+                Valider la commande <i class="fa fa-chevron-right"></i>
+            </a>
         {% else %}
             <h3>Vous n'avez pas encore importé de produit, ils s'ajouteront ici.</h3>
         {% endif %}
