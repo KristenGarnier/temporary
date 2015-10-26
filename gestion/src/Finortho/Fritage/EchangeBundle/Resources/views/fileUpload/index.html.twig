@@ -43,7 +43,7 @@
                 </div>
                 <div id="hide" style="display: none;">
                     <div class="form-group">
-                        <label for="axis">Axe vertical ( si différente ) </label>
+                        <label for="axis">Axe vertical ( si différent ) </label>
                         <select class="form-control" id="axis" name="axis" >
                             <option value="X"  {% if app.session.get('params').axis == 'X' %}selected{% endif %}>X</option>
                             <option value="Y" {% if app.session.get('params').axis == 'Y' %}selected{% endif %}>Y</option>
@@ -94,7 +94,7 @@
                                     <li>Usage clinique</li>
                                 {% endif %}
                                 {% if  command.verification3 %}
-                                    <li>Vérification 4 points</li>
+                                    <li>Vérification 3 points</li>
                                 {% endif %}
                                 {% if  command.assemblage %}
                                     <li>Assemblé</li>
