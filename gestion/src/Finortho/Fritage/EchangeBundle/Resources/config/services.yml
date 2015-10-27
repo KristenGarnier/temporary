@@ -10,3 +10,7 @@ services:
     finortho_fritage_echange.session_handler:
         class: Finortho\Fritage\EchangeBundle\Services\SessionHandler
         arguments: [@session, @doctrine.orm.entity_manager]
+
+    finortho_fritage_echange.namer:
+        class: Finortho\Fritage\EchangeBundle\Services\FinorthoNamer
+        arguments: [ @security.token_storage]

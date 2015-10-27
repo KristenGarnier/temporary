@@ -88,5 +88,6 @@ fos_user:
 
 oneup_uploader:
     mappings:
-        gallery:
-            frontend: fineuploader
+        commandes_utilisateurs:
+            frontend: dropzone
+            namer:  finortho_fritage_echange.namer

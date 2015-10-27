@@ -31,6 +31,6 @@ class ExigencesController extends Controller
     }
 
     public function testAction(){
-
+        return $this->render('FinorthoFritageEchangeBundle:Test:index.html.twig');
     }
 }

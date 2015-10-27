@@ -1,0 +1,210 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/jquery.fileupload.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/sweetalert/dist/sweetalert.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container" id="container">
+        <h3>Upload your files here</h3>
+
+        <div id="message"></div>
+
+        <div id="actions" class="row">
+
+            <div class="col-lg-7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+        </span>
+                <button type="submit" class="btn btn-primary start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel upload</span>
+                </button>
+            </div>
+
+            <div class="col-lg-5">
+                <!-- The global file processing state -->
+        <span class="fileupload-process">
+          <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0"
+               aria-valuemax="100" aria-valuenow="0">
+              <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+          </div>
+        </span>
+            </div>
+
+        </div>
+
+
+        <div class="table table-striped files" id="previews">
+
+            <div id="template" class="file-row row">
+                <!-- This is used as the file preview template -->
+                <div class="col col-md-4">
+                    <p class="name" data-dz-name></p>
+                    <strong class="error text-danger" data-dz-errormessage></strong>
+                </div>
+                <div class="col col-md-4">
+                    <button data-dz-remove class="btn btn-warning cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        <span>Cancel</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script>
+    <script>
+
+        var previewNode = document.querySelector("#template");
+        previewNode.id = "";
+        var previewTemplate = previewNode.parentNode.innerHTML;
+        previewNode.parentNode.removeChild(previewNode);
+
+        var processing = false;
+
+
+        var myDropzone = new Dropzone(document.body, {
+            url: "{{oneup_uploader_endpoint('commandes_utilisateurs')}}",
+            paramName: "file", // The name that will be used to transfer the file
+            maxFilesize: 5, // MB
+            clickable: ".fileinput-button",
+            autoProcessQueue: false,
+            parallelUploads: 50,
+            dictFileTooBig: 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo',
+            previewTemplate: previewTemplate,
+            previewsContainer: "#previews",
+            accept: function (file, done) {
+                var splitted = file.name.split('.');
+
+                if (splitted[1] == 'stl' || splitted[1] == 'pdf' || splitted[1] == 'png' || splitted[1] == 'jpeg' || splitted[1] == 'jpg') {
+                    done();
+                }
+                else {
+                    done("Vous ne pouvez pas importer des fichiers de type " + splitted[1]);
+                }
+            }
+        });
+
+        // Update the total progress bar
+        myDropzone.on("totaluploadprogress", function (progress) {
+            document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+        });
+
+        myDropzone.on("sending", function (file) {
+            // Show the total progress bar when upload starts
+            document.querySelector("#total-progress").style.opacity = "1";
+            // And disable the start button
+        });
+
+        myDropzone.on("processing", function() {
+            //set autoProcessQueue to true, so every file gets uploaded
+            processing = true;
+        });
+
+        // Hide the total progress bar when nothing's uploading anymore
+        myDropzone.on("queuecomplete", function (progress, a ,b) {
+            if (processing){
+                document.querySelector("#total-progress").style.opacity = "0";
+                myDropzone.removeAllFiles(true);
+                swal({
+                    title: "Bien joué !",
+                    text: "Vos fichiers ont bien été envoyé sur le serveur",
+                    timer: 2000,
+                    type: "success",
+                    showConfirmButton: false
+                });
+            }
+            processing = false;
+        });
+
+
+        myDropzone.on("error", function (a, b) {
+            var btest = b.search('mporter des fichiers');
+            if (b != 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo' && btest == -1){
+                swal({
+                    title: "Oups !",
+                    text: "Une erreur est survenue l'ors de l'envoi des fichiers, veuillez réessayer.",
+                    type: "error"
+                });
+            }
+
+        });
+
+        // Setup the buttons for all transfers
+        // The "add files" button doesn't need to be setup because the config
+        // `clickable` has already been specified.
+        document.querySelector("#actions .start").onclick = function () {
+            myDropzone.processQueue();
+        };
+        document.querySelector("#actions .cancel").onclick = function () {
+            document.querySelector("#total-progress").style.opacity = "0";
+            document.querySelector("#total-progress .progress-bar").style.width = "0%";
+            myDropzone.removeAllFiles(true);
+        };
+
+    </script>
+    <!--<script type="text/javascript" src="{#{{ asset('js/jquery.min.js') }}#}"></script>
+    <script type="text/javascript" src="{#{{ asset('js/jquery.ui.widget.js') }}#}"></script>
+    <script type="text/javascript" src="{#{{ asset('js/jquery.iframe-transport.js') }}#}"></script>
+    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload.js') }}#}"></script>
+    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload-validate.js') }}#}"></script>
+    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload-process.js') }}#}"></script>
+    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload-ui.js') }}#}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                autoUpload: true,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 1024,
+                /*add: function (e, data) {
+                    data.context = $('<div/>').attr('id', data.files[0].name.replace(/\s+/g, '').split('.').join("")).appendTo('#files');
+                    $.each(data.files, function (index, file) {
+                        var node = $('<p/>')
+                                .append($('<span/>').text(file.name));
+                        if (!index) {
+                            node
+                                    .append('<br>');
+                            $('<button/>').text('Upload')
+                                    .appendTo($('#' + data.files[0].name.replace(/\s+/g, '').split('.').join("")))
+                                    .click(function () {
+                                        data.context = $('<p/>').text('Uploading...').replaceAll($(this));
+                                        data.submit();
+                                    });
+                        }
+                        node.appendTo(data.context);
+                    });
+                },
+                done: function (e, data) {
+                    data.context.text('Upload finished.');
+                }*/
+            }).on('fileuploadadded', function (e, data) {
+                console.log(e);
+                for( var i = 0; i < data.originalFiles.length; i++){
+                    console.log(data.originalFiles[i].name);
+                    console.log(i);
+                }
+
+
+            });
+        });
+    </script>-->
+{% endblock %}
