@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ asset('node_modules/sweetalert/dist/sweetalert.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/mprogress/build/css/mprogress.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 {% endblock %}
 
@@ -106,6 +107,10 @@
             </div>
         </div>
 
+        <div>
+            {{ tree |raw }}
+        </div>
+
 
     </div>
 {% endblock %}
@@ -123,4 +128,5 @@
     </script>
     <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/php_file_tree_jquery.js') }}"></script>
 {% endblock %}
