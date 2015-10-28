@@ -155,9 +155,6 @@ div.alert-warning{
     line-height: 65px;
     color: #5C6374;
 }
-.attachments-button:hover span {
-    color: #4B89E2;
-}
 
 .attachments-button, .zoom-button {
     -webkit-font-smoothing: antialiased;
