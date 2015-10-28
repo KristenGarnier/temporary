@@ -12,34 +12,75 @@
         <h3>Nous envoyer des fichiers</h3>
 
         <div class="container">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <strong class="heading">Attention <i class="icon ion-alert"></i></strong> Seuls les fichiers de type
+                stl, pdf, jpg, et png dans la limite de 5 Mo sont acceptés.
+            </div>
             <div id="actions" class="row">
 
-                <div class="col-lg-7">
+                <div class="col-md-12">
                     <!-- The fileinput-button span is used to style the file input field as button -->
                     <button class="btn  fileinput-button">
                         <i class="icon ion-ios-plus-empty"></i>
                         Ajouter des fichiers...
                     </button>
-                    <button type="submit" class="btn  start">
+
+                    <button type="reset" class="btn cancel">
+                        <i class="glyphicon glyphicon-ban-circle"></i>
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn  start pull-right">
                         <i class="icon ion-upload"></i>
                         Envoyer
                     </button>
-                    <button type="reset" class="btn cancel">
-                        <i class="glyphicon glyphicon-ban-circle"></i>
-                        Annuler l'envoi
-                    </button>
                 </div>
+            </div>
 
-                <div class="col-lg-5">
-                    <!-- The global file processing state -->
-                <span class="fileupload-process">
-                  <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0"
-                       aria-valuemax="100" aria-valuenow="0">
-                      <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-                  </div>
-                </span>
+            <div id="no-content">
+
+                <div class="attachments-button center-block" href="#">
+
+                    <svg class="attachments-icon" xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+                         viewBox="0 0 60 60" version="1.1">
+                        <title>attachments icon</title>
+
+                        <g class="document-container">
+                            <path id="document-background"
+                                  d="M28.32 9.286L46.32 9.286 58.32 21.286 58.32 48.286 28.32 48.286 28.32 9.286Z"
+                                  stroke="#FFFFFF" stroke-width="4" fill="#FFFFFF"/>
+                            <path id="document-paper"
+                                  d="M28.32 9.286L46.32 9.286 58.32 21.286 58.32 48.286 28.32 48.286 28.32 9.286Z"
+                                  stroke="#4F92F0" fill="#FFFFFF"/>
+                            <g class="document-lines" fill="#4F92F0">
+                                <rect id="text-line-5" x="33.82" y="39.786" width="6" height="1"/>
+                                <rect id="text-line-4" x="33.82" y="36.786" width="19" height="1"/>
+                                <rect id="text-line-3" x="33.82" y="33.786" width="16" height="1"/>
+                                <rect id="text-line-2" x="33.82" y="30.786" width="19" height="1"/>
+                                <rect id="text-line-1" x="33.82" y="27.786" width="16" height="1"/>
+                            </g>
+                            <path id="paper-fold" d="M58.32 21.286L46.32 21.286 46.32 9.286" stroke="#4F92F0"
+                                  fill="none"/>
+                        </g>
+
+                        <g class="photo-2-container" fill="#FFFFFF">
+                            <rect id="photo-2-background" stroke="#FFFFFF" stroke-width="4" x="9.667" y="10.506"
+                                  width="19" height="25"/>
+                            <rect id="photo-2-border" stroke="#4F92F0" x="9.667" y="10.506" width="19" height="25"/>
+                        </g>
+
+                        <g class="photo-1-container" fill="#FFFFFF">
+                            <rect id="photo-1-background" stroke="#FFFFFF" stroke-width="4" x="2.569" y="34.297"
+                                  width="25" height="19"/>
+                            <rect id="photo-1-border" stroke="#4F92F0" x="2.602" y="34.208" width="25" height="19"/>
+                        </g>
+
+                    </svg>
+
+                    <span>Glissez vos fichiers ici</span>
+
                 </div>
-
             </div>
 
 
@@ -48,7 +89,10 @@
                 <div id="template" class="file-row row">
                     <!-- This is used as the file preview template -->
                     <div class="col col-md-8">
-                        <p class="name" data-dz-name></p>
+                        <div class="row">
+                            <div class="col-md-6"><p class="name" data-dz-name></p></div>
+                            <div class="col-md-6"><p class="dz-size" data-dz-size></p></div>
+                        </div>
                         <strong class="error text-danger" data-dz-errormessage></strong>
                     </div>
                     <div class="col col-md-4">
@@ -70,178 +114,13 @@
 {% block javascripts %}
 
     <script type="text/javascript" src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
-    <script>
-        document.querySelector("#actions").addEventListener("click", function (e) {
-            if (e.target !== e.currentTarget) {
-                test(e.target);
-                setTimeout(function () {
-                    test(e.target);
-                }, 1000);
-            }
-
-        });
-
-        function test(that) {
-            console.log(that);
-            that.classList.toggle('anim');
-        }
-
-        document.querySelector(".single").addEventListener("click", function (e) {
-            testbis(e.target);
-            setTimeout(function () {
-                testbis(e.target);
-            }, 1000);
-
-        });
-
-        function testbis(that) {
-            console.log(that);
-            that.classList.toggle('anim');
-        }
-    </script>
+    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
     <script type="text/javascript" src="{{ asset('node_modules/mprogress/build/js/mprogress.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dropzone_definition.js') }}"></script>
     <script>
-
-        var mprogress = new Mprogress();
-
-        var previewNode = document.querySelector("#template");
-        previewNode.id = "";
-        var previewTemplate = previewNode.parentNode.innerHTML;
-        previewNode.parentNode.removeChild(previewNode);
-
-        var processing = false;
-
-
-        var myDropzone = new Dropzone(document.body, {
-            url: "{{oneup_uploader_endpoint('commandes_utilisateurs')}}",
-            paramName: "file", // The name that will be used to transfer the file
-            maxFilesize: 5, // MB
-            clickable: ".fileinput-button",
-            autoProcessQueue: false,
-            parallelUploads: 50,
-            dictFileTooBig: 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo',
-            previewTemplate: previewTemplate,
-            previewsContainer: "#previews",
-            accept: function (file, done) {
-                var splitted = file.name.split('.');
-
-                if (splitted[1] == 'stl' || splitted[1] == 'STL' || splitted[1] == 'pdf' || splitted[1] == 'PDF' || splitted[1] == 'png' || splitted[1] == 'PNG' || splitted[1] == 'JPEG' || splitted[1] == 'jpeg' || splitted[1] == 'JPG' || splitted[1] == 'jpg') {
-                    done();
-                }
-                else {
-                    done("Vous ne pouvez pas importer des fichiers de type " + splitted[1]);
-                }
-            }
-        });
-
-        // Update the total progress bar
-        myDropzone.on("totaluploadprogress", function (progress) {
-            mprogress.set(progress/100);
-            //document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
-        });
-
-        myDropzone.on("sending", function (file) {
-            // Show the total progress bar when upload starts
-            document.querySelector("#total-progress").style.opacity = "1";
-            // And disable the start button
-        });
-
-        myDropzone.on("processing", function () {
-            //set autoProcessQueue to true, so every file gets uploaded
-            mprogress.start();
-            processing = true;
-        });
-
-        // Hide the total progress bar when nothing's uploading anymore
-        myDropzone.on("queuecomplete", function (progress, a, b) {
-            if (processing) {
-                document.querySelector("#total-progress").style.opacity = "0";
-                myDropzone.removeAllFiles(true);
-                mprogress.end();
-                swal({
-                    title: "Bien joué !",
-                    text: "Vos fichiers ont bien été envoyé sur le serveur",
-                    timer: 2000,
-                    type: "success",
-                    showConfirmButton: false
-                });
-            }
-            processing = false;
-        });
-
-
-        myDropzone.on("error", function (a, b) {
-            var btest = b.search('mporter des fichiers');
-            if (b != 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo' && btest == -1) {
-                swal({
-                    title: "Oups !",
-                    text: "Une erreur est survenue l'ors de l'envoi des fichiers, veuillez réessayer.",
-                    type: "error"
-                });
-            }
-
-        });
-
-        // Setup the buttons for all transfers
-        // The "add files" button doesn't need to be setup because the config
-        // `clickable` has already been specified.
-        document.querySelector("#actions .start").onclick = function () {
-            myDropzone.processQueue();
-        };
-        document.querySelector("#actions .cancel").onclick = function () {
-            document.querySelector("#total-progress").style.opacity = "0";
-            document.querySelector("#total-progress .progress-bar").style.width = "0%";
-            myDropzone.removeAllFiles(true);
-        };
-
+        init_dropzone("{{ oneup_uploader_endpoint('commandes_utilisateurs') }}");
     </script>
-    <!--<script type="text/javascript" src="{#{{ asset('js/jquery.min.js') }}#}"></script>
-    <script type="text/javascript" src="{#{{ asset('js/jquery.ui.widget.js') }}#}"></script>
-    <script type="text/javascript" src="{#{{ asset('js/jquery.iframe-transport.js') }}#}"></script>
-    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload.js') }}#}"></script>
-    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload-validate.js') }}#}"></script>
-    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload-process.js') }}#}"></script>
-    <script type="text/javascript" src="{#{{ asset('js/jquery.fileupload-ui.js') }}#}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-
-            $('#fileupload').fileupload({
-                dataType: 'json',
-                autoUpload: true,
-                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-                maxFileSize: 1024,
-                /*add: function (e, data) {
-                    data.context = $('<div/>').attr('id', data.files[0].name.replace(/\s+/g, '').split('.').join("")).appendTo('#files');
-                    $.each(data.files, function (index, file) {
-                        var node = $('<p/>')
-                                .append($('<span/>').text(file.name));
-                        if (!index) {
-                            node
-                                    .append('<br>');
-                            $('<button/>').text('Upload')
-                                    .appendTo($('#' + data.files[0].name.replace(/\s+/g, '').split('.').join("")))
-                                    .click(function () {
-                                        data.context = $('<p/>').text('Uploading...').replaceAll($(this));
-                                        data.submit();
-                                    });
-                        }
-                        node.appendTo(data.context);
-                    });
-                },
-                done: function (e, data) {
-                    data.context.text('Upload finished.');
-                }*/
-            }).on('fileuploadadded', function (e, data) {
-                console.log(e);
-                for( var i = 0; i < data.originalFiles.length; i++){
-                    console.log(data.originalFiles[i].name);
-                    console.log(i);
-                }
-
-
-            });
-        });
-    </script>-->
+    <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 {% endblock %}
