@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Finortho\Fritage\EchangeBundle\FinorthoFritageEchangeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Finortho\AdminBundle\FinorthoAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

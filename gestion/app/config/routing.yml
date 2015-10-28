@@ -1,3 +1,7 @@
+finortho_admin:
+    resource: "@FinorthoAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
 finortho_fritage_echange:
     resource: "@FinorthoFritageEchangeBundle/Resources/config/routing.yml"
     prefix:   /

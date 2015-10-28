@@ -1,0 +1,4 @@
+services:
+#    finortho_admin.example:
+#        class: Finortho\AdminBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
