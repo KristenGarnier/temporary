@@ -1,63 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/jquery.fileupload.css') }}">
     <link rel="stylesheet" href="{{ asset('node_modules/sweetalert/dist/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('node_modules/mprogress/build/css/mprogress.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 {% endblock %}
 
 {% block body %}
-    <div class="container" id="container">
-        <h3>Upload your files here</h3>
+    <div id="container">
+        <h3>Nous envoyer des fichiers</h3>
 
-        <div id="message"></div>
+        <div class="container">
+            <div id="actions" class="row">
 
-        <div id="actions" class="row">
-
-            <div class="col-lg-7">
-                <!-- The fileinput-button span is used to style the file input field as button -->
-        <span class="btn btn-success fileinput-button">
-            <i class="glyphicon glyphicon-plus"></i>
-            <span>Add files...</span>
-        </span>
-                <button type="submit" class="btn btn-primary start">
-                    <i class="glyphicon glyphicon-upload"></i>
-                    <span>Start upload</span>
-                </button>
-                <button type="reset" class="btn btn-warning cancel">
-                    <i class="glyphicon glyphicon-ban-circle"></i>
-                    <span>Cancel upload</span>
-                </button>
-            </div>
-
-            <div class="col-lg-5">
-                <!-- The global file processing state -->
-        <span class="fileupload-process">
-          <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0"
-               aria-valuemax="100" aria-valuenow="0">
-              <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
-          </div>
-        </span>
-            </div>
-
-        </div>
-
-
-        <div class="table table-striped files" id="previews">
-
-            <div id="template" class="file-row row">
-                <!-- This is used as the file preview template -->
-                <div class="col col-md-4">
-                    <p class="name" data-dz-name></p>
-                    <strong class="error text-danger" data-dz-errormessage></strong>
-                </div>
-                <div class="col col-md-4">
-                    <button data-dz-remove class="btn btn-warning cancel">
+                <div class="col-lg-7">
+                    <!-- The fileinput-button span is used to style the file input field as button -->
+                    <button class="btn  fileinput-button">
+                        <i class="icon ion-ios-plus-empty"></i>
+                        Ajouter des fichiers...
+                    </button>
+                    <button type="submit" class="btn  start">
+                        <i class="icon ion-upload"></i>
+                        Envoyer
+                    </button>
+                    <button type="reset" class="btn cancel">
                         <i class="glyphicon glyphicon-ban-circle"></i>
-                        <span>Cancel</span>
+                        Annuler l'envoi
                     </button>
                 </div>
+
+                <div class="col-lg-5">
+                    <!-- The global file processing state -->
+                <span class="fileupload-process">
+                  <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0"
+                       aria-valuemax="100" aria-valuenow="0">
+                      <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                  </div>
+                </span>
+                </div>
+
             </div>
 
+
+            <div class="table table-striped files" id="previews">
+
+                <div id="template" class="file-row row">
+                    <!-- This is used as the file preview template -->
+                    <div class="col col-md-8">
+                        <p class="name" data-dz-name></p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>
+                    </div>
+                    <div class="col col-md-4">
+                        <button data-dz-remove class="btn cancel single pull-right">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                            <span>Retirer</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
 
@@ -68,8 +70,40 @@
 {% block javascripts %}
 
     <script type="text/javascript" src="{{ asset('node_modules/sweetalert/dist/sweetalert.min.js') }}"></script>
+    <script>
+        document.querySelector("#actions").addEventListener("click", function (e) {
+            if (e.target !== e.currentTarget) {
+                test(e.target);
+                setTimeout(function () {
+                    test(e.target);
+                }, 1000);
+            }
+
+        });
+
+        function test(that) {
+            console.log(that);
+            that.classList.toggle('anim');
+        }
+
+        document.querySelector(".single").addEventListener("click", function (e) {
+            testbis(e.target);
+            setTimeout(function () {
+                testbis(e.target);
+            }, 1000);
+
+        });
+
+        function testbis(that) {
+            console.log(that);
+            that.classList.toggle('anim');
+        }
+    </script>
+    <script type="text/javascript" src="{{ asset('node_modules/mprogress/build/js/mprogress.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script>
     <script>
+
+        var mprogress = new Mprogress();
 
         var previewNode = document.querySelector("#template");
         previewNode.id = "";
@@ -92,7 +126,7 @@
             accept: function (file, done) {
                 var splitted = file.name.split('.');
 
-                if (splitted[1] == 'stl' || splitted[1] == 'pdf' || splitted[1] == 'png' || splitted[1] == 'jpeg' || splitted[1] == 'jpg') {
+                if (splitted[1] == 'stl' || splitted[1] == 'STL' || splitted[1] == 'pdf' || splitted[1] == 'PDF' || splitted[1] == 'png' || splitted[1] == 'PNG' || splitted[1] == 'JPEG' || splitted[1] == 'jpeg' || splitted[1] == 'JPG' || splitted[1] == 'jpg') {
                     done();
                 }
                 else {
@@ -103,7 +137,8 @@
 
         // Update the total progress bar
         myDropzone.on("totaluploadprogress", function (progress) {
-            document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
+            mprogress.set(progress/100);
+            //document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
         });
 
         myDropzone.on("sending", function (file) {
@@ -112,16 +147,18 @@
             // And disable the start button
         });
 
-        myDropzone.on("processing", function() {
+        myDropzone.on("processing", function () {
             //set autoProcessQueue to true, so every file gets uploaded
+            mprogress.start();
             processing = true;
         });
 
         // Hide the total progress bar when nothing's uploading anymore
-        myDropzone.on("queuecomplete", function (progress, a ,b) {
-            if (processing){
+        myDropzone.on("queuecomplete", function (progress, a, b) {
+            if (processing) {
                 document.querySelector("#total-progress").style.opacity = "0";
                 myDropzone.removeAllFiles(true);
+                mprogress.end();
                 swal({
                     title: "Bien joué !",
                     text: "Vos fichiers ont bien été envoyé sur le serveur",
@@ -136,7 +173,7 @@
 
         myDropzone.on("error", function (a, b) {
             var btest = b.search('mporter des fichiers');
-            if (b != 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo' && btest == -1){
+            if (b != 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo' && btest == -1) {
                 swal({
                     title: "Oups !",
                     text: "Une erreur est survenue l'ors de l'envoi des fichiers, veuillez réessayer.",

@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+
+*{
+    font-family: "Open Sans";
+}
+
+button.btn {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 1px;
+    border-radius:0;
+    padding: 1rem 3rem;
+}
+
+button.btn:hover{
+
+}
+
+button.btn.start{
+    background-color: #3498db;
+    color: white;
+    box-shadow: 0 0 0 0 rgba(52, 152, 219,0.7);
+}
+button.btn.fileinput-button{
+    background-color: #2ecc71;
+    color: white;
+    box-shadow: 0 0 0 0 rgba(46, 204, 113,0.7);
+}
+button.btn.cancel{
+    background-color: #f1c40f;
+    color: white;
+    box-shadow: 0 0 0 0 rgba(241, 196, 15,0.7);
+}
+
+button.btn:focus, button.btn:active{
+    outline: none !important;
+    outline-offset: 0 !important;
+    border-color: transparent;
+}
+
+h3 {
+    padding-top: 5vh;
+    margin: 0;
+    padding-bottom: 5vh;
+    padding-left: 10vw;
+    background: #3498db;
+    color: white;
+    margin-bottom: 5vh;
+    font-weight: 200;
+}
+
+.file-row{
+    margin: 1vh auto;
+    padding: 2vh 3vh;
+}
+
+.file-row:first-child{
+    margin-top: 6vh;
+}
+
+.file-row:not(:last-child){
+    border-bottom: 1px solid rgba(200,200,200, 0.5);
+}
+
+.btn.anim
+{
+    -webkit-animation: pulse 1s 1 cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1s 1 cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1s 1 cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1s 1 cubic-bezier(0.66, 0, 0, 1);
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
