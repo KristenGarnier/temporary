@@ -1,3 +1,11 @@
 finortho_admin_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: FinorthoAdminBundle:Default:index }
+
+finortho_admin_new_user:
+    path:     /users/new
+    defaults: { _controller: FinorthoAdminBundle:Default:addUser }
+
+finortho_admin_list_users:
+    path:     /users
+    defaults: { _controller: FinorthoAdminBundle:Default:listUser }

@@ -1,5 +1,5 @@
 finortho_fritage_echange_data:
-    path:     /
+    path:     /single
     defaults: { _controller: FinorthoFritageEchangeBundle:Echange:index }
 
 finortho_fritage_echange_download:
@@ -27,5 +27,5 @@ finortho_fritage_exigences_define:
     defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:define}
 
 finortho_fritage_test:
-    path:   /test
+    path:   /
     defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:test}

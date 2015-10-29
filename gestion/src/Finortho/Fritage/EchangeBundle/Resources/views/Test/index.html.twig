@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin.html.twig' %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('node_modules/sweetalert/dist/sweetalert.css') }}">
@@ -8,9 +8,12 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 {% endblock %}
 
+{% block pagetitle %}
+    Nous envoyer des fichiers
+{% endblock %}
+
 {% block body %}
     <div id="container">
-        <h3>Nous envoyer des fichiers</h3>
 
         <div class="container">
             <div class="alert alert-warning alert-dismissible" role="alert">
@@ -39,76 +42,74 @@
                 </div>
             </div>
 
-            <div id="no-content">
+            <div class="inside">
+                <div id="no-content">
 
-                <div class="attachments-button center-block" href="#">
+                    <div class="attachments-button center-block" href="#">
 
-                    <svg class="attachments-icon" xmlns="http://www.w3.org/2000/svg" width="60" height="60"
-                         viewBox="0 0 60 60" version="1.1">
-                        <title>attachments icon</title>
+                        <svg class="attachments-icon" xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+                             viewBox="0 0 60 60" version="1.1">
+                            <title>attachments icon</title>
 
-                        <g class="document-container">
-                            <path id="document-background"
-                                  d="M28.32 9.286L46.32 9.286 58.32 21.286 58.32 48.286 28.32 48.286 28.32 9.286Z"
-                                  stroke="#FFFFFF" stroke-width="4" fill="#FFFFFF"/>
-                            <path id="document-paper"
-                                  d="M28.32 9.286L46.32 9.286 58.32 21.286 58.32 48.286 28.32 48.286 28.32 9.286Z"
-                                  stroke="#4F92F0" fill="#FFFFFF"/>
-                            <g class="document-lines" fill="#4F92F0">
-                                <rect id="text-line-5" x="33.82" y="39.786" width="6" height="1"/>
-                                <rect id="text-line-4" x="33.82" y="36.786" width="19" height="1"/>
-                                <rect id="text-line-3" x="33.82" y="33.786" width="16" height="1"/>
-                                <rect id="text-line-2" x="33.82" y="30.786" width="19" height="1"/>
-                                <rect id="text-line-1" x="33.82" y="27.786" width="16" height="1"/>
+                            <g class="document-container">
+                                <path id="document-background"
+                                      d="M28.32 9.286L46.32 9.286 58.32 21.286 58.32 48.286 28.32 48.286 28.32 9.286Z"
+                                      stroke="#FFFFFF" stroke-width="4" fill="#FFFFFF"/>
+                                <path id="document-paper"
+                                      d="M28.32 9.286L46.32 9.286 58.32 21.286 58.32 48.286 28.32 48.286 28.32 9.286Z"
+                                      stroke="#4F92F0" fill="#FFFFFF"/>
+                                <g class="document-lines" fill="#4F92F0">
+                                    <rect id="text-line-5" x="33.82" y="39.786" width="6" height="1"/>
+                                    <rect id="text-line-4" x="33.82" y="36.786" width="19" height="1"/>
+                                    <rect id="text-line-3" x="33.82" y="33.786" width="16" height="1"/>
+                                    <rect id="text-line-2" x="33.82" y="30.786" width="19" height="1"/>
+                                    <rect id="text-line-1" x="33.82" y="27.786" width="16" height="1"/>
+                                </g>
+                                <path id="paper-fold" d="M58.32 21.286L46.32 21.286 46.32 9.286" stroke="#4F92F0"
+                                      fill="none"/>
                             </g>
-                            <path id="paper-fold" d="M58.32 21.286L46.32 21.286 46.32 9.286" stroke="#4F92F0"
-                                  fill="none"/>
-                        </g>
 
-                        <g class="photo-2-container" fill="#FFFFFF">
-                            <rect id="photo-2-background" stroke="#FFFFFF" stroke-width="4" x="9.667" y="10.506"
-                                  width="19" height="25"/>
-                            <rect id="photo-2-border" stroke="#4F92F0" x="9.667" y="10.506" width="19" height="25"/>
-                        </g>
+                            <g class="photo-2-container" fill="#FFFFFF">
+                                <rect id="photo-2-background" stroke="#FFFFFF" stroke-width="4" x="9.667" y="10.506"
+                                      width="19" height="25"/>
+                                <rect id="photo-2-border" stroke="#4F92F0" x="9.667" y="10.506" width="19" height="25"/>
+                            </g>
 
-                        <g class="photo-1-container" fill="#FFFFFF">
-                            <rect id="photo-1-background" stroke="#FFFFFF" stroke-width="4" x="2.569" y="34.297"
-                                  width="25" height="19"/>
-                            <rect id="photo-1-border" stroke="#4F92F0" x="2.602" y="34.208" width="25" height="19"/>
-                        </g>
+                            <g class="photo-1-container" fill="#FFFFFF">
+                                <rect id="photo-1-background" stroke="#FFFFFF" stroke-width="4" x="2.569" y="34.297"
+                                      width="25" height="19"/>
+                                <rect id="photo-1-border" stroke="#4F92F0" x="2.602" y="34.208" width="25" height="19"/>
+                            </g>
 
-                    </svg>
+                        </svg>
 
-                    <span>Glissez vos fichiers ici</span>
+                        <span>Glissez vos fichiers ici</span>
 
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="table table-striped files" id="previews">
+                <div class="table table-striped files" id="previews">
 
-                <div id="template" class="file-row row">
-                    <!-- This is used as the file preview template -->
-                    <div class="col col-md-8">
-                        <div class="row">
-                            <div class="col-md-6"><p class="name" data-dz-name></p></div>
-                            <div class="col-md-6"><p class="dz-size" data-dz-size></p></div>
+                    <div id="template" class="file-row row">
+                        <!-- This is used as the file preview template -->
+                        <div class="col col-md-8">
+                            <div class="row">
+                                <div class="col-md-6"><p class="name" data-dz-name></p></div>
+                                <div class="col-md-6"><p class="dz-size" data-dz-size></p></div>
+                            </div>
+                            <strong class="error text-danger" data-dz-errormessage></strong>
                         </div>
-                        <strong class="error text-danger" data-dz-errormessage></strong>
+                        <div class="col col-md-4">
+                            <button data-dz-remove class="btn cancel single pull-right">
+                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                <span>Retirer</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col col-md-4">
-                        <button data-dz-remove class="btn cancel single pull-right">
-                            <i class="glyphicon glyphicon-ban-circle"></i>
-                            <span>Retirer</span>
-                        </button>
-                    </div>
+
                 </div>
-
             </div>
-        </div>
-
-        <div>
-            {{ tree |raw }}
         </div>
 
 

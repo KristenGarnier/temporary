@@ -1,0 +1,65 @@
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% endblock %}
+
+{% block pagetitle %}
+    Ajouter un nouvel utilisateur
+{% endblock %}
+
+{% block menu %}
+    <a class="pull-right navi" href="{{ path('finortho_admin_homepage') }}">Ajouter un utilisateur</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_homepage') }}">Fichers envoyés</a>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h4>Liste des utilisateurs :</h4>
+
+        <div id="actions">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <th>{{ user.id }}</th>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <button type="submit" class="btn  cancel">
+                                <i class="icon ion-edit"></i>
+                                Modifier
+                            </button>
+                            <button type="submit" class="btn  danger">
+                                <i class="icon ion-trash-b"></i>
+                                Suprimmer
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
+{% endblock %}
