@@ -10,13 +10,20 @@
 {% endblock %}
 
 {% block menu %}
-    <a class="pull-right navi" href="{{ path('finortho_admin_homepage') }}">Ajouter un utilisateur</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
     <a class="pull-right navi" href="{{ path('finortho_admin_homepage') }}">Fichers envoyés</a>
 {% endblock %}
 
 {% block body %}
 
     <div class="container">
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
 
         <h4>Liste des utilisateurs :</h4>
 
@@ -38,14 +45,12 @@
                         <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
                         <td>
-                            <button type="submit" class="btn  cancel">
-                                <i class="icon ion-edit"></i>
-                                Modifier
-                            </button>
-                            <button type="submit" class="btn  danger">
-                                <i class="icon ion-trash-b"></i>
-                                Suprimmer
-                            </button>
+                            <a href="{{ path('finortho_admin_delete_user', {'id' :  user.id } ) }}">
+                                <button type="button" class="btn  danger">
+                                    <i class="icon ion-trash-b"></i>
+                                    Suprimmer
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -62,4 +67,6 @@
 
 {% block javascripts %}
     <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 {% endblock %}

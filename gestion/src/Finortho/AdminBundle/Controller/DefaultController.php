@@ -37,6 +37,7 @@ class DefaultController extends Controller
             }
 
             $userManager->updateUser($user);
+            return $this->redirect($this->generateUrl('finortho_admin_list_users'));
         }
 
         return $this->render('FinorthoAdminBundle:Default:newuser.html.twig');
@@ -47,5 +48,17 @@ class DefaultController extends Controller
         $users = $userManager->findUsers();
 
         return $this->render('FinorthoAdminBundle:Default:users.html.twig', array('users' => $users));
+    }
+
+    public function deleteUserAction($id){
+        $user = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:User')->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->set('success', 'L’utilisateur a bien été suprimmé.');
+
+        return $this->redirect($this->generateUrl('finortho_admin_list_users'));
     }
 }

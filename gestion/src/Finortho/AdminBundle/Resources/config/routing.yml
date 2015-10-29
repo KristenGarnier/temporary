@@ -6,6 +6,10 @@ finortho_admin_new_user:
     path:     /users/new
     defaults: { _controller: FinorthoAdminBundle:Default:addUser }
 
+finortho_admin_delete_user:
+    path:     /users/delete/{id}
+    defaults: { _controller: FinorthoAdminBundle:Default:deleteUser }
+
 finortho_admin_list_users:
     path:     /users
     defaults: { _controller: FinorthoAdminBundle:Default:listUser }

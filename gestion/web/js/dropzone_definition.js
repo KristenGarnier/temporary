@@ -1,4 +1,4 @@
-function init_dropzone(endpoint){
+function init_dropzone(endpoint) {
 
     var mprogress = new Mprogress();
 
@@ -34,7 +34,7 @@ function init_dropzone(endpoint){
 
     // Update the total progress bar
     myDropzone.on("totaluploadprogress", function (progress) {
-        mprogress.set(progress/100);
+        mprogress.set(progress / 100);
         //document.querySelector("#total-progress .progress-bar").style.width = progress + "%";
     });
 
@@ -61,18 +61,19 @@ function init_dropzone(endpoint){
         processing = false;
     });
 
-    myDropzone.on('addedfile', function(){
+    myDropzone.on('addedfile', function () {
         document.querySelector("#no-content").style.display = "none";
     });
 
-    myDropzone.on('removedfile', function(){
-        if (this.getQueuedFiles().length == 0){
+    myDropzone.on('removedfile', function () {
+        if (this.getQueuedFiles().length == 0) {
             document.querySelector("#no-content").style.display = "block";
         }
     });
 
 
     myDropzone.on("error", function (a, b) {
+        console.log(a, b);
         var btest = b.search('mporter des fichiers');
         if (b != 'Le fichier est trop lourd, veuillez rentrer des fichiers de moins de 5 Mo' && btest == -1) {
             swal({
@@ -82,6 +83,18 @@ function init_dropzone(endpoint){
             });
         }
 
+    });
+
+    myDropzone.on("sending", function (file, xhr, formData) {
+        var delivery = file.previewElement.querySelector('#delivery').value;
+        var deliverySplit = delivery.split('-');
+        console.log(deliverySplit);
+
+        // Will send the filesize along with the file as POST data.
+        formData.append("filename", file.name);
+        formData.append("quantite", file.previewElement.querySelector('#quantity').value.toString());
+        formData.append("day", deliverySplit[0]);
+        formData.append("method", deliverySplit[1]);
     });
 
     // Setup the buttons for all transfers
