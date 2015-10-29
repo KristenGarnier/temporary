@@ -28,6 +28,7 @@ class FinorthoNamer
 
         $date = $this->weekDate($this->session->get('date'));
         $name = $this->session->get('filename');
+        $name = str_replace(' ', '_', $name);
         $quantite = $this->session->get('quantite');
         $method = $this->session->get('method');
 
