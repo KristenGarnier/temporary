@@ -13,6 +13,10 @@
     Nous envoyer des fichiers
 {% endblock %}
 
+{% block menu %}
+    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i class="icon ion-log-out"></i></a>
+{% endblock %}
+
 {% block body %}
     <div id="container">
 
