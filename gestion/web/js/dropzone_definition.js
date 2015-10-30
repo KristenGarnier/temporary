@@ -53,6 +53,7 @@ function init_dropzone(endpoint) {
             var req = new XMLHttpRequest();
             req.open('GET', '/notify', true);
             req.send();
+            console.log(req.response);
             myDropzone.removeAllFiles(true);
             mprogress.end();
             swal({

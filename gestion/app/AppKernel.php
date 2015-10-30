@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Finortho\AdminBundle\FinorthoAdminBundle(),
+            new Headoo\HeadooMailjetBundle\HeadooMailjetBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

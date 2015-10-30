@@ -38,11 +38,29 @@ class ExigencesController extends Controller
     }
 
     public function notifyAction(){
-        $mail = \Swift_Message::newInstance();
+       // $mail = \Swift_Message::newInstance();
 
         $utilisateur = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:User')->find($this->getUser());
 
-        $mail
+        $mailjet = $this->container->get('headoo_mailjet_wrapper');
+
+        $params = array(
+            "method" => "POST",
+            "from" => "finortho@gmail.com",
+            "to" => "garnier.kristen@icloud.com",
+            "subject" => "Nouveaux fichiers importés sur le serveur",
+            "html" => "<html>L'utilisateur : ".$utilisateur->getUsername()." a déposé des fichiers sur la plateforme de stockage.
+            <br>
+            <br>
+            Email de l'utilisateur : ".$utilisateur->getEmail().'
+            <br>
+            <a href="http://212.47.229.9/admin"> Consulter les fichiers </a>
+            </html>'
+        );
+
+        $result = $mailjet->sendEmail($params);
+
+        /*$mail
             ->setFrom('finortho@gmail.com')
             ->setTo('garnier.kristen@icloud.com')
             ->setSubject('Nouvelle commande')
@@ -55,8 +73,8 @@ class ExigencesController extends Controller
             ')
             ->setContentType('text/html');
 
-        $this->get('swiftmailer.mailer.default')->send($mail);
+        $this->get('swiftmailer.mailer.default')->send($mail);*/
 
-        return new JsonResponse();
+        return new JsonResponse(json_encode($result));
     }
 }
