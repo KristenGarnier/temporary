@@ -1,7 +1,6 @@
 function init_dropzone(endpoint) {
 
     var mprogress = new Mprogress();
-    document.querySelector('.whirly-loader').style.display = "none";
 
     var previewNode = document.querySelector("#template");
     previewNode.id = "";
