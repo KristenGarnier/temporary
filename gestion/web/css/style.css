@@ -139,6 +139,10 @@ div.alert-warning {
     }
 }
 
+p.name{
+    word-wrap: break-word;
+}
+
 @-ms-keyframes pulse {
     to {
         box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);
