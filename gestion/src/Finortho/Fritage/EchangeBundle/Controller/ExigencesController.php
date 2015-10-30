@@ -47,7 +47,7 @@ class ExigencesController extends Controller
         $params = array(
             "method" => "POST",
             "from" => "finortho@gmail.com",
-            "to" => "garnier.kristen@icloud.com",
+            "to" => "fritage@finortho.com",
             "subject" => "Nouveaux fichiers importés sur le serveur",
             "html" => "<html>L'utilisateur : ".$utilisateur->getUsername()." a déposé des fichiers sur la plateforme de stockage.
             <br>
