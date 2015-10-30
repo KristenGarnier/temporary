@@ -29,3 +29,7 @@ finortho_fritage_exigences_define:
 finortho_fritage_test:
     path:   /
     defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:test}
+
+finortho_fritage_send_message:
+    path: /notify
+    defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:notify}

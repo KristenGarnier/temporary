@@ -43,14 +43,16 @@ class DefaultController extends Controller
         return $this->render('FinorthoAdminBundle:Default:newuser.html.twig');
     }
 
-    public function listUserAction(){
+    public function listUserAction()
+    {
         $userManager = $this->get('fos_user.user_manager');
         $users = $userManager->findUsers();
 
         return $this->render('FinorthoAdminBundle:Default:users.html.twig', array('users' => $users));
     }
 
-    public function deleteUserAction($id){
+    public function deleteUserAction($id)
+    {
         $user = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:User')->find($id);
 
         $em = $this->getDoctrine()->getManager();
@@ -61,4 +63,5 @@ class DefaultController extends Controller
 
         return $this->redirect($this->generateUrl('finortho_admin_list_users'));
     }
+
 }

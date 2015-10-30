@@ -50,6 +50,9 @@ function init_dropzone(endpoint) {
         document.querySelector('.whirly-loader').style.display = "none";
         if (processing) {
             document.querySelector("#no-content").style.display = "block";
+            var req = new XMLHttpRequest();
+            req.open('GET', '/notify', false);
+            req.send();
             myDropzone.removeAllFiles(true);
             mprogress.end();
             swal({

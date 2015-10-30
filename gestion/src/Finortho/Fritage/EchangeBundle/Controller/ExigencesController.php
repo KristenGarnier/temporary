@@ -4,6 +4,7 @@ namespace Finortho\Fritage\EchangeBundle\Controller;
 
 use Finortho\Fritage\EchangeBundle\Form\ExigenceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ExigencesController extends Controller
@@ -34,5 +35,28 @@ class ExigencesController extends Controller
         $file_tree = $this->get('finortho_fritage_echange.file_tree');
         $tree = $file_tree->php_file_tree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]" );
         return $this->render('FinorthoFritageEchangeBundle:Test:index.html.twig', array('tree' => $tree));
+    }
+
+    public function notifyAction(){
+        $mail = \Swift_Message::newInstance();
+
+        $utilisateur = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:User')->find($this->getUser());
+
+        $mail
+            ->setFrom('finortho@gmail.com')
+            ->setTo('garnier.kristen@icloud.com')
+            ->setSubject('Nouvelle commande')
+            ->setBody("L'utilisateur : ".$utilisateur->getUsername()." a déposé des fichiers sur la plateforme de stockage.
+            <br>
+            <br>
+            Email de l'utilisateur : ".$utilisateur->getEmail().'
+            <br>
+            <a href="http://212.47.229.9/admin"> Consulter les fichiers </a>
+            ')
+            ->setContentType('text/html');
+
+        $this->get('swiftmailer.mailer.default')->send($mail);
+
+        return new JsonResponse();
     }
 }
