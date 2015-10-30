@@ -1,6 +1,7 @@
 function init_dropzone(endpoint) {
 
     var mprogress = new Mprogress();
+    document.querySelector('.whirly-loader').style.display = "none";
 
     var previewNode = document.querySelector("#template");
     previewNode.id = "";
@@ -40,12 +41,14 @@ function init_dropzone(endpoint) {
 
     myDropzone.on("processing", function () {
         //set autoProcessQueue to true, so every file gets uploaded
+        document.querySelector('.whirly-loader').style.display = "block";
         mprogress.start();
         processing = true;
     });
 
     // Hide the total progress bar when nothing's uploading anymore
     myDropzone.on("queuecomplete", function (progress, a, b) {
+        document.querySelector('.whirly-loader').style.display = "none";
         if (processing) {
             document.querySelector("#no-content").style.display = "block";
             myDropzone.removeAllFiles(true);

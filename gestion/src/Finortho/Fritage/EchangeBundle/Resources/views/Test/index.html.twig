@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/default.css') }}">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('css/spinner.css')}}" type="text/css">
 {% endblock %}
 
 {% block pagetitle %}
@@ -89,7 +90,12 @@
                 </div>
 
 
+                <div class="whirly-loader center-block">
+                    Loading…
+                </div>
+
                 <div class="table table-striped files" id="previews">
+
 
                     <div id="template" class="file-row row">
                         <!-- This is used as the file preview template -->
