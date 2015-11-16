@@ -59,7 +59,39 @@ class UserMangamentControllerTest extends WebTestCase
         $client = static::createClient();
 
 
-        $this->Createuser($client);
+        $this->adminConnect($client);
+
+        $client->request(
+            'POST',
+            'http://localhost:8000/admin/users/new',
+            array(
+                'username' => 'test',
+                'email' => 'test@testdouble.fr',
+                'password' => 'test'
+            )
+        );
+        $this->assertEquals(
+            500, // or Symfony\Component\HttpFoundation\Response::HTTP_OK
+            $client->getResponse()->getStatusCode()
+        );
+
+
+    }
+
+    public function testShouldFailCauseEmailAlreadyTaken(){
+        $client = static::createClient();
+
+        $this->adminConnect($client);
+
+        $client->request(
+            'POST',
+            'http://localhost:8000/admin/users/new',
+            array(
+                'username' => 'tester',
+                'email' => 'test@test.fr',
+                'password' => 'test'
+            )
+        );
         $this->assertEquals(
             500, // or Symfony\Component\HttpFoundation\Response::HTTP_OK
             $client->getResponse()->getStatusCode()
