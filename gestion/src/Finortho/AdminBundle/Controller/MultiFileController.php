@@ -2,12 +2,11 @@
 
 namespace Finortho\AdminBundle\Controller;
 
-use Finortho\Fritage\EchangeBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
+
 
 /**
- * Class MultiFileController
+ * Classe permettant d'accéder aux fichiers uploadésen multi
  * @package Finortho\AdminBundle\Controller
  */
 class MultiFileController extends Controller

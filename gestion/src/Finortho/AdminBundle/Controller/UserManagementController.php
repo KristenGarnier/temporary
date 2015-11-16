@@ -3,10 +3,11 @@
 namespace Finortho\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Finortho\Fritage\EchangeBundle\Entity\User;
+
 
 /**
- * Class UserManagementController
- *
  * Classe permettant la gestion des utilisateurs
  *
  * @package Finortho\AdminBundle\Controller
@@ -33,12 +34,12 @@ class UserManagementController extends Controller
 
             $exists = $userManager->findUserBy(array('email' => $user->getEmail()));
             if ($exists instanceof User) {
-                throw new \HttpException(409, 'Email already taken');
+                throw new \Exception('Email already taken', 409);
             }
 
             $existsUsername = $userManager->findUserBy(array('username' => $user->getUsername()));
             if ($existsUsername instanceof User) {
-                throw new \HttpException(409, 'Username already taken');
+                throw new \Exception('Username already taken',409);
             }
 
             $userManager->updateUser($user);

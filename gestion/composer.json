@@ -25,7 +25,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpdocumentor/phpdocumentor": "^2.8"
+        "phpdocumentor/phpdocumentor": "^2.8",
+        "phpunit/phpunit": "5.0.*"
     },
     "scripts": {
         "post-install-cmd": [

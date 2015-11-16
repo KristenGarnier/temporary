@@ -20,6 +20,7 @@ security:
             memory:
                 users:
                     admin: { password: admin, roles: ['ROLE_ADMIN']}
+                    user: { password: user, roles: ['ROLE_USER']}
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
