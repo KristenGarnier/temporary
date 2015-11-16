@@ -2,19 +2,24 @@
 
 namespace Finortho\AdminBundle\Controller;
 
-use Finortho\Fritage\EchangeBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+/**
+ * Class UserManagementController
+ *
+ * Classe permettant la gestion des utilisateurs
+ *
+ * @package Finortho\AdminBundle\Controller
+ */
+class UserManagementController extends Controller
 {
-    public function indexAction()
-    {
-        $file_tree = $this->get('finortho_fritage_echange.file_tree');
-        $tree = $file_tree->php_file_tree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]");
-        return $this->render('FinorthoAdminBundle:Default:index.html.twig', array('tree' => $tree));
-    }
-
+    /**
+     * Méthode permettant d'ajouter un utilisateur à l'interface de multi upload
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \HttpException
+     */
     public function addUserAction(Request $request)
     {
         $userManager = $this->get('fos_user.user_manager');
@@ -43,6 +48,11 @@ class DefaultController extends Controller
         return $this->render('FinorthoAdminBundle:Default:newuser.html.twig');
     }
 
+    /**
+     * Méthode permettant de lester les utilisateurs
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listUserAction()
     {
         $userManager = $this->get('fos_user.user_manager');
@@ -51,6 +61,12 @@ class DefaultController extends Controller
         return $this->render('FinorthoAdminBundle:Default:users.html.twig', array('users' => $users));
     }
 
+    /**
+     * Méthode permettant de suprimmer un utilisateur
+     *
+     * @param int $id id de l'utilisateur à suprimmer
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function deleteUserAction($id)
     {
         $user = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:User')->find($id);
@@ -63,5 +79,4 @@ class DefaultController extends Controller
 
         return $this->redirect($this->generateUrl('finortho_admin_list_users'));
     }
-
 }

@@ -1,15 +1,15 @@
 finortho_admin_homepage:
     path:     /
-    defaults: { _controller: FinorthoAdminBundle:Default:index }
+    defaults: { _controller: FinorthoAdminBundle:MultiFile:index }
 
 finortho_admin_new_user:
     path:     /users/new
-    defaults: { _controller: FinorthoAdminBundle:Default:addUser }
+    defaults: { _controller: FinorthoAdminBundle:UserManagement:addUser }
 
 finortho_admin_delete_user:
     path:     /users/delete/{id}
-    defaults: { _controller: FinorthoAdminBundle:Default:deleteUser }
+    defaults: { _controller: FinorthoAdminBundle:UserManagement:deleteUser }
 
 finortho_admin_list_users:
     path:     /users
-    defaults: { _controller: FinorthoAdminBundle:Default:listUser }
+    defaults: { _controller: FinorthoAdminBundle:UserManagement:listUser }
