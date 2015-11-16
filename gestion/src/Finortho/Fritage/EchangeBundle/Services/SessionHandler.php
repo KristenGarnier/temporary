@@ -6,17 +6,39 @@ use Doctrine\ORM\EntityManager;
 use Finortho\Fritage\EchangeBundle\Entity\Stl;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+/**
+ * Class SessionHandler
+ *
+ * Ensemble d'helpers spour la session
+ *
+ * @package Finortho\Fritage\EchangeBundle\Services
+ */
 class SessionHandler
 {
+    /**
+     * @var Session
+     */
     private $session;
+    /**
+     * @var EntityManager
+     */
     private $em;
 
+    /**
+     * @param Session       $session
+     * @param EntityManager $em
+     */
     public function __construct(Session $session, EntityManager $em)
     {
         $this->session = $session;
         $this->em = $em;
     }
 
+    /**
+     * Method permettant d'ajouter un fichier au tableau des fichiers de session
+     *
+     * @param Stl $stl_file
+     */
     public function setUploads(Stl $stl_file)
     {
 
@@ -30,6 +52,11 @@ class SessionHandler
 
     }
 
+    /**
+     * Methode permettant d'avoir tous les uploads de la session
+     *
+     * @return array
+     */
     public function getUploads()
     {
         $uploads = array();
@@ -42,6 +69,11 @@ class SessionHandler
         return $uploads;
     }
 
+    /**
+     * Methode permettant de suprimmer un élement dans les uploads dans la session
+     *
+     * @param int $id id de la pièce
+     */
     public function unsetUpload($id)
     {
         if (array_key_exists('uploads', $this->session->all())) {

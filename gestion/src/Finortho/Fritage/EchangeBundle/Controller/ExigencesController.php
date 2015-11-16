@@ -7,8 +7,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class ExigencesController
+ *
+ * Classe permettant de définir les éxigences par rapport à un produit
+ *
+ * @package Finortho\Fritage\EchangeBundle\Controller
+ */
 class ExigencesController extends Controller
 {
+    /**
+     * Methode permettant de définir les exigeances pour chaque produit
+     *
+     * @param integer $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function defineAction($id,Request $request)
     {
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
@@ -29,52 +43,5 @@ class ExigencesController extends Controller
             return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
         }
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:exigences.html.twig', array('form' => $form->createView()));
-    }
-
-    public function testAction(){
-        $file_tree = $this->get('finortho_fritage_echange.file_tree');
-        $tree = $file_tree->php_file_tree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]" );
-        return $this->render('FinorthoFritageEchangeBundle:Test:index.html.twig', array('tree' => $tree));
-    }
-
-    public function notifyAction(){
-       // $mail = \Swift_Message::newInstance();
-
-        $utilisateur = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:User')->find($this->getUser());
-
-        $mailjet = $this->container->get('headoo_mailjet_wrapper');
-
-        $params = array(
-            "method" => "POST",
-            "from" => "finortho@gmail.com",
-            "to" => "frittage@finortho.com",
-            "subject" => "Nouveaux fichiers importés sur le serveur",
-            "html" => "<html>L'utilisateur : ".$utilisateur->getUsername()." a déposé des fichiers sur la plateforme de stockage.
-            <br>
-            <br>
-            Email de l'utilisateur : ".$utilisateur->getEmail().'
-            <br>
-            <a href="http://212.47.229.9/admin"> Consulter les fichiers </a>
-            </html>'
-        );
-
-        $result = $mailjet->sendEmail($params);
-
-        /*$mail
-            ->setFrom('finortho@gmail.com')
-            ->setTo('garnier.kristen@icloud.com')
-            ->setSubject('Nouvelle commande')
-            ->setBody("L'utilisateur : ".$utilisateur->getUsername()." a déposé des fichiers sur la plateforme de stockage.
-            <br>
-            <br>
-            Email de l'utilisateur : ".$utilisateur->getEmail().'
-            <br>
-            <a href="http://212.47.229.9/admin"> Consulter les fichiers </a>
-            ')
-            ->setContentType('text/html');
-
-        $this->get('swiftmailer.mailer.default')->send($mail);*/
-
-        return new JsonResponse(json_encode($result));
     }
 }

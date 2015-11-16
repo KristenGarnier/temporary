@@ -6,8 +6,22 @@ use Finortho\Fritage\EchangeBundle\Form\AxisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class AxisController
+ *
+ * Classe de définition de l'axe de la pièce
+ *
+ * @package Finortho\Fritage\EchangeBundle\Controller
+ */
 class AxisController extends Controller
 {
+    /**
+     * Méthode permettant de définir l'axe de la pièce dans la machine à l'aide d'un rendu avec plan 3D.
+     *
+     * @param integer $id de la pièce
+     * @param Request $request données du formulaire
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function defineAction($id,Request $request)
     {
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);

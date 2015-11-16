@@ -20,6 +20,6 @@ services:
 
     finortho_fritage_echange.preupload_listener:
         class: Finortho\Fritage\EchangeBundle\Services\PreUploadUser
-        arguments: [@doctrine, @session]
+        arguments: [@session]
         tags:
             - { name: kernel.event_listener,  event: oneup_uploader.pre_upload, method: onUpload }

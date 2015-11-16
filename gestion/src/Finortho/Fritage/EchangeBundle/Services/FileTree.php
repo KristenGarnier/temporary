@@ -3,11 +3,24 @@
 namespace Finortho\Fritage\EchangeBundle\Services;
 
 
+/**
+ * Class FileTree
+ *
+ * Service permettant de générer l'arbre de fichier dans la zone administrateur
+ *
+ * @package Finortho\Fritage\EchangeBundle\Services
+ */
 class FileTree
 {
 
     private $basedir;
 
+    /**
+     * @param string $directory
+     * @param string $return_link
+     * @param array $extensions
+     * @return string
+     */
     public function php_file_tree($directory, $return_link, $extensions = array())
     {
         // Generates a valid XHTML list of all directories, sub-directories, and files in $directory
@@ -18,6 +31,13 @@ class FileTree
         return $code;
     }
 
+    /**
+     * @param           $directory
+     * @param           $return_link
+     * @param array     $extensions
+     * @param bool|true $first_call
+     * @return string
+     */
     private function php_file_tree_dir($directory, $return_link, $extensions = array(),  $first_call = true)
     {
         // Recursive function called by php_file_tree() to list directories/files
@@ -72,6 +92,10 @@ class FileTree
         return $php_file_tree;
     }
 
+    /**
+     * @param $dir
+     * @return array
+     */
     private function php4_scandir($dir)
     {
         $dh = opendir($dir);

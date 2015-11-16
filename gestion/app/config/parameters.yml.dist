@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    mailjet_api_key: fc66387504b13a13b8f6069b01b4a0c1
+    mailjet_secret_key: 69b08837b2eac09af3dc1189896d806b

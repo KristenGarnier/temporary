@@ -9,16 +9,32 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+/**
+ * Class EchangeController
+ *
+ * Classe gérant tout le système d'échange avec l'utilisateur
+ *
+ * @package Finortho\Fritage\EchangeBundle\Controller
+ */
 class EchangeController extends Controller
 {
 
     private $session;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->session = new Session();
     }
 
+    /**
+     * Methode permettant l'insertion basique d'un produit dans la base de donnée ( pas d'axe et pas de requirements )
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function indexAction(Request $request)
     {
         $session_handler = $this->get('finortho_fritage_echange.session_handler');
@@ -98,6 +114,12 @@ class EchangeController extends Controller
     }
 
 
+    /**
+     * Méthode permettant de forcer le téléchargment d'une pièce lors du click
+     *
+     * @param int $id identifiant de la pièce
+     * @return Response
+     */
     public function downloadAction($id)
     {
 
@@ -110,6 +132,12 @@ class EchangeController extends Controller
         return $response;
     }
 
+    /**
+     * Méthode permettant de suprimmer une pièce de la base de donnée, et de suprimmer le fichier du serveur
+     *
+     * @param int $id identifiant de la pièce
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function eraseAction($id)
     {
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
@@ -129,6 +157,13 @@ class EchangeController extends Controller
         return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
     }
 
+    /**
+     * Méthode permettant la modification des fichers uploadés
+     *
+     * @param Request $request
+     * @param int $id id de la pièce à modifier
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
     public function modifyAction(Request $request, $id)
     {
         $session_handler = $this->get('finortho_fritage_echange.session_handler');

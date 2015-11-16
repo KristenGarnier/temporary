@@ -28,8 +28,8 @@ finortho_fritage_exigences_define:
 
 finortho_fritage_test:
     path:   /
-    defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:test}
+    defaults: {_controller: FinorthoFritageEchangeBundle:MultiUpload:index}
 
 finortho_fritage_send_message:
     path: /notify
-    defaults: {_controller: FinorthoFritageEchangeBundle:Exigences:notify}
+    defaults: {_controller: FinorthoFritageEchangeBundle:MultiUpload:notify}
