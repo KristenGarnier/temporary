@@ -8,10 +8,13 @@
          bootstrap="bootstrap.php.cache"
 >
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="admin">
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
             <directory>../src/*Bundle/Tests</directory>
+        </testsuite>
+        <testsuite name="front">
+            <directory>../src/*/*/*Bundle/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -25,6 +28,11 @@
         <whitelist>
             <directory>../src</directory>
             <exclude>
+                <directory>../src/Finortho/Fritage/*/DependencyInjection</directory>
+                <directory>../src/Finortho/Fritage/*/Ressources</directory>
+                <directory>../src/Finortho/Fritage/*/Tests</directory>
+                <directory>../src/Finortho/Fritage/*/Entity</directory>
+                <directory>../src/Finortho/Fritage/*/Form</directory>
                 <directory>../src/*Bundle/Resources</directory>
                 <directory>../src/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/Resources</directory>

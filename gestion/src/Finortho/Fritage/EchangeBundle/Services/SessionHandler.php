@@ -2,6 +2,7 @@
 
 namespace Finortho\Fritage\EchangeBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Finortho\Fritage\EchangeBundle\Entity\Stl;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -28,7 +29,7 @@ class SessionHandler
      * @param Session       $session
      * @param EntityManager $em
      */
-    public function __construct(Session $session, EntityManager $em)
+    public function __construct(Session $session, ObjectManager $em)
     {
         $this->session = $session;
         $this->em = $em;
@@ -81,8 +82,11 @@ class SessionHandler
             $key = array_search(intval($id), $uploads);
             if (is_numeric($key)) {
                 unset($uploads[$key]);
-                $this->session->set('uploads', $uploads);
-                var_dump($uploads);
+                if(empty($uploads)){
+                    $this->session->remove('uploads');
+                }else {
+                    $this->session->set('uploads', $uploads);
+                }
             }
         }
     }

@@ -27,15 +27,11 @@ class FinorthoNamer
     /**
      * @param TokenStorage  $context
      * @param Session       $session
-     * @param \Swift_Mailer $mailer
-     * @param EntityManager $em
      */
-    public function __construct(TokenStorage $context, Session $session, \Swift_Mailer $mailer, EntityManager $em)
+    public function __construct(TokenStorage $context, Session $session)
     {
         $this->context = $context;
         $this->session = $session;
-        $this->mailer = $mailer;
-        $this->em = $em;
     }
 
     /**
