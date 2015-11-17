@@ -3,9 +3,6 @@
 namespace Finortho\Fritage\EchangeBundle\Services;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
-use Finortho\Fritage\EchangeBundle\Entity\User;
-use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\AclBundle\Entity\Car;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -60,7 +57,7 @@ class FinorthoNamer
      * @param $day
      * @return string
      */
-    private function weekDate($day)
+    public function weekDate($day)
     {
         $date = Carbon::now(new \DateTimeZone('Europe/Paris'));
         $weekend = false;
@@ -83,7 +80,7 @@ class FinorthoNamer
      * @param $date
      * @return mixed
      */
-    private function dateChecker(Carbon $date)
+    public function dateChecker(Carbon $date)
     {
         return $date->isWeekend();
     }

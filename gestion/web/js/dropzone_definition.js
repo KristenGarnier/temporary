@@ -23,7 +23,7 @@ function init_dropzone(endpoint) {
         accept: function (file, done) {
             var splitted = file.name.split('.');
 
-            if (splitted[1] == 'stl' || splitted[1] == 'STL' || splitted[1] == 'pdf' || splitted[1] == 'PDF' || splitted[1] == 'png' || splitted[1] == 'PNG' || splitted[1] == 'JPEG' || splitted[1] == 'jpeg' || splitted[1] == 'JPG' || splitted[1] == 'jpg') {
+            if (splitted[splitted.length -1] == 'stl' || splitted[splitted.length -1] == 'STL' || splitted[splitted.length -1] == 'pdf' || splitted[splitted.length -1] == 'PDF' || splitted[splitted.length -1] == 'png' || splitted[splitted.length -1] == 'PNG' || splitted[splitted.length -1] == 'JPEG' || splitted[splitted.length -1] == 'jpeg' || splitted[splitted.length -1] == 'JPG' || splitted[splitted.length -1] == 'jpg') {
                 done();
             }
             else {

@@ -2,6 +2,7 @@
 
 namespace Finortho\Fritage\EchangeBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -16,9 +17,9 @@ class CheckDouble
     private $em;
 
     /**
-     * @param EntityManager $em
+     * @param ObjectManager $em
      */
-    public function __construct(EntityManager $em)
+    public function __construct(ObjectManager $em)
     {
         $this->em = $em;
     }
@@ -32,6 +33,8 @@ class CheckDouble
      * @param $entityName nom de l'entité
      * @param $enterpriseName nom de l'entreprise
      * @throws \Exception si il existe déjà un fihcier sous ce nom
+     *
+     * @return boolean
      */
     public function check($entityName, $enterpriseName){
         $check = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findOneBy(array('name' => $entityName, 'utilisateur' => $enterpriseName));
@@ -39,6 +42,8 @@ class CheckDouble
         if( !empty($check)){
             Throw new \Exception('Il existe déjà un fichier sous ce nom');
         }
+
+        return true;
 
     }
 }

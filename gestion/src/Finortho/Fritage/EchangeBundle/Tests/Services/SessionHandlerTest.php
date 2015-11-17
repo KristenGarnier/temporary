@@ -65,6 +65,7 @@ class SessionHandlerTest extends WebTestCase
         $stl = $this->getMock('Finortho\Fritage\EchangeBundle\Entity\Stl');
         $stl->expects($this->exactly(2))->method('getId')->will($this->returnValue(1));
 
+        //mocking the repository
         $stlRepository = $this
             ->getMockBuilder('\Doctrine\ORM\EntityRepository')
             ->disableOriginalConstructor()
