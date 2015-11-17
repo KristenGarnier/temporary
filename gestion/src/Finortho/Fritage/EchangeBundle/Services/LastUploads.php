@@ -2,6 +2,7 @@
 
 namespace Finortho\Fritage\EchangeBundle\Services;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
@@ -24,10 +25,10 @@ class LastUploads
     private $user;
 
     /**
-     * @param EntityManager $em
+     * @param ObjectManager $em
      * @param TokenStorage  $token
      */
-    public function __construct(EntityManager $em, TokenStorage $token)
+    public function __construct(ObjectManager $em, TokenStorage $token)
     {
         $this->em = $em;
         $this->user = $token->getToken()->getUser();
@@ -39,7 +40,7 @@ class LastUploads
      * @return mixed
      */
     public function get(){
-        $uploads = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findByUtilisateur($this->user, array('date' => 'DESC'));
+        $uploads = $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findBy(array('user' => $this->user), array('date' => 'DESC'));
         return $uploads;
     }
 }
