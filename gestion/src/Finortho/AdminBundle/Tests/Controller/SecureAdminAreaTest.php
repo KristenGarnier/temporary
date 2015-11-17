@@ -35,14 +35,12 @@ class SecureAdminAreaTest extends WebTestCase
 
         $crawler = $client->request('GET', 'http://localhost:8000/login');
 
-
         $this->adminConnect($client);
 
         $this->assertTrue($client->getResponse()->isRedirect('http://localhost:8000/'));
 
         $client->request('GET', 'http://localhost:8000/admin');
         $client->followRedirect();
-
         $this->assertTrue($client->getResponse()->isSuccessful());
 
     }
