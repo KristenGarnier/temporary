@@ -1,3 +1,7 @@
+finortho_api:
+    resource: "@FinorthoApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
 finortho_admin:
     resource: "@FinorthoAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
@@ -12,3 +16,7 @@ fos_user:
 oneup_uploader:
     resource: .
     type: uploader
+
+#exigence_api:
+#    resource: "@PBWApiBundle/Resources/config/routing.yml"
+#    prefix:   /api

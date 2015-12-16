@@ -21,6 +21,10 @@ class AppKernel extends Kernel
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Finortho\AdminBundle\FinorthoAdminBundle(),
             new Headoo\HeadooMailjetBundle\HeadooMailjetBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new Finortho\ApiBundle\FinorthoApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
