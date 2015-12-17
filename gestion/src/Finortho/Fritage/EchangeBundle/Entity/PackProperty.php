@@ -39,7 +39,7 @@ class PackProperty
 
     /**
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem", inversedBy="items")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $packItem;
 

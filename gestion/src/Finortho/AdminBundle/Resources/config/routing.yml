@@ -17,3 +17,7 @@ finortho_admin_list_users:
 finortho_fritage_echange_pack:
     resource: "@FinorthoAdminBundle/Resources/config/routing/pack.yml"
     prefix:   /pack
+
+finortho_fritage_echange_pack_item:
+    resource: "@FinorthoAdminBundle/Resources/config/routing/packitem.yml"
+    prefix:   /item
