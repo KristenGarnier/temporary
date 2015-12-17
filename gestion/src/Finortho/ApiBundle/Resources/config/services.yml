@@ -1,4 +1,4 @@
 services:
-#    finortho_api.example:
-#        class: Finortho\ApiBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    produit_handler:
+        class: Finortho\ApiBundle\Handler\ProduitHandler
+        arguments: [@doctrine.orm.entity_manager, "Finortho\Fritage\EchangeBundle\Entity\Stl"]

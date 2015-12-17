@@ -5,12 +5,18 @@ namespace Finortho\Fritage\EchangeBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Stl
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
+ * @ExclusionPolicy("all")
  */
 class Stl
 {
@@ -20,6 +26,8 @@ class Stl
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Expose
      */
     private $id;
 
@@ -27,6 +35,7 @@ class Stl
      * @var string vatialbe stockant l'extenstion de l'image
      *
      * @ORM\Column(name="url", type="string", length=255)
+     *
      */
     private $url;
 
@@ -34,6 +43,7 @@ class Stl
      * @var string vatiable stockant le nom de l'image
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Expose
      */
     private $name;
 
