@@ -8,14 +8,14 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
- * Pack
+ * PackProperty
  *
  * @ORM\Table()
  * @ORM\Entity
  *
  * @ExclusionPolicy("all")
  */
-class Pack
+class PackProperty
 {
     /**
      * @var integer
@@ -38,9 +38,12 @@ class Pack
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem", mappedBy="pack")
+     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem", inversedBy="items")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $items;
+    private $packItem;
+
+    
 
 
 
@@ -76,44 +79,27 @@ class Pack
     {
         return $this->name;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add items
+     * Set packItem
      *
-     * @param \Finortho\Fritage\EchangeBundle\Entity\PackItem $items
-     * @return Pack
+     * @param \Finortho\Fritage\EchangeBundle\Entity\PackItem $packItem
+     * @return PackProperty
      */
-    public function addItem(\Finortho\Fritage\EchangeBundle\Entity\PackItem $items)
+    public function setPackItem(\Finortho\Fritage\EchangeBundle\Entity\PackItem $packItem)
     {
-        $this->items[] = $items;
+        $this->packItem = $packItem;
 
         return $this;
     }
 
     /**
-     * Remove items
+     * Get packItem
      *
-     * @param \Finortho\Fritage\EchangeBundle\Entity\PackItem $items
+     * @return \Finortho\Fritage\EchangeBundle\Entity\PackItem 
      */
-    public function removeItem(\Finortho\Fritage\EchangeBundle\Entity\PackItem $items)
+    public function getPackItem()
     {
-        $this->items->removeElement($items);
-    }
-
-    /**
-     * Get items
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getItems()
-    {
-        return $this->items;
+        return $this->packItem;
     }
 }
