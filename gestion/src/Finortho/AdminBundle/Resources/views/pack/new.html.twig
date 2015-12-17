@@ -7,37 +7,36 @@
 {% endblock %}
 
 {% block pagetitle %}
-Fichier envoyés
+    Ajouter un pack
 {% endblock %}
 
 {% block menu %}
-    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i class="icon ion-log-out"></i></a>
+    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i
+                class="icon ion-log-out"></i></a>
     <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
-    <a  class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
-    <a  class="pull-right navi" href="{{ path('pack') }}">Packs</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
+    <a class="pull-right navi" href="{{ path('pack') }}">Packs</a>
 {% endblock %}
 
-{% block body %}
-
-
+{% block body -%}
     <div class="container">
-        <h4>Fichiers envoyés par les clients :</h4>
+        <h4>Créer un nouveau pack</h4>
 
-        <div class="tree-container">
-            {{ tree |raw }}
+        {{ form(form) }}
+
+        <div id="actions" class="pull-right">
+            <a href="{{ path('pack') }}">
+                <button class="btn cancel">
+                    Retour à la liste
+                </button>
+            </a>
         </div>
-
     </div>
-
-
-
 {% endblock %}
-
 
 {% block javascripts %}
 
     <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
     <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/php_file_tree_jquery.js') }}"></script>
 {% endblock %}

@@ -13,3 +13,7 @@ finortho_admin_delete_user:
 finortho_admin_list_users:
     path:     /users
     defaults: { _controller: FinorthoAdminBundle:UserManagement:listUser }
+
+finortho_fritage_echange_pack:
+    resource: "@FinorthoAdminBundle/Resources/config/routing/pack.yml"
+    prefix:   /pack

@@ -1,0 +1,30 @@
+pack:
+    path:     /
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:index" }
+
+pack_show:
+    path:     /{id}/show
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:show" }
+
+pack_new:
+    path:     /new
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:new" }
+
+pack_create:
+    path:     /create
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:create" }
+    methods:  POST
+
+pack_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:edit" }
+
+pack_update:
+    path:     /{id}/update
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:update" }
+    methods:  [POST, PUT]
+
+pack_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FinorthoAdminBundle:PackageManagement:delete" }
+    methods:  [POST, DELETE]

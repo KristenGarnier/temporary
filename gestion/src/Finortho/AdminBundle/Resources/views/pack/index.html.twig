@@ -1,0 +1,74 @@
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% endblock %}
+
+{% block pagetitle %}
+    Package disponibles
+{% endblock %}
+
+{% block menu %}
+    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i
+                class="icon ion-log-out"></i></a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
+    <a class="pull-right navi" href="{{ path('pack') }}">Packs</a>
+{% endblock %}
+
+{% block body -%}
+    <div class="container">
+        <h4>Tous vos package disponibles :</h4>
+
+        <table class="table">
+            <thead>
+            <tr class="row" >
+                <th class="col-md-3">Id</th>
+                <th class="col-md-3">Nom</th>
+                <th class="col-md-6">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr class="row">
+                    <td class="col-md-3"><a href="{{ path('pack_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td class="col-md-3">{{ entity.name }}</td>
+                    <td class="col-md-6">
+                        <a href="{{ path('pack_show', { 'id': entity.id }) }}">
+                            <button class="btn fileinput-button">
+                                Voir
+                            </button>
+                        </a>
+
+                        <a href="{{ path('pack_edit', { 'id': entity.id }) }}">
+                            <button class="btn cancel">
+                                Mettre à jour
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div id="actions">
+
+            <a href="{{ path('pack_new') }}">
+                <button class="btn start">
+                    Ajouter un nouveau pack
+                </button>
+            </a>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+{% endblock %}
