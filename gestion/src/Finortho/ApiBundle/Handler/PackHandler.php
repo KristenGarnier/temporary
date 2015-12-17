@@ -12,13 +12,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Finortho\ApiBundle\Service\UserExist;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+
 /**
  * Class for handling database call and logic form controller
  *
- * Class ProduitHandler
+ * Class PackHandler
  * @package Finortho\ApiBundle\Handler
  */
-class ProduitHandler
+class PackHandler
 {
 
     /**
@@ -53,9 +54,15 @@ class ProduitHandler
      * @return array poducts from user
      * @throws HttpException if user does not exist
      */
-    public function userProducts($id)
+    public function userPack($id)
     {
-        return $this->repository->findBy(array('utilisateur' => $id));
+        return ['dummy data !'];
+        //return $this->repository->findBy(array('utilisateur' => $id));
+    }
+
+    public function pack()
+    {
+        return ['here is yo pack'];
     }
 
 }

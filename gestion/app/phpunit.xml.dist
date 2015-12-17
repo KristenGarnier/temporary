@@ -9,12 +9,15 @@
 >
     <testsuites>
         <testsuite name="admin">
-            <directory>../src/*/*Bundle/Tests</directory>
-            <directory>../src/*/Bundle/*Bundle/Tests</directory>
-            <directory>../src/*Bundle/Tests</directory>
+            <directory>../src/*/AdminBundle/Tests</directory>
+            <directory>../src/*/Bundle/AdminBundle/Tests</directory>
+            <directory>../src/AdminBundle/Tests</directory>
         </testsuite>
         <testsuite name="front">
             <directory>../src/*/*/*Bundle/Tests</directory>
+        </testsuite>
+        <testsuite name="api">
+            <directory>../src/*/ApiBundle/Tests</directory>
         </testsuite>
     </testsuites>
 
@@ -40,6 +43,7 @@
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/DependencyInjection</directory>
+                <directory>/*/ApiBundle/Tests/WebTestCaseApi</directory>
             </exclude>
         </whitelist>
     </filter>

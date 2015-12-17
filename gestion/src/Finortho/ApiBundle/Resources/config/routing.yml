@@ -1,3 +1,7 @@
 produits:
     type: rest
     resource: "@FinorthoApiBundle/Controller/ProduitController.php"
+
+packs:
+    type: rest
+    resource: "@FinorthoApiBundle/Controller/PackController.php"

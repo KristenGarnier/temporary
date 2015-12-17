@@ -2,3 +2,15 @@ services:
     produit_handler:
         class: Finortho\ApiBundle\Handler\ProduitHandler
         arguments: [@doctrine.orm.entity_manager, "Finortho\Fritage\EchangeBundle\Entity\Stl"]
+
+    pack_handler:
+            class: Finortho\ApiBundle\Handler\PackHandler
+            arguments: [@doctrine.orm.entity_manager, 'Finortho\Fritage\EchangeBundle\Entity\Pack']
+
+    user_exist:
+            class: Finortho\ApiBundle\Service\UserExist
+            arguments: [@doctrine.orm.entity_manager]
+
+    get_or_404:
+            class: Finortho\ApiBundle\Service\GetOr404
+            arguments: [@user_exist]

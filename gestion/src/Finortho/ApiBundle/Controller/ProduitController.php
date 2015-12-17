@@ -4,6 +4,7 @@ namespace Finortho\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Api Class for Products
@@ -23,10 +24,15 @@ class ProduitController extends FOSRestController
      */
     public function getProduitsAction(Request $request)
     {
-        if (array_key_exists('user', $request->headers) && $request->headers->get('user') != NULL) {
-            return $this->get('produit_handler')->userProducts($request->headers->get('user'));
+        $user = $request->headers->get('user');
+        if ($user != NULL) {
+            return $this->get('getOr404')->check(
+                $this->get('produit_handler'),
+                'userProducts',
+                $user
+            );
         } else {
-            throw new \Exception('Access Forbidden', 403);
+            throw new HttpException(403, "Access Forbidden");
         }
 
     }
