@@ -2,24 +2,26 @@
 
 namespace Finortho\Fritage\EchangeBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Finortho\AdminBundle\Tests\Extended_WebTestCase;
 
-class PackPropertyControllerTest extends WebTestCase
+class PackPropertyControllerTest extends Extended_WebTestCase
 {
-    /*
+
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
         $client = static::createClient();
 
+        $this->adminConnect($client);
+
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/packproperty/');
+        $crawler = $client->request('GET', 'http://localhost:8000/admin/property/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /packproperty/");
         $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'finortho_fritage_echangebundle_packproperty[field_name]'  => 'Test',
+            'finortho_fritage_echangebundle_packproperty[name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +35,7 @@ class PackPropertyControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'finortho_fritage_echangebundle_packproperty[field_name]'  => 'Foo',
+            'finortho_fritage_echangebundle_packproperty[name]'  => 'Foo',
             // ... other fields to fill
         ));
 
@@ -49,7 +51,14 @@ class PackPropertyControllerTest extends WebTestCase
 
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
-    }
 
-    */
+        $client->request('GET', 'http://localhost:8000/admin/property/0/show');
+        $this->assertEquals($client->getResponse()->getStatusCode(), 404);
+
+        $client->request('POST', 'http://localhost:8000/admin/property/0/update');
+        $this->assertEquals($client->getResponse()->getStatusCode(), 404);
+
+        $client->request('GET', 'http://localhost:8000/admin/property/0/edit');
+        $this->assertEquals($client->getResponse()->getStatusCode(), 404);
+    }
 }
