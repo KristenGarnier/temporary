@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PackItemType extends AbstractType
+class PackPropertyType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,16 +16,6 @@ class PackItemType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('pack', 'entity', array(
-                'class' => 'Finortho\Fritage\EchangeBundle\Entity\Pack',
-                'property' => 'name',
-                'multiple' => false
-            ))
-            ->add('items', 'entity', array(
-                'class' => 'Finortho\Fritage\EchangeBundle\Entity\PackProperty',
-                'property' => 'name',
-                'multiple' => true
-            ))
         ;
     }
     
@@ -35,7 +25,7 @@ class PackItemType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Finortho\Fritage\EchangeBundle\Entity\PackItem'
+            'data_class' => 'Finortho\Fritage\EchangeBundle\Entity\PackProperty'
         ));
     }
 
@@ -44,6 +34,6 @@ class PackItemType extends AbstractType
      */
     public function getName()
     {
-        return 'finortho_fritage_echangebundle_packitem';
+        return 'finortho_fritage_echangebundle_packproperty';
     }
 }

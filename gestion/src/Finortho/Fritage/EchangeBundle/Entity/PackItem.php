@@ -44,7 +44,7 @@ class PackItem
     private $pack;
 
     /**
-     * @ORM\OneToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackProperty", mappedBy="pack")
+     * @ORM\ManyToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackProperty", cascade={"persist"})
      */
     private $items;
 

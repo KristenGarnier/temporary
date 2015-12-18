@@ -21,3 +21,7 @@ finortho_fritage_echange_pack:
 finortho_fritage_echange_pack_item:
     resource: "@FinorthoAdminBundle/Resources/config/routing/packitem.yml"
     prefix:   /item
+
+finortho_fritage_echange_pack_property:
+    resource: "@FinorthoAdminBundle/Resources/config/routing/packproperty.yml"
+    prefix:   /property

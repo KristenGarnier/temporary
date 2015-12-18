@@ -37,15 +37,6 @@ class PackProperty
     private $name;
 
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem", inversedBy="items")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $packItem;
-
-    
-
-
 
     /**
      * Get id
@@ -78,28 +69,5 @@ class PackProperty
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set packItem
-     *
-     * @param \Finortho\Fritage\EchangeBundle\Entity\PackItem $packItem
-     * @return PackProperty
-     */
-    public function setPackItem(\Finortho\Fritage\EchangeBundle\Entity\PackItem $packItem)
-    {
-        $this->packItem = $packItem;
-
-        return $this;
-    }
-
-    /**
-     * Get packItem
-     *
-     * @return \Finortho\Fritage\EchangeBundle\Entity\PackItem 
-     */
-    public function getPackItem()
-    {
-        return $this->packItem;
     }
 }

@@ -1,0 +1,30 @@
+packproperty:
+    path:     /
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:index" }
+
+packproperty_show:
+    path:     /{id}/show
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:show" }
+
+packproperty_new:
+    path:     /new
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:new" }
+
+packproperty_create:
+    path:     /create
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:create" }
+    methods:  POST
+
+packproperty_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:edit" }
+
+packproperty_update:
+    path:     /{id}/update
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:update" }
+    methods:  [POST, PUT]
+
+packproperty_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FinorthoAdminBundle:PackagePropertyManagement:delete" }
+    methods:  [POST, DELETE]
