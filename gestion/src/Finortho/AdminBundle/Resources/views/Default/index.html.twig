@@ -1,24 +1,10 @@
-{% extends 'admin.html.twig' %}
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-{% endblock %}
-
-{% block pagetitle %}
-Fichier envoyés
-{% endblock %}
-
-{% block menu %}
-    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i class="icon ion-log-out"></i></a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
-    <a  class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
-    <a  class="pull-right navi" href="{{ path('finortho_admin_exigences') }}">Packs</a>
+{% block title %}
+    Fichiers envoyés
 {% endblock %}
 
 {% block body %}
-
 
     <div class="container">
         <h4>Fichiers envoyés par les clients :</h4>
@@ -26,10 +12,7 @@ Fichier envoyés
         <div class="tree-container">
             {{ tree |raw }}
         </div>
-
     </div>
-
-
 
 {% endblock %}
 

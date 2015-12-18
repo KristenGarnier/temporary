@@ -1,18 +1,7 @@
-{% extends 'admin.html.twig' %}
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-{% endblock %}
-
-{% block pagetitle %}
-    Ajouter un nouvel utilisateur
-{% endblock %}
-
-{% block menu %}
-    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i class="icon ion-log-out"></i></a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_exigences') }}">Fichers envoyés</a>
+{% block title %}
+    Utilisateurs
 {% endblock %}
 
 {% block body %}
@@ -29,6 +18,13 @@
         <h4>Liste des utilisateurs :</h4>
 
         <div id="actions">
+            <div>
+                <a href="{{ path('finortho_admin_new_user') }}" class="pull-right">
+                    <button class="btn start" style="margin-bottom: 2rem">
+                        Ajouter un utilisateur
+                    </button>
+                </a>
+            </div>
 
             <table class="table">
                 <thead>
@@ -58,16 +54,9 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 
 
 
-{% endblock %}
 
-
-{% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 {% endblock %}

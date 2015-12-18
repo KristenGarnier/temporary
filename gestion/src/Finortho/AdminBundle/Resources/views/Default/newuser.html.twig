@@ -1,25 +1,12 @@
-{% extends 'admin.html.twig' %}
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-{% endblock %}
-
-{% block pagetitle %}
-Ajouter un nouvel utilisateur
-{% endblock %}
-
-{% block menu %}
-    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i class="icon ion-log-out"></i></a>
-    <a  class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
-    <a  class="pull-right navi" href="{{ path('finortho_admin_exigences') }}">Fichers envoyés</a>
+{% block title %}
+    Ajouter un nouvel utilisateur
 {% endblock %}
 
 {% block body %}
-
     <div class="container">
-
-        <form method="post" >
+        <form method="post">
             <div class="form-group">
                 <label for="nom">Nom d'utilisateur</label>
                 <input type="text" class="form-control" id="nom" name="username" required>
@@ -40,14 +27,5 @@ Ajouter un nouvel utilisateur
                 </button>
             </div>
         </form>
-
     </div>
-
-
-
-{% endblock %}
-
-
-{% block javascripts %}
-    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
 {% endblock %}

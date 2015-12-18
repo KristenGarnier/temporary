@@ -7,20 +7,19 @@
 {% endblock %}
 
 {% block pagetitle %}
-    Package disponibles
+    {% block title %}{% endblock %}
 {% endblock %}
 
 {% block menu %}
     <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i
                 class="icon ion-log-out"></i></a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_exigences') }}">Packs</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Gestion utilisateurs</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_exigences') }}">Gestion Exigences</a>
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <div id="actions" class="row">
+        <div id="actions" class="row" style="margin-bottom: 4rem">
             <div class="col-md-4 text-center">
                 <a href="{{ path('pack') }}" class="text-center">
                     <button class="btn start">Les catégories de packs</button>
@@ -37,7 +36,11 @@
                 </a>
             </div>
         </div>
+        {% block content %}
+
+        {% endblock %}
     </div>
+
 {% endblock %}
 
 {% block javascripts %}
@@ -45,4 +48,5 @@
     <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
     <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/php_file_tree_jquery.js') }}"></script>
 {% endblock %}
