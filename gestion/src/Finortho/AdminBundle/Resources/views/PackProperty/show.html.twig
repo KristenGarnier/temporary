@@ -1,10 +1,29 @@
-{% extends '::base.html.twig' %}
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% endblock %}
+
+{% block pagetitle %}
+    Ajouter un pack
+{% endblock %}
+
+{% block menu %}
+    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i
+                class="icon ion-log-out"></i></a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
+    <a class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
+    <a class="pull-right navi" href="{{ path('pack') }}">Packs</a>
+{% endblock %}
 
 {% block body -%}
-    <h1>PackProperty</h1>
+    <div class="container">
+        <h4>Votre propritété</h4>
 
-    <table class="record_properties">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
@@ -13,20 +32,29 @@
                 <th>Name</th>
                 <td>{{ entity.name }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('packproperty') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('packproperty_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        <div id="actions" class="">
+            <a href="{{ path('packproperty') }}">
+                <button class="btn cancel">
+                    Retout à la liste
+                </button>
+
+            </a>
+            <a href="{{ path('packproperty_edit', { 'id': entity.id }) }}">
+                <button class="btn cancel">
+                    Éditer
+                </button>
+            </a>
+            {{ form(delete_form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 {% endblock %}

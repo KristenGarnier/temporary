@@ -17,10 +17,10 @@ class PackPropertyControllerTest extends Extended_WebTestCase
         // Create a new entry in the database
         $crawler = $client->request('GET', 'http://localhost:8000/admin/property/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /packproperty/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        $crawler = $client->click($crawler->selectLink('Ajouter une nouvelle propriété')->link());
 
         // Fill in the form and submit it
-        $form = $crawler->selectButton('Create')->form(array(
+        $form = $crawler->selectButton('Créer')->form(array(
             'finortho_fritage_echangebundle_packproperty[name]'  => 'Test',
             // ... other fields to fill
         ));
@@ -32,9 +32,9 @@ class PackPropertyControllerTest extends Extended_WebTestCase
         $this->assertGreaterThan(0, $crawler->filter('td:contains("Test")')->count(), 'Missing element td:contains("Test")');
 
         // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
+        $crawler = $client->click($crawler->selectLink('Éditer')->link());
 
-        $form = $crawler->selectButton('Update')->form(array(
+        $form = $crawler->selectButton('Mettre à jour')->form(array(
             'finortho_fritage_echangebundle_packproperty[name]'  => 'Foo',
             // ... other fields to fill
         ));

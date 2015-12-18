@@ -68,7 +68,7 @@ class PackagePropertyManagementController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Créer', 'attr' => ['class' => 'btn start']));
 
         return $form;
     }
@@ -148,7 +148,7 @@ class PackagePropertyManagementController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Mettre à jour', 'attr' => ['class' => 'btn start']));
 
         return $form;
     }
@@ -220,7 +220,7 @@ class PackagePropertyManagementController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('packproperty_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Delete', 'attr' => ['class' => 'btn danger', 'style' => 'margin-top: 2rem; margin-left: 1vw;']))
             ->getForm();
     }
 
