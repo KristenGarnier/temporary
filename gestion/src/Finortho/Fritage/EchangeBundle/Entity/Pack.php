@@ -24,7 +24,6 @@ class Pack
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Expose
      */
     private $id;
 
@@ -32,13 +31,20 @@ class Pack
      * @var string Variable contenant le nom du pack
      *
      * @ORM\Column(name="name", type="string", length=255)
-     *
+     *@Expose
      */
     private $name;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User", cascade={"remove"})
+     * @ORM\Column(nullable=true)
+     */
+    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem", mappedBy="pack")
+     *
+     * @Expose
      */
     private $items;
 
@@ -115,5 +121,28 @@ class Pack
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set user
+     *
+     * @param string $user
+     * @return Pack
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

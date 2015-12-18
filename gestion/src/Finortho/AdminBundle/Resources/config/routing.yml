@@ -25,3 +25,7 @@ finortho_fritage_echange_pack_item:
 finortho_fritage_echange_pack_property:
     resource: "@FinorthoAdminBundle/Resources/config/routing/packproperty.yml"
     prefix:   /property
+
+finortho_admin_exigences:
+    path: /exigences
+    defaults: { _controller: FinorthoAdminBundle:PackageInterface:index }

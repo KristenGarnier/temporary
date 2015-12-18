@@ -24,7 +24,7 @@ class PackItem
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Expose
+     *
      */
     private $id;
 
@@ -33,20 +33,31 @@ class PackItem
      *
      * @ORM\Column(name="name", type="string", length=255)
      *
+     * @Expose
+     *
      */
     private $name;
 
 
     /**
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\Pack", inversedBy="items")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     *
+     *
      */
     private $pack;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackProperty", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackProperty", cascade={"detach"})
+     * @Expose
      */
-    private $items;
+    public $property;
+
+    /**
+     * @var array
+     * @Expose
+     */
+    private $childs = [];
 
 
 
@@ -89,7 +100,7 @@ class PackItem
      */
     public function __construct()
     {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->property = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -115,36 +126,37 @@ class PackItem
         return $this->pack;
     }
 
+
     /**
-     * Add items
+     * Add property
      *
-     * @param \Finortho\Fritage\EchangeBundle\Entity\PackProperty $items
+     * @param \Finortho\Fritage\EchangeBundle\Entity\PackProperty $property
      * @return PackItem
      */
-    public function addItem(\Finortho\Fritage\EchangeBundle\Entity\PackProperty $items)
+    public function addProperty(\Finortho\Fritage\EchangeBundle\Entity\PackProperty $property)
     {
-        $this->items[] = $items;
+        $this->property[] = $property;
 
         return $this;
     }
 
     /**
-     * Remove items
+     * Remove property
      *
-     * @param \Finortho\Fritage\EchangeBundle\Entity\PackProperty $items
+     * @param \Finortho\Fritage\EchangeBundle\Entity\PackProperty $property
      */
-    public function removeItem(\Finortho\Fritage\EchangeBundle\Entity\PackProperty $items)
+    public function removeProperty(\Finortho\Fritage\EchangeBundle\Entity\PackProperty $property)
     {
-        $this->items->removeElement($items);
+        $this->property->removeElement($property);
     }
 
     /**
-     * Get items
+     * Get property
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getItems()
+    public function getProperty()
     {
-        return $this->items;
+        return $this->property;
     }
 }

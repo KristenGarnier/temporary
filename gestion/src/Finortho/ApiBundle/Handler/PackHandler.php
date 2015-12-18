@@ -62,7 +62,7 @@ class PackHandler
 
     public function pack()
     {
-        return ['here is yo pack'];
+        return $this->om->getRepository('FinorthoFritageEchangeBundle:Pack')->findBy(['user' => NULL]);
     }
 
 }

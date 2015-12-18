@@ -23,7 +23,7 @@ class PackItemControllerTest extends Extended_WebTestCase
         $form = $crawler->selectButton('Créer')->form(array(
             'finortho_fritage_echangebundle_packitem[name]'  => 'Test',
             'finortho_fritage_echangebundle_packitem[pack]'  => 6,
-            'finortho_fritage_echangebundle_packitem[items]'  => 1
+            'finortho_fritage_echangebundle_packitem[property]'  => 1
             // ... other fields to fill
         ));
 

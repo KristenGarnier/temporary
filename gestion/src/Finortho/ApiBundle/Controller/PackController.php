@@ -38,6 +38,13 @@ class PackController extends FOSRestController
 
     }
 
+    /**
+     * Send back default pack
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws \HttpException
+     */
     public function getPacksAction(Request $request)
     {
         $user = $request->headers->get('user');

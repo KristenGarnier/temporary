@@ -24,7 +24,7 @@ class PackProperty
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * @Expose
+     *
      */
     private $id;
 
@@ -33,6 +33,7 @@ class PackProperty
      *
      * @ORM\Column(name="name", type="string", length=255)
      *
+     * @Expose
      */
     private $name;
 
