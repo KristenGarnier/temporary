@@ -1,0 +1,35 @@
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
+
+{% block title %}
+    Gestion des exigences
+{% endblock %}
+
+{% block content -%}
+    <h4>Contient les packs :</h4>
+    <div class="row">
+        {% for entity in entities %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3 style="color: black;">{{ entity.name }}</h3>
+                        {% for item in entity.items %}
+                            <div class="col-sm-12" style="margin-top: 2rem;">
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <h3 style="color: black;">{{ item.name }}</h3>
+                                        <ul class="list-group" style="margin-top: 2rem">
+                                            {% for property in item.property %}
+                                                <li class="list-group-item">{{ property.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -7,9 +7,17 @@ services:
             class: Finortho\ApiBundle\Handler\PackHandler
             arguments: [@doctrine.orm.entity_manager, 'Finortho\Fritage\EchangeBundle\Entity\Pack']
 
+    message_handler:
+                class: Finortho\ApiBundle\Handler\MessageHandler
+                arguments: [@doctrine.orm.entity_manager, 'Finortho\Fritage\EchangeBundle\Entity\Message']
+
     user_exist:
             class: Finortho\ApiBundle\Service\UserExist
             arguments: [@doctrine.orm.entity_manager]
+
+    message_exist:
+                class: Finortho\ApiBundle\Service\MessageExist
+                arguments: [@doctrine.orm.entity_manager]
 
     get_or_404:
             class: Finortho\ApiBundle\Service\GetOr404

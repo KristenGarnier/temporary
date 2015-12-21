@@ -5,3 +5,7 @@ produits:
 packs:
     type: rest
     resource: "@FinorthoApiBundle/Controller/PackController.php"
+
+messages:
+    type: rest
+    resource: "@FinorthoApiBundle/Controller/MessageController.php"

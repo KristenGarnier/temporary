@@ -1,26 +1,12 @@
-{% extends 'admin.html.twig' %}
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}">
-    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% block title %}
+    Catégorie {{ entity.name }}
 {% endblock %}
 
-{% block pagetitle %}
-    Ajouter un pack
-{% endblock %}
-
-{% block menu %}
-    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i
-                class="icon ion-log-out"></i></a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_new_user') }}">Ajouter un utilisateur</a>
-    <a class="pull-right navi" href="{{ path('finortho_admin_list_users') }}">Utilisateurs</a>
-    <a class="pull-right navi" href="{{ path('pack') }}">Packs</a>
-{% endblock %}
-
-{% block body -%}
+{% block content -%}
     <div class="container">
-        <h4>Votre pack</h4>
+        <h4>{{entity.name }}</h4>
 
         <table class="table">
             <tbody>
@@ -34,6 +20,20 @@
             </tr>
             </tbody>
         </table>
+
+        <h4>Contient les packs :</h4>
+        <div class="row">
+            {% for item in entity.items %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h3 style="color: black;">{{ item.name }}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
 
         <div id="actions" class="">
                 <a href="{{ path('pack') }}">

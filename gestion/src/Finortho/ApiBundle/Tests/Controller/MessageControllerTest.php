@@ -4,13 +4,13 @@ namespace Finortho\ApiBundle\Tests\Controller;
 
 use Finortho\ApiBundle\Tests\WebCaseApi;
 
-class PackControllerTest extends WebCaseApi
+class MessageControllerTest extends WebCaseApi
 {
-    public function testShouldSendPackUserJsonArray()
+    public function testShouldSendMessageUserJsonArray()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/api/packs/user', array(), array(), array(
+        $client->request('GET', '/api/messages', array(), array(), array(
             'HTTP_user' => 1
         ));
         $response = $client->getResponse();
@@ -19,11 +19,11 @@ class PackControllerTest extends WebCaseApi
         $this->assertTrue(is_array(json_decode($response->getContent())));
     }
 
-    public function testShouldReturnAnErrorPackUser()
+    public function testShouldReturnAnErrorMessageUser()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/api/packs/user');
+        $client->request('GET', '/api/messages');
         $response = $client->getResponse();
 
         $this->assertJsonResponse($response, 403);
@@ -33,7 +33,7 @@ class PackControllerTest extends WebCaseApi
     public function testShouldSayNotFound(){
         $client = static::createClient();
 
-        $client->request('GET', '/api/packs/user', array(), array(), array(
+        $client->request('GET', '/api/messages', array(), array(), array(
             'HTTP_user' => "als"
         ));
         $response = $client->getResponse();
@@ -42,40 +42,36 @@ class PackControllerTest extends WebCaseApi
         $this->assertContains('User not found', $response->getContent());
     }
 
-    public function testShouldSendPackJsonArray()
-    {
+    public function testShouldAddaMessage(){
         $client = static::createClient();
 
-        $client->request('GET', '/api/packs', array(), array(), array(
-            'HTTP_user' => 1
-        ));
+        $client->request('POST', '/api/messages', ["content" => "test"], [], [
+            'HTTP_user' => "1"
+        ]);
         $response = $client->getResponse();
-
-        $this->assertJsonResponse($response, 200);
-        $this->assertTrue(is_array(json_decode($response->getContent())));
+        $this->assertEquals(201, $response->getStatusCode());
     }
 
-    public function testShouldReturnAnErrorPack()
+    public function testShouldFailAddingaMessage(){
+        $client = static::createClient();
+
+        $client->request('POST', '/api/messages', ["content" => "test"], [], [
+            'HTTP_user' => "1"
+        ]);
+        $response = $client->getResponse();
+        $this->assertEquals(409, $response->getStatusCode());
+        $this->assertContains('error', $response->getContent());
+    }
+
+    public function testPOSTShouldReturnAnErrorMessageUser()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/api/packs');
+        $client->request('POST', '/api/messages');
         $response = $client->getResponse();
 
         $this->assertJsonResponse($response, 403);
         $this->assertContains('error', $response->getContent());
-    }
-
-    public function testShouldSayNotFoundPack(){
-        $client = static::createClient();
-
-        $client->request('GET', '/api/packs', array(), array(), array(
-            'HTTP_user' => "als"
-        ));
-        $response = $client->getResponse();
-
-        $this->assertJsonResponse($response, 404);
-        $this->assertContains('User not found', $response->getContent());
     }
 
 

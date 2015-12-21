@@ -19,12 +19,14 @@ class PackItemType extends AbstractType
             ->add('pack', 'entity', array(
                 'class' => 'Finortho\Fritage\EchangeBundle\Entity\Pack',
                 'property' => 'name',
-                'multiple' => false
+                'multiple' => false,
+                'required' => false
             ))
             ->add('property', 'entity', array(
                 'class' => 'Finortho\Fritage\EchangeBundle\Entity\PackProperty',
                 'property' => 'name',
                 'multiple' => true,
+                'expanded' => true,
                 'required' => false
             ))
         ;

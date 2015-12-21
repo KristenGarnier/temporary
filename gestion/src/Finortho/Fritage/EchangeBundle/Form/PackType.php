@@ -16,12 +16,12 @@ class PackType extends AbstractType
     {
         $builder
             ->add('name', 'text', array('label' => 'Nom'))
-            ->add('items', 'entity', array(
+            /*->add('items', 'entity', array(
                 'class' => 'Finortho\Fritage\EchangeBundle\Entity\PackItem',
                 'property' => 'name',
                 'multiple' => true,
                 'required' => false
-            ));
+            ))*/;
         ;
     }
     

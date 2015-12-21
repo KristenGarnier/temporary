@@ -19,13 +19,17 @@ class GetOr404
      * @param Int $arg user id
      * @param $service
      * @param String $method name of the method
+     * @param boolean $call If the function need to be called or not
      * @return array
      * @throws HttpException
      */
-    public function check($service, $method, $arg)
+    public function check($service, $method, $arg, $call = true)
     {
         if ($this->userExist->check($arg)) {
-            return call_user_func_array(array($service, $method), array($arg));
+            if($call){
+                return call_user_func_array(array($service, $method), array($arg));
+            }
+            return true;
         }
 
         throw new HttpException(404, "User not found");
