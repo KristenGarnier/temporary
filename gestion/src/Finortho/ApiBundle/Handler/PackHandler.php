@@ -74,6 +74,7 @@ class PackHandler
     public function addPackUser($data, $id)
     {
         $pack = new PackItem();
+        $category = $this->om->getRepository('FinorthoFritageEchangeBundle:Pack')->findOneByName($data['pack']);
         $propArray = [];
         foreach ($data['property'] as $i => $prop) {
             $packProp = $this->om->getRepository('FinorthoFritageEchangeBundle:PackProperty')->findOneBy(['name' => $prop, 'user' => $id]);
@@ -87,6 +88,7 @@ class PackHandler
 
         $pack->setName($data['name']);
         $pack->setUser($id);
+        $pack->setPack($category);
 
         foreach ($propArray as $p) {
             $pack->addProperty($p);
