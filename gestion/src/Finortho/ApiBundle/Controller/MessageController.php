@@ -7,8 +7,18 @@ use FOS\RestBundle\Util\Codes;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * Class MessageController
+ * @package Finortho\ApiBundle\Controller
+ */
 class MessageController extends FOSRestController
 {
+    /**
+     * Get all the message from a user
+     *
+     * @param Request $request
+     * @return mixed
+     */
     public function getMessagesAction(Request $request)
     {
         $user = $request->headers->get('user');
@@ -24,10 +34,15 @@ class MessageController extends FOSRestController
         }
     }
 
+    /**
+     * Save a user message in the db
+     *
+     * @param Request $request
+     * @return \FOS\RestBundle\View\View
+     */
     public function postMessageAction(Request $request)
     {
         $user = $request->headers->get('user');
-
         if ($user != NULL) {
             if ($this->get('getOr404')->check(null, null, $user, false)) {
                 if ($this->get('message_exist')->check($request->get('content'), $user)) {

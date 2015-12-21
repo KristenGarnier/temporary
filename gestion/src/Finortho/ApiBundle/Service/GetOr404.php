@@ -4,8 +4,17 @@ namespace Finortho\ApiBundle\Service;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
+/**
+ * Class GetOr404
+ * @package Finortho\ApiBundle\Service
+ */
 class GetOr404
 {
+    /**
+     * Check if user exists
+     *
+     * @var UserExist
+     */
     private $userExist;
 
     public function __construct(UserExist $userExist)
