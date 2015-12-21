@@ -9,7 +9,8 @@
 namespace Finortho\ApiBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finortho\ApiBundle\Service\UserExist;
+use Finortho\Fritage\EchangeBundle\Entity\PackItem;
+use Finortho\Fritage\EchangeBundle\Entity\PackProperty;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 
@@ -60,9 +61,39 @@ class PackHandler
         //return $this->repository->findBy(array('utilisateur' => $id));
     }
 
+    /**
+     * Return an array with just the default entities
+     *
+     * @return array|\Finortho\Fritage\EchangeBundle\Entity\Pack[]
+     */
     public function pack()
     {
-        return $this->om->getRepository('FinorthoFritageEchangeBundle:Pack')->findBy(['user' => NULL]);
+        return $this->om->getRepository('FinorthoFritageEchangeBundle:Pack')->findAllPackNotCreatedByUser();
+    }
+
+    public function addPackUser($data, $id)
+    {
+        $pack = new PackItem();
+        $propArray = [];
+        foreach ($data['property'] as $i => $prop) {
+            $packProp = $this->om->getRepository('FinorthoFritageEchangeBundle:PackProperty')->findOneBy(['name' => $prop, 'user' => $id]);
+            if (empty($packProp)) {
+                $packProp = new PackProperty();
+                $packProp->setName($prop);
+                $packProp->setUser($id);
+            }
+            array_push($propArray, $packProp);
+        }
+
+        $pack->setName($data['name']);
+        $pack->setUser($id);
+
+        foreach ($propArray as $p) {
+            $pack->addProperty($p);
+        }
+
+        $this->om->persist($pack);
+        $this->om->flush();
     }
 
 }

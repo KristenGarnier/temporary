@@ -11,7 +11,8 @@ use JMS\Serializer\Annotation\Expose;
  * Pack
  *
  * @ORM\Table()
- * @ORM\Entity
+ *
+ * @ORM\Entity(repositoryClass="Finortho\Fritage\EchangeBundle\Entity\PackRepository")
  *
  * @ExclusionPolicy("all")
  */
@@ -34,12 +35,6 @@ class Pack
      *@Expose
      */
     private $name;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User", cascade={"remove"})
-     * @ORM\Column(nullable=true)
-     */
-    private $user;
 
     /**
      * @ORM\OneToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem", mappedBy="pack")
@@ -121,28 +116,5 @@ class Pack
     public function getItems()
     {
         return $this->items;
-    }
-
-    /**
-     * Set user
-     *
-     * @param string $user
-     * @return Pack
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return string 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }

@@ -23,7 +23,7 @@ class PackagePropertyManagementController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('FinorthoFritageEchangeBundle:PackProperty')->findAll();
+        $entities = $em->getRepository('FinorthoFritageEchangeBundle:PackProperty')->findBy(['user' => NULL]);
 
         return $this->render('FinorthoAdminBundle:PackProperty:index.html.twig', array(
             'entities' => $entities,

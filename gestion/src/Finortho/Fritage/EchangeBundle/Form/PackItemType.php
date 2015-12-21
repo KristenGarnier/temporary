@@ -2,6 +2,7 @@
 
 namespace Finortho\Fritage\EchangeBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -24,6 +25,10 @@ class PackItemType extends AbstractType
             ))
             ->add('property', 'entity', array(
                 'class' => 'Finortho\Fritage\EchangeBundle\Entity\PackProperty',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->where('p.user is null');
+                },
                 'property' => 'name',
                 'multiple' => true,
                 'expanded' => true,

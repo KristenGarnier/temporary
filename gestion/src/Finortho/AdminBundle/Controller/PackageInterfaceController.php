@@ -8,7 +8,7 @@ class PackageInterfaceController extends Controller
 {
     public function indexAction()
     {
-        $entities = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Pack')->findBy(['user' => null]);
+        $entities = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Pack')->findAllPackNotCreatedByUser();
         return $this->render('FinorthoAdminBundle:Interface:content.html.twig', ['entities' => $entities]);
     }
 }

@@ -19,7 +19,7 @@
         </tr>
         </tbody>
     </table>
-    {% if entity.pack is defined %}
+    {% if entity.pack.name is defined %}
         <h4>Fais parti de la catégorie de pack : <strong>{{ entity.pack.name }}</strong></h4>
     {% else %}
         <h4>Pas de catégorie de pack attaché.</h4>

@@ -24,7 +24,7 @@ class PackItem
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     *
+     * @Expose
      */
     private $id;
 
@@ -48,7 +48,15 @@ class PackItem
     private $pack;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackProperty", cascade={"detach"})
+     * @ORM\OneToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User", cascade={"remove"})
+     * @ORM\Column(nullable=true)
+     *
+     * @Expose
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackProperty", cascade={"detach", "persist"})
      * @Expose
      */
     public $property;
@@ -158,5 +166,28 @@ class PackItem
     public function getProperty()
     {
         return $this->property;
+    }
+
+    /**
+     * Set user
+     *
+     * @param string $user
+     * @return PackItem
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

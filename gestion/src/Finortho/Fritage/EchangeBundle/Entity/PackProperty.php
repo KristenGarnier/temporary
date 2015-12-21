@@ -37,6 +37,13 @@ class PackProperty
      */
     private $name;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User", cascade={"remove"})
+     * @ORM\Column(nullable=true)
+     *
+     */
+    private $user;
+
 
 
     /**
@@ -70,5 +77,28 @@ class PackProperty
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set user
+     *
+     * @param string $user
+     * @return PackProperty
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return string 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

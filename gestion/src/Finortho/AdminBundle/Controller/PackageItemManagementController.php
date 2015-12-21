@@ -19,7 +19,7 @@ class PackageItemManagementController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('FinorthoFritageEchangeBundle:PackItem')->findAll();
+        $entities = $em->getRepository('FinorthoFritageEchangeBundle:PackItem')->findBy(['user' => NULL]);
 
         return $this->render('FinorthoAdminBundle:PackItem:index.html.twig', array(
             'entities' => $entities,
