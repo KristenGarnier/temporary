@@ -61,6 +61,11 @@ class MessageControllerTest extends WebCaseApi
         $response = $client->getResponse();
         $this->assertEquals(409, $response->getStatusCode());
         $this->assertContains('error', $response->getContent());
+
+        $em = $client->getContainer()->get('doctrine.orm.entity_manager');
+        $message = $em->getRepository('FinorthoFritageEchangeBundle:Message')->findOneByContent('test');
+        $em->remove($message);
+        $em->flush();
     }
 
     public function testPOSTShouldReturnAnErrorMessageUser()
