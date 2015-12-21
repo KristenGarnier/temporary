@@ -63,6 +63,13 @@ class Stl
     private $utilisateur;
 
     /**
+     * @var string $commentaire Commentaire du client sur la pièce à produire
+     *
+     * @ORM\Column(name="commentaire", type="text", nullable=true)
+     */
+    private $commentaire;
+
+    /**
      * @var string angle de la pièce ( remplacement du Z )
      *
      * @ORM\Column(name="axis", type="string", length=1, nullable=true)
@@ -549,5 +556,28 @@ class Stl
     public function getAssemblage()
     {
         return $this->assemblage;
+    }
+
+    /**
+     * Set commentaire
+     *
+     * @param string $commentaire
+     * @return Stl
+     */
+    public function setCommentaire($commentaire)
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * Get commentaire
+     *
+     * @return string 
+     */
+    public function getCommentaire()
+    {
+        return $this->commentaire;
     }
 }

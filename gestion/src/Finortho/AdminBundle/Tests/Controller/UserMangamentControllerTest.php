@@ -6,17 +6,6 @@ use Finortho\AdminBundle\Tests\Extended_WebTestCase as WebTestCase;
 class UserMangamentControllerTest extends WebTestCase
 {
 
-    public function testShouldCreateUserByForm(){
-        $client = static::createClient();
-
-        $crawler = $this->Createuser($client);
-        $crawler = $client->followRedirect();
-        $this->assertGreaterThan(
-            0,
-            $crawler->filter('html:contains("test@test.fr")')->count()
-        );
-    }
-
     public function testShouldEraseUser(){
         $client = static::createClient();
         $this->adminConnect($client);
@@ -24,7 +13,6 @@ class UserMangamentControllerTest extends WebTestCase
         $crawler = $client->request('GET', 'http://localhost:8000/admin/users');
 
         $crawler = $this->eraseUser($crawler, $client);
-        $client->followRedirect();
 
         $this->assertEquals(
             0,
@@ -36,7 +24,7 @@ class UserMangamentControllerTest extends WebTestCase
         $client = static::createClient();
         $this->adminConnect($client);
 
-        $client->request(
+        $crawler = $client->request(
             'POST',
             'http://localhost:8000/admin/users/new',
             array(
@@ -46,7 +34,6 @@ class UserMangamentControllerTest extends WebTestCase
             )
         );
 
-        $crawler = $client->followRedirect();
         $this->assertGreaterThan(
             0,
             $crawler->filter('html:contains("test@test.fr")')->count()
@@ -107,7 +94,6 @@ class UserMangamentControllerTest extends WebTestCase
         $crawler = $client->request('GET', 'http://localhost:8000/admin/users');
 
         $crawler = $this->eraseUser($crawler, $client);
-        $client->followRedirect();
 
         $this->assertEquals(
             0,
