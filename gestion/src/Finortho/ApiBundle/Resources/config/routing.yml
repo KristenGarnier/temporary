@@ -9,3 +9,7 @@ packs:
 messages:
     type: rest
     resource: "@FinorthoApiBundle/Controller/MessageController.php"
+
+commandes:
+    type: rest
+    resource: "@FinorthoApiBundle/Controller/CommandeController.php"
