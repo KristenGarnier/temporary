@@ -17,7 +17,7 @@ class StlType extends AbstractType
         $builder
             ->add('file', 'file', array('required' => false, 'label' => 'Votre fichier .stl'))
             ->add('name', 'text', array('label' => 'Nom du fichier'))
-            ->add('commentaire', 'textarea ', array('label' => 'Dites en nous plus sur le fichier'))
+            ->add('commentaire', 'textarea', array('label' => 'Dites en nous plus sur le fichier'))
         ;
     }
     

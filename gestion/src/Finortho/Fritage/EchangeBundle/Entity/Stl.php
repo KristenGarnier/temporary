@@ -84,32 +84,12 @@ class Stl
     private $quantite;
 
     /**
-     * @var boolean si la pièce doit être fonctionnelle ou non)
+     * @var pack auquel appartient la pièce
      *
-     * @ORM\Column(name="fonctionel", type="boolean", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $fonctionnel;
-
-    /**
-     * @var boolean si la pièce est destiné à un usage clinique
-     *
-     * @ORM\Column(name="clinique", type="boolean", nullable=true)
-     */
-    private $clinique;
-
-    /**
-     * @var boolean si la pièce est destiné à un usage clinique
-     *
-     * @ORM\Column(name="verif_3", type="boolean", nullable=true)
-     */
-    private $verification_3;
-
-    /**
-     * @var boolean si la pièce doit être assemblée
-     *
-     * @ORM\Column(name="assemble", type="boolean", nullable=true)
-     */
-    private $assemblage;
+    private $pack;
 
     /**
      * Get id
@@ -133,7 +113,6 @@ class Stl
     public function setUrl($url)
     {
         $this->url = $url;
-
         return $this;
     }
 
@@ -235,7 +214,6 @@ class Stl
         }
 
         $this->name = $this->renomme($this->name);
-        $this->nameEntreprise = $this->renomme($this->getUtilisateur()->getUsernameCanonical());
 
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
@@ -467,98 +445,6 @@ class Stl
     }
 
     /**
-     * Set fonctionnel
-     *
-     * @param boolean $fonctionnel
-     * @return Stl
-     */
-    public function setFonctionnel($fonctionnel)
-    {
-        $this->fonctionnel = $fonctionnel;
-
-        return $this;
-    }
-
-    /**
-     * Get fonctionnel
-     *
-     * @return boolean 
-     */
-    public function getFonctionnel()
-    {
-        return $this->fonctionnel;
-    }
-
-    /**
-     * Set clinique
-     *
-     * @param boolean $clinique
-     * @return Stl
-     */
-    public function setClinique($clinique)
-    {
-        $this->clinique = $clinique;
-
-        return $this;
-    }
-
-    /**
-     * Get clinique
-     *
-     * @return boolean 
-     */
-    public function getClinique()
-    {
-        return $this->clinique;
-    }
-
-    /**
-     * Set verification_3
-     *
-     * @param boolean $verification3
-     * @return Stl
-     */
-    public function setVerification3($verification3)
-    {
-        $this->verification_3 = $verification3;
-
-        return $this;
-    }
-
-    /**
-     * Get verification_3
-     *
-     * @return boolean 
-     */
-    public function getVerification3()
-    {
-        return $this->verification_3;
-    }
-
-    /**
-     * Set assemblage
-     *
-     * @param boolean $assemblage
-     * @return Stl
-     */
-    public function setAssemblage($assemblage)
-    {
-        $this->assemblage = $assemblage;
-
-        return $this;
-    }
-
-    /**
-     * Get assemblage
-     *
-     * @return boolean 
-     */
-    public function getAssemblage()
-    {
-        return $this->assemblage;
-    }
-
-    /**
      * Set commentaire
      *
      * @param string $commentaire
@@ -579,5 +465,28 @@ class Stl
     public function getCommentaire()
     {
         return $this->commentaire;
+    }
+
+    /**
+     * Set pack
+     *
+     * @param \Finortho\Fritage\EchangeBundle\Entity\PackItem $pack
+     * @return Stl
+     */
+    public function setPack(\Finortho\Fritage\EchangeBundle\Entity\PackItem $pack = null)
+    {
+        $this->pack = $pack;
+
+        return $this;
+    }
+
+    /**
+     * Get pack
+     *
+     * @return \Finortho\Fritage\EchangeBundle\Entity\PackItem 
+     */
+    public function getPack()
+    {
+        return $this->pack;
     }
 }
