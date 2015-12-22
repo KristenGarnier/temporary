@@ -57,8 +57,7 @@ class PackHandler
      */
     public function userPack($id)
     {
-        return ['dummy data !'];
-        //return $this->repository->findBy(array('utilisateur' => $id));
+        return $this->om->getRepository('FinorthoFritageEchangeBundle:Pack')->findAllPackCreatedByUser($id);
     }
 
     /**

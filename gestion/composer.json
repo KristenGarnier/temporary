@@ -24,7 +24,8 @@
         "headoo/headoo-mailjet-bundle" : "1.0.x-dev",
         "jms/serializer-bundle" : "@dev",
         "friendsofsymfony/rest-bundle": "^1.7",
-        "nelmio/api-doc-bundle": "^2.11"
+        "nelmio/api-doc-bundle": "^2.11",
+        "nelmio/cors-bundle": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

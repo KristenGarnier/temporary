@@ -41,7 +41,7 @@ class Pack
      *
      * @Expose
      */
-    private $items;
+    public $items;
 
 
 
