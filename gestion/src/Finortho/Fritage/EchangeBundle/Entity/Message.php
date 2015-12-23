@@ -36,13 +36,29 @@ class Message
     /**
      * @var string Message de l'utilisateur
      *
-     * @ORM\Column(name="content", type="text");
+     * @ORM\Column(name="text", type="text");
      *
      * @Expose
      */
-    private $content;
+    private $text;
 
+    /**
+     * @var string date d'envoi du message
+     *
+     * @ORM\Column(name="date", type="text");
+     *
+     * @Expose
+     */
+    private $date;
 
+    /**
+     * @var string heure d'envoi du message
+     *
+     * @ORM\Column(name="time", type="text");
+     *
+     * @Expose
+     */
+    private $time;
 
 
 
@@ -80,26 +96,73 @@ class Message
         return $this->user;
     }
 
+
     /**
-     * Set content
+     * Set text
      *
-     * @param string $content
+     * @param string $text
      * @return Message
      */
-    public function setContent($content)
+    public function setText($text)
     {
-        $this->content = $content;
+        $this->text = $text;
 
         return $this;
     }
 
     /**
-     * Get content
+     * Get text
      *
      * @return string 
      */
-    public function getContent()
+    public function getText()
     {
-        return $this->content;
+        return $this->text;
+    }
+
+    /**
+     * Set date
+     *
+     * @param string $date
+     * @return Message
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return string 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set time
+     *
+     * @param string $time
+     * @return Message
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get time
+     *
+     * @return string 
+     */
+    public function getTime()
+    {
+        return $this->time;
     }
 }
