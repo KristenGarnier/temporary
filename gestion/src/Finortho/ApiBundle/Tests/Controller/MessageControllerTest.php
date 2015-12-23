@@ -45,7 +45,7 @@ class MessageControllerTest extends WebCaseApi
     public function testShouldAddaMessage(){
         $client = static::createClient();
 
-        $client->request('POST', '/api/messages', ["content" => "test"], [], [
+        $client->request('POST', '/api/messages', ["text" => "test", "date" => '12/12/12', 'time' => '12:12'], [], [
             'HTTP_user' => "1"
         ]);
         $response = $client->getResponse();
@@ -55,7 +55,7 @@ class MessageControllerTest extends WebCaseApi
     public function testShouldFailAddingaMessage(){
         $client = static::createClient();
 
-        $client->request('POST', '/api/messages', ["content" => "test"], [], [
+        $client->request('POST', '/api/messages', ["text" => "test"], [], [
             'HTTP_user' => "1"
         ]);
         $response = $client->getResponse();
@@ -63,7 +63,7 @@ class MessageControllerTest extends WebCaseApi
         $this->assertContains('error', $response->getContent());
 
         $em = $client->getContainer()->get('doctrine.orm.entity_manager');
-        $message = $em->getRepository('FinorthoFritageEchangeBundle:Message')->findOneByContent('test');
+        $message = $em->getRepository('FinorthoFritageEchangeBundle:Message')->findOneByText('test');
         $em->remove($message);
         $em->flush();
     }
