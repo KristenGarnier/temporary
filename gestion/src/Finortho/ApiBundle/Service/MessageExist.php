@@ -24,14 +24,14 @@ class MessageExist
 
     /**
      * Check if the user already send the message ( so there is no spam )
-     * @param $content
+     * @param $text
      * @param $id
      * @return bool
      */
-    public function check($content, $id)
+    public function check($text, $id)
     {
         return empty(
-            $this->orm->getRepository('FinorthoFritageEchangeBundle:Message')->findBy(['content' => $content, 'user' => $id])
+            $this->orm->getRepository('FinorthoFritageEchangeBundle:Message')->findBy(['text' => $text, 'user' => $id])
         );
     }
 }

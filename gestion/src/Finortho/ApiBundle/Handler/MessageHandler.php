@@ -56,22 +56,24 @@ class MessageHandler
      */
     public function userMessages($id)
     {
-        return $this->repository->findBy(array('user' => $id));
+        return $this->repository->findBy(array('user' => $id), ['id' => 'DESC']);
     }
 
     /**
      * Add a message and save it to the dab
      *
      * @param Int $id User id
-     * @param string $content Content of the message
+     * @param string $data Message and when he has ben sent
      * @return array poducts from user
      * @throws HttpException if user does not exist
      */
-    public function addUserMessage($id, $content)
+    public function addUserMessage($id, $data)
     {
         $message = new Message();
         $message->setUser($id);
-        $message->setContent($content);
+        $message->setText($data['text']);
+        $message->setDate($data['date']);
+        $message->setTime($data['time']);
 
         $this->om->persist($message);
         $this->om->flush();

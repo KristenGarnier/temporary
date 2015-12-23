@@ -62,6 +62,12 @@ class PackController extends FOSRestController
 
     }
 
+    /**
+     * Add a personal pack to the user
+     *
+     * @param Request $request
+     * @return \FOS\RestBundle\View\View
+     */
     public function postPacksAction(Request $request){
 
         $user = $request->headers->get('user');
@@ -73,7 +79,6 @@ class PackController extends FOSRestController
                 $routeOptions = array(
                     '_format' => $request->get('_format')
                 );
-
                 return $this->view(null, Codes::HTTP_CREATED, $routeOptions);
             }
         } else {

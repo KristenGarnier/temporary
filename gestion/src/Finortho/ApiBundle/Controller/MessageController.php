@@ -45,8 +45,8 @@ class MessageController extends FOSRestController
         $user = $request->headers->get('user');
         if ($user != NULL) {
             if ($this->get('getOr404')->check(null, null, $user, false)) {
-                if ($this->get('message_exist')->check($request->get('content'), $user)) {
-                    $this->get('message_handler')->addUserMessage($user, $request->get('content'));
+                if ($this->get('message_exist')->check($request->get('text'), $user)) {
+                    $this->get('message_handler')->addUserMessage($user, $request->request->all());
 
                     $routeOptions = array(
                         '_format' => $request->get('_format')
