@@ -15,9 +15,10 @@ class StlType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', 'file', array('required' => false, 'label' => 'Votre fichier .stl'))
+            ->add('file', 'file', array('label' => 'Votre fichier .stl'))
             ->add('name', 'text', array('label' => 'Nom du fichier'))
             ->add('commentaire', 'textarea', array('label' => 'Dites en nous plus sur le fichier'))
+            ->add('quantite', 'number', array('label' => 'Le nombre de pièces à produire'))
         ;
     }
     
