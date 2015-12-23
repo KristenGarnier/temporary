@@ -56,18 +56,12 @@ class SessionHandler
     /**
      * Methode permettant d'avoir tous les uploads de la session
      *
+     * @param int $id id de l'utilisateur
      * @return array
      */
-    public function getUploads()
+    public function getUploads($id)
     {
-        $uploads = array();
-        if (array_key_exists('uploads', $this->session->all())) {
-            foreach ($this->session->get('uploads') as $upload) {
-                array_push($uploads, $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->find($upload));
-            }
-        }
-
-        return $uploads;
+        return $this->em->getRepository('FinorthoFritageEchangeBundle:Stl')->findBy(array('utilisateur' => $id, 'pack' => null));
     }
 
     /**

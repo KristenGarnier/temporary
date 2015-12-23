@@ -55,7 +55,7 @@ class ProduitHandler
      */
     public function userProducts($id)
     {
-        return $this->repository->findBy(array('utilisateur' => $id));
+        return $this->repository->findBy(array('utilisateur' => $id, 'pack' => null));
     }
 
 }

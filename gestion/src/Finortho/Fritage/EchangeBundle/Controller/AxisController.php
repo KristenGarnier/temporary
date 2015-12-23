@@ -40,7 +40,7 @@ class AxisController extends Controller
 
             }
             $this->get('session')->set('params', array('axis'=> $stl_file->getAxis()));
-            return $this->redirect($this->generateUrl('finortho_fritage_exigences_define', array('id' => $stl_file->getId())));
+            return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
         }
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:axis.html.twig', array('form' => $form->createView(), 'path' => $stl_file->get3DPath()));
     }

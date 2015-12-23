@@ -51,7 +51,7 @@ class EchangeController extends Controller
 
                 } catch (\Exception $e) {
 
-                    $currentCommand = $session_handler->getUploads();
+                    $currentCommand = $session_handler->getUploads($this->getUser()->getId());
                     $this->session->getFlashBag()->add('error', $e->getMessage());
                     return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
                 }
@@ -89,7 +89,7 @@ class EchangeController extends Controller
                 $em->flush();
             } else {
 
-                $currentCommand = $session_handler->getUploads();
+                $currentCommand = $session_handler->getUploads($this->getUser()->getId());
 
                 $this->session->getFlashBag()->add('error', "Veuilez remplir le formulaire comme il le faut");
 
@@ -102,14 +102,14 @@ class EchangeController extends Controller
             $this->session->getFlashBag()->add('success', "Le fichier ".$name." a bien été ajouté");
 
             if($checked){
-                $currentCommand = $session_handler->getUploads();
+                $currentCommand = $session_handler->getUploads($this->getUser()->getId());
                 $this->session->set('params', array('axis' => $stl_file->getAxis(), 'quantite' => $stl_file->getQuantite(), 'fonctionnel' => $stl_file->getFonctionnel(), 'clinique' => $stl_file->getClinique(), 'verification' => $stl_file->getVerification3(), 'assemblage' => $stl_file->getAssemblage()));
                 return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
             }
             return $this->redirect($this->generateUrl('finortho_fritage_axis_define' , array('id' => $stl_file->getId())));
         }
 
-        $currentCommand = $session_handler->getUploads();
+        $currentCommand = $session_handler->getUploads($this->getUser()->getId());
         return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
     }
 

@@ -57,39 +57,6 @@ class SessionHandlerTest extends WebTestCase
 
     }
 
-    public function testShouldGetAllUploadInSession(){
-
-        $session = new Session(new MockArraySessionStorage());
-
-        //mocking the entity
-        $stl = $this->getMock('Finortho\Fritage\EchangeBundle\Entity\Stl');
-        $stl->expects($this->exactly(2))->method('getId')->will($this->returnValue(1));
-
-        //mocking the repository
-        $stlRepository = $this
-            ->getMockBuilder('\Doctrine\ORM\EntityRepository')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $stlRepository->expects($this->once())
-            ->method('find')
-            ->will($this->returnValue($stl));
-
-        // Last, mock the EntityManager to return the mock of the repository
-        $entityManager = $this
-            ->getMockBuilder('\Doctrine\Common\Persistence\ObjectManager')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $entityManager->expects($this->once())
-            ->method('getRepository')
-            ->will($this->returnValue($stlRepository));
-
-        $sessionHandler = new SessionHandler($session, $entityManager);
-        $sessionHandler->setUploads($stl);
-
-        $return = $sessionHandler->getUploads();
-        $this->assertEquals($return[0]->getId(), 1);
-    }
-
     public function testThisShouldUnsetUploadWhenMultiple(){
         $session = new Session(new MockArraySessionStorage());
 

@@ -35,28 +35,6 @@
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
-            {% if app.session.get('params') %}
-                <div class="checkbox">
-                    <label for="same">
-                        <input type="checkbox" id="same" name="same" onclick="switchForm()"/> Mêmes paramètres que le produit précédent
-                    </label>
-                </div>
-                <div id="hide" style="display: none;">
-                    <div class="form-group">
-                        <label for="axis">Axe vertical ( si différent ) </label>
-                        <select class="form-control" id="axis" name="axis" >
-                            <option value="X"  {% if app.session.get('params').axis == 'X' %}selected{% endif %}>X</option>
-                            <option value="Y" {% if app.session.get('params').axis == 'Y' %}selected{% endif %}>Y</option>
-                            <option value="Z" {% if app.session.get('params').axis == 'Z' %}selected{% endif %}>Z</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="qty">Quantité ( si différente ) </label>
-                        <input type="number" id="qty" name="quantite" class="form-control">
-                    </div>
-
-                </div>
-            {% endif %}
             <button class="btn btn-primary" type="submit" role="button"><i class="fa fa-plus"></i> Ajouter un produit
             </button>
 
@@ -69,7 +47,6 @@
                     <th>Visuel</th>
                     <th>Axe vertical</th>
                     <th>Quantité</th>
-                    <th>Caractéristiques</th>
                     <th>Actions</th>
                 </tr>
 
@@ -86,22 +63,6 @@
                         <td>{{ command.axis }}</td>
                         <td>{{ command.quantite }}</td>
                         <td>
-                            <ul>
-                                {% if  command.fonctionnel %}
-                                    <li>Démo fonctionnelle</li>
-                                {% endif %}
-                                {% if  command.clinique %}
-                                    <li>Usage clinique</li>
-                                {% endif %}
-                                {% if  command.verification3 %}
-                                    <li>Vérification 3 points</li>
-                                {% endif %}
-                                {% if  command.assemblage %}
-                                    <li>Assemblé</li>
-                                {% endif %}
-                            </ul>
-                        </td>
-                        <td>
                             <a href="{{ path('finortho_fritage_echange_erase', {'id': command.id}) }}"
                                class="btn btn-danger">
                                 <i class="fa fa-trash"></i>
@@ -114,7 +75,7 @@
                     </tr>
                 {% endfor %}
             </table>
-            <a class="btn btn-default pull-right" href="{{ path('finortho_fritage_commande_index') }}">
+            <a class="btn btn-default pull-right" href="{{ path('finortho_fritage_exigences_define') }}">
                 Valider la commande <i class="fa fa-chevron-right"></i>
             </a>
         {% else %}
@@ -141,18 +102,6 @@
         }
 
         {% endfor %}
-    </script>
-    <script>
-        function switchForm(){
-            if(document.querySelector('#same').checked){
-                document.getElementById('hide').style.display = 'block';
-
-            }else {
-                document.getElementById('hide').style.display = 'none';
-            }
-
-        }
-
     </script>
 
 

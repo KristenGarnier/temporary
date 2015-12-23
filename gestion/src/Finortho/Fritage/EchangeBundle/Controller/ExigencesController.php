@@ -19,13 +19,13 @@ class ExigencesController extends Controller
     /**
      * Methode permettant de définir les exigeances pour chaque produit
      *
-     * @param integer $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function defineAction($id,Request $request)
+    public function defineAction(Request $request)
     {
-        $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
+        return $this->render('FinorthoFritageEchangeBundle:Exigence:index.html.twig', ['user' => $this->getUser()->getId()]);
+        /*$stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
         $form = $this->createForm(new ExigenceType(), $stl_file);
 
         if ($this->get('request')->getMethod() == 'POST') {
@@ -42,6 +42,6 @@ class ExigencesController extends Controller
             $this->get('session')->set('params', $final);
             return $this->redirect($this->generateUrl('finortho_fritage_echange_data'));
         }
-        return $this->render('FinorthoFritageEchangeBundle:fileUpload:exigences.html.twig', array('form' => $form->createView()));
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:exigences.html.twig', array('form' => $form->createView()));*/
     }
 }
