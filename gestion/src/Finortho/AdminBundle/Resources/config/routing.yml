@@ -1,5 +1,5 @@
 finortho_admin_homepage:
-    path:     /
+    path:     /multifile
     defaults: { _controller: FinorthoAdminBundle:MultiFile:index }
 
 finortho_admin_new_user:
@@ -29,3 +29,7 @@ finortho_fritage_echange_pack_property:
 finortho_admin_exigences:
     path: /exigences
     defaults: { _controller: FinorthoAdminBundle:PackageInterface:index }
+
+finortho_admin_commandes:
+    path: /
+    defaults: { _controller: FinorthoAdminBundle:CommandeManagement:index }

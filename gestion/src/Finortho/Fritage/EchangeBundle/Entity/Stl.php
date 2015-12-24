@@ -92,7 +92,7 @@ class Stl
     private $pack;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\Stl", inversedBy="stls")
+     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\Commande", inversedBy="stls")
      * @ORM\JoinColumn(nullable=true)
      */
     private $commande;
@@ -500,10 +500,10 @@ class Stl
     /**
      * Set commande
      *
-     * @param \Finortho\Fritage\EchangeBundle\Entity\Stl $commande
+     * @param \Finortho\Fritage\EchangeBundle\Entity\Commande $commande
      * @return Stl
      */
-    public function setCommande(\Finortho\Fritage\EchangeBundle\Entity\Stl $commande = null)
+    public function setCommande(\Finortho\Fritage\EchangeBundle\Entity\Commande $commande = null)
     {
         $this->commande = $commande;
 

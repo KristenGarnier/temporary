@@ -18,24 +18,27 @@
 {% endblock %}
 
 {% block body %}
+
     <div class="container">
-        <div id="actions" class="row" style="margin-bottom: 4rem">
-            <div class="col-md-4 text-center">
-                <a href="{{ path('pack') }}" class="text-center">
-                    <button class="btn start">Les catégories de packs</button>
-                </a>
+        {% block submenu %}
+            <div id="actions" class="row" style="margin-bottom: 4rem">
+                <div class="col-md-4 text-center">
+                    <a href="{{ path('pack') }}" class="text-center">
+                        <button class="btn start">Les catégories de packs</button>
+                    </a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="{{ path('packitem') }}" class="text-center">
+                        <button class="btn start">Les packs</button>
+                    </a>
+                </div>
+                <div class="col-md-4 text-center">
+                    <a href="{{ path('packproperty') }}" class="text-center">
+                        <button class="btn start">Les exigences</button>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-4 text-center">
-                <a href="{{ path('packitem') }}" class="text-center">
-                    <button class="btn start">Les packs</button>
-                </a>
-            </div>
-            <div class="col-md-4 text-center">
-                <a href="{{ path('packproperty') }}" class="text-center">
-                    <button class="btn start">Les exigences</button>
-                </a>
-            </div>
-        </div>
+        {% endblock %}
         {% block content %}
 
         {% endblock %}

@@ -10,9 +10,9 @@ namespace Finortho\ApiBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Finortho\ApiBundle\Service\ValidateDataReact;
+use Finortho\Fritage\EchangeBundle\Entity\Commande;
 use Finortho\Fritage\EchangeBundle\Entity\PackItem;
-use Finortho\Fritage\EchangeBundle\Entity\PackProperty;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Carbon\Carbon;
 
 
 /**
@@ -61,16 +61,22 @@ class CommandeHandler
      * Attach a pack to a product
      *
      * @param $data
+     * @param $id
      */
-    public function attachProduct($data)
+    public function attachProduct($data, $id)
     {
-
+        $commande = new Commande();
+        $commande->setDate(Carbon::now()->toDateString());
+        $commande->setUser($this->om->getRepository('FinorthoFritageEchangeBundle:User')->find($id));
         foreach($data as $item){
             $this->validateReactData->check($data);
             $stl = $this->repository->find($item['id']);
             $stl->setPack($this->om->getRepository('FinorthoFritageEchangeBundle:PackItem')->find($item['packId']));
+            $stl->setCommande($commande);
+            $commande->addStl($stl);
         }
 
+        $this->om->persist($commande);
         $this->om->flush();
     }
 

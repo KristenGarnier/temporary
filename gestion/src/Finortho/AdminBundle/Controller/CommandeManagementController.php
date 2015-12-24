@@ -6,8 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CommandeManagementController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('', array('name' => $name));
+        $commands = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Commande')->findAll();
+        return $this->render('FinorthoAdminBundle:Commande:index.html.twig', ['commandes' => $commands]);
     }
 }

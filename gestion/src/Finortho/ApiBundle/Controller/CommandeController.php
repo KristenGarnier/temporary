@@ -24,7 +24,7 @@ class CommandeController extends FOSRestController
         $user = $request->headers->get('user');
         if ($user != NULL) {
             if ($this->get('getOr404')->check(null, null, $user, false)) {
-                $this->get('commande_handler')->attachProduct($request->request->all());
+                $this->get('commande_handler')->attachProduct($request->request->all(), $user);
 
                 $routeOptions = array(
                     '_format' => $request->get('_format')

@@ -1,0 +1,48 @@
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
+
+{% block title %}
+    Les commandes
+{% endblock %}
+
+{# Resetting the submenu #}
+{% block submenu %}
+
+{% endblock %}
+
+{% block content -%}
+
+    <h4>Les dernières commandes</h4>
+    <div>
+        {% for commande in commandes %}
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <strong>{{ commande.user.username | capitalize }}</strong>
+                        <span class="pull-right">{{ commande.date | date('d-m-Y') }}</span>
+                    </div>
+                    <div class="panel-body">
+                        {% for stl in commande.stls %}
+                            <div style="margin: 2rem 0; border-bottom: solid 1px lightgrey">
+                                <div style="margin: 1rem 0">
+                                    <a href="{{ path('finortho_fritage_echange_download', { 'id' : stl.id}) }}">
+                                        <strong>{{ stl.name }}.stl</strong></a>
+                                    <span class="pull-right"> Quantité : {{ stl.quantite }}</span>
+                                </div>
+                                <p style="padding: 0 1rem; word-wrap: break-word">
+                                    {{ stl.commentaire }}
+                                </p>
+                                <h6>Pack : </h6>
+                                <ul>
+                                    {% for item in stl.pack.property %}
+                                        <li>{{ item.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
