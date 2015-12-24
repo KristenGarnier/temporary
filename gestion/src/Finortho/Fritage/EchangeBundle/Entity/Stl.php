@@ -92,6 +92,12 @@ class Stl
     private $pack;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\Stl", inversedBy="stls")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $commande;
+
+    /**
      * Get id
      *
      * @return integer
@@ -490,4 +496,27 @@ class Stl
         return $this->pack;
     }
 
+
+    /**
+     * Set commande
+     *
+     * @param \Finortho\Fritage\EchangeBundle\Entity\Stl $commande
+     * @return Stl
+     */
+    public function setCommande(\Finortho\Fritage\EchangeBundle\Entity\Stl $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \Finortho\Fritage\EchangeBundle\Entity\Stl 
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
 }
