@@ -1,4 +1,6 @@
+if($('#action').length){
     document.querySelector("#actions").addEventListener("click", event);
+}
 
 
 function test(that) {

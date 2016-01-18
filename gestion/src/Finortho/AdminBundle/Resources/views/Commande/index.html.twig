@@ -12,9 +12,9 @@
 {% block content -%}
 
     <h4>Les dernières commandes</h4>
-    <div>
+    <div id="masonery-container">
         {% for commande in commandes %}
-            <div class="col-md-3">
+            <div class="masonery-item">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <strong>{{ commande.user.username | capitalize }}</strong>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="panel-body">
                         {% for stl in commande.stls %}
-                            <div style="margin: 2rem 0; border-bottom: solid 1px lightgrey">
+                            <div class="well" style="margin: 2rem 0;">
                                 <div style="margin: 1rem 0">
                                     <a href="{{ path('finortho_fritage_echange_download', { 'id' : stl.id}) }}">
                                         <strong>{{ stl.name }}.stl</strong></a>
@@ -32,9 +32,9 @@
                                     {{ stl.commentaire }}
                                 </p>
                                 <h6>Pack : </h6>
-                                <ul>
+                                <ul class="list-group">
                                     {% for item in stl.pack.property %}
-                                        <li>{{ item.name }}</li>
+                                        <li class="list-group-item">{{ item.name }}</li>
                                     {% endfor %}
                                 </ul>
                             </div>
@@ -45,4 +45,10 @@
         {% endfor %}
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{asset('js/equire.js')}}"></script>
+    <script src="{{ asset('node_modules/savvior/dist/savvior.min.js') }}"></script>
+    <script src="{{asset('js/commandes.js')}}"></script>
 {% endblock %}
