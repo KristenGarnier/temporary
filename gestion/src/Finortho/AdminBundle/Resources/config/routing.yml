@@ -33,3 +33,7 @@ finortho_admin_exigences:
 finortho_admin_commandes:
     path: /
     defaults: { _controller: FinorthoAdminBundle:CommandeManagement:index }
+
+finortho_admin_commandes_completed:
+    path: /completed
+    defaults: { _controller: FinorthoAdminBundle:CommandeManagement:completed }

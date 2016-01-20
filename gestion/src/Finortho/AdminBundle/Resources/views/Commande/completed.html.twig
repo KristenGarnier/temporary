@@ -1,0 +1,31 @@
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
+
+{% block title %}
+    Les commandes
+{% endblock %}
+
+{# Resetting the submenu #}
+{% block submenu %}
+    <div id="actions" class="row" style="margin-bottom: 4rem">
+        <div class="text-center">
+            <a href="{{ path('finortho_admin_commandes') }}" class="text-center">
+                <button class="btn start">Les commandes non traitées</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content -%}
+
+    <div id="app"></div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        window.doc = {{ commandes | raw }};
+    </script>
+    <script src="{{ asset('js/vendor.js') }}"></script>
+    <script src="{{ asset('js/completed.js') }}"></script>
+
+{% endblock %}

@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints\Date;
  *
  * @ORM\Table()
  * @ORM\Entity
+ *
  */
 class Commande
 {
@@ -27,6 +28,8 @@ class Commande
      *
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true)
+     *
+     *
      */
     private $user;
 
@@ -44,6 +47,13 @@ class Commande
      * @ORM\JoinColumn(nullable=true)
      */
     private $stls;
+
+    /**
+     * @var $completed Boolean Si la commande a bien été traitée ou non
+     *
+     * @ORM\Column(name="completed", type="boolean", nullable=false)
+     */
+    private $completed = false;
 
 
     /**

@@ -6,6 +6,13 @@
 
 {# Resetting the submenu #}
 {% block submenu %}
+    <div id="actions" class="row" style="margin-bottom: 4rem">
+        <div class="text-center">
+            <a href="{{ path('finortho_admin_commandes_completed') }}" class="text-center">
+                <button class="btn start">Les commandes à traiter</button>
+            </a>
+        </div>
+    </div>
 
 {% endblock %}
 

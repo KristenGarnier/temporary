@@ -12,6 +12,6 @@ $(function () {
     savvior.init("#masonery-container", {
         "screen and (max-width: 20em)": { columns: 2 },
         "screen and (min-width: 20em) and (max-width: 40em)": { columns: 3 },
-        "screen and (min-width: 40em)": { columns: 4 },
+        "screen and (min-width: 40em)": { columns: 3 },
     });
 });

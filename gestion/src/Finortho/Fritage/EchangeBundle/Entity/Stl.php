@@ -35,7 +35,7 @@ class Stl
      * @var string vatialbe stockant l'extenstion de l'image
      *
      * @ORM\Column(name="url", type="string", length=255)
-     *
+     * @Expose
      */
     private $url;
 
@@ -51,6 +51,7 @@ class Stl
      * @var string date d'upload du ficher
      *
      * @ORM\Column(name="date", type="datetime", length=255)
+     * @Expose
      */
     private $date;
 
@@ -80,6 +81,7 @@ class Stl
      * @var integer quantité de pièces sur ce modèle
      *
      * @ORM\Column(name="quantite", type="integer", nullable=true)
+     * @Expose
      */
     private $quantite;
 
@@ -88,6 +90,7 @@ class Stl
      *
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem")
      * @ORM\JoinColumn(nullable=true)
+     * @Expose
      */
     private $pack;
 

@@ -227,3 +227,12 @@ p.name{
 .size-1of2 { width: 50%; }
 .size-1of3 { width: 33.33333%; }
 .size-1of4 { width: 25%; }
+
+.panel {
+    border-color: #3498db !important;
+}
+
+div.panel-heading{
+    background-color: #3498db !important;
+    border-color: #3498db !important;
+}
