@@ -4,6 +4,7 @@ namespace Finortho\Fritage\EchangeBundle\Controller;
 
 use Finortho\Fritage\EchangeBundle\Entity\Stl;
 use Finortho\Fritage\EchangeBundle\Form\StlType;
+use Finortho\Fritage\EchangeBundle\Form\StlModifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -166,35 +167,30 @@ class EchangeController extends Controller
      */
     public function modifyAction(Request $request, $id)
     {
-        $session_handler = $this->get('finortho_fritage_echange.session_handler');
         $stl_file = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Stl')->find($id);
         $name = $stl_file->getName();
         $path = $stl_file->getWebPath();
-        $form = $this->createForm(new StlType(), $stl_file);
+        $form = $this->createForm(new StlModifType(), $stl_file);
 
         if ($this->get('request')->getMethod() == 'POST') {
 
-            $user_uploads = $this->get('finortho_fritage_echange.user_uploads');
 
             $form->handleRequest($request);
             if ($form->isValid()) {
 
-                if($name != $stl_file->getName() && $form['file']->getData() == null){
+                if($name != $stl_file->getName()){
                     rename($path, $stl_file->getWebPath());
                 }
 
                 $em = $this->getDoctrine()->getManager();
                 $stl_file->setDate(new \DateTime());
-                $stl_file->preUpload();
-                $stl_file->upload();
 
-                $em->persist($stl_file);
                 $em->flush();
             } else {
 
                 $this->session->getFlashBag()->add('error', "Veuilez remplir le formulaire comme il le faut");
 
-                return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
+                return $this->render('FinorthoFritageEchangeBundle:fileUpload:modify.html.twig', array('form' => $form->createView()));
             }
 
             $this->session->getFlashBag()->add('success', "Le fichier a bien été modifié");
@@ -202,7 +198,7 @@ class EchangeController extends Controller
 
         }
 
-        return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView()));
+        return $this->render('FinorthoFritageEchangeBundle:fileUpload:modify.html.twig', array('form' => $form->createView()));
 
     }
 

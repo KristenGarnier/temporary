@@ -13,8 +13,8 @@
 
 <div class="header">
     <div class="row">
-        <div class="col col-md-4">
-            <h3>{% block pagetitle %}{% endblock %}</h3>
+        <div class="col-md-4">
+            <img src="{{ asset('image/marle-logo.png') }}" alt="Logo de Marle" height="50">
         </div>
         <div class="col col-md-8" id="menu">
             {% block menu %}
@@ -24,7 +24,8 @@
 
 </div>
 
-{% block body %}{% endblock %}
+{% block body %}
+{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>

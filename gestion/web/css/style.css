@@ -69,7 +69,7 @@ h3 {
     margin: 0;
 
 
-    color: white;
+    color:  white;
     font-weight: 200;
 }
 
@@ -79,21 +79,30 @@ h4 {
 
 .header {
     padding: 5vh 10vh;
-    background: #3498db;
+    background: url('../image/header-background.jpg') right no-repeat;
+    background-color: #FFF;
     margin-bottom: 5vh;
+    border-bottom: 4px solid #3498db;
+}
+
+.header h3 {
+    color: #3498db;
+
 }
 
 .header a {
     text-decoration: none;
-    color: white;
+    color:  #3498db;
     padding: 0.7rem 1rem;
     border: solid 2px transparent;
     transition: all ease 0.2s;
+    font-weight: 700;
 }
 
 .header a:hover {
     background-color: rgba(255,255,255,0.1);
-    border: solid 2px white;
+    border: solid 2px  #3498db;
+
 }
 
 strong.heading {
@@ -235,4 +244,29 @@ p.name{
 div.panel-heading{
     background-color: #3498db !important;
     border-color: #3498db !important;
+}
+
+.single h2{
+    margin-bottom: 4rem;
+    color: #3498db;
+}
+
+.single h3{
+    margin: 4rem 0;
+    color: #333333;
+}
+
+.single{
+    margin-bottom: 15rem;
+}
+
+.alert{
+    border: none;
+    border-radius: 0;
+}
+
+h3.title{
+    color: #3498db;
+    font-weight: 500;
+    margin-bottom: 4rem;
 }

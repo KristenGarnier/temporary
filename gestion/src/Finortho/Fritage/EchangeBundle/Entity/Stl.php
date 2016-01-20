@@ -73,7 +73,7 @@ class Stl
     /**
      * @var string angle de la pièce ( remplacement du Z )
      *
-     * @ORM\Column(name="axis", type="string", length=1, nullable=true)
+     * @ORM\Column(name="axis", type="string", length=155, nullable=true)
      */
     private $axis;
 
@@ -89,14 +89,14 @@ class Stl
      * @var pack auquel appartient la pièce
      *
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\PackItem")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * @Expose
      */
     private $pack;
 
     /**
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\Commande", inversedBy="stls")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $commande;
 

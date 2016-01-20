@@ -1,0 +1,30 @@
+{% extends 'admin.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{% endblock %}
+
+{% block menu %}
+    <a class="pull-right navi" href="{{ path('fos_user_security_logout') }}">Se déconnecter <i
+                class="icon ion-log-out"></i></a>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="gutter"></div>
+        {% block submenu %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/button_effect.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
+{% endblock %}

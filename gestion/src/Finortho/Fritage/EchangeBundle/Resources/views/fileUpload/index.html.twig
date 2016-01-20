@@ -1,19 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'FinorthoFritageEchangeBundle:interface:layout.html.twig' %}
 
-{% block body %}
-    <div class="container">
-        <h2>Bonjour {{ app.user.username | capitalize }}</h2>
+{% block title %}
+    Bonjour {{ app.user.username | capitalize }}
+{% endblock %}
 
+{% block content %}
+    <div class="single">
         {% for flashMessage in app.session.flashbag.get('erase') %}
 
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible">
                 {{ flashMessage }}
             </div>
 
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('success') %}
 
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible">
                 {{ flashMessage }}
             </div>
 
@@ -21,13 +23,13 @@
 
         {% for flashMessage in app.session.flashbag.get('error') %}
 
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible">
                 {{ flashMessage }}
             </div>
 
         {% endfor %}
 
-        <h3>Ajoutez un nouveau produit</h3>
+        <h2>Ajoutez un nouveau produit</h2>
 
         <form method="post" {{ form_enctype(form) }}>
 
@@ -35,7 +37,7 @@
             {{ form_errors(form) }}
             {{ form_widget(form) }}
             {{ form_rest(form) }}
-            <button class="btn btn-primary" type="submit" role="button"><i class="fa fa-plus"></i> Ajouter un produit
+            <button class="btn start" type="submit" role="button"><i class="fa fa-plus"></i> Ajouter un produit
             </button>
 
         </form>
@@ -63,20 +65,24 @@
                         <td>{{ command.axis }}</td>
                         <td>{{ command.quantite }}</td>
                         <td>
-                            <a href="{{ path('finortho_fritage_echange_erase', {'id': command.id}) }}"
-                               class="btn btn-danger">
-                                <i class="fa fa-trash"></i>
+                            <a href="{{ path('finortho_fritage_echange_erase', {'id': command.id}) }}">
+                                <button class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </a>
-                            <a href="{{ path('finortho_fritage_echange_modify', {'id': command.id}) }}"
-                               class="btn btn-warning">
-                                <i class="fa fa-pencil"></i>
+                            <a href="{{ path('finortho_fritage_echange_modify', {'id': command.id}) }}">
+                                <button class="btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
                             </a>
                         </td>
                     </tr>
                 {% endfor %}
             </table>
-            <a class="btn btn-default pull-right" href="{{ path('finortho_fritage_exigences_define') }}">
-                Valider la commande <i class="fa fa-chevron-right"></i>
+            <a class="pull-right" href="{{ path('finortho_fritage_exigences_define') }}">
+                <button class="btn btn-default">
+                    Valider la commande <i class="fa fa-chevron-right"></i>
+                </button>
             </a>
         {% else %}
             <h3>Vous n'avez pas encore importé de produit, ils s'ajouteront ici.</h3>
@@ -84,7 +90,7 @@
     </div>
 {% endblock %}
 
-{% block javascripts %}
+{% block scripts %}
 
     <script src="{{ asset('js/master.min2.js') }}"></script>
 

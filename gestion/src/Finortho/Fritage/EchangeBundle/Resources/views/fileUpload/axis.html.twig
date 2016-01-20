@@ -1,38 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'FinorthoFritageEchangeBundle:interface:layout.html.twig' %}
 
-{% block body %}
-    <div class="container">
-        <h3>Renseignez l'axe vertical dans la machine</h3>
-        {% for flashMessage in app.session.flashbag.get('error') %}
+{% block title %}
+    Axe
+{% endblock %}
 
-            <div class="alert alert-danger">
-                {{ flashMessage }}
+{% block content %}
+    <h3 class="title">Renseignez l'axe vertical dans la machine</h3>
+    {% for flashMessage in app.session.flashbag.get('error') %}
+
+        <div class="alert alert-danger alert-dismissible">
+            {{ flashMessage }}
+        </div>
+
+    {% endfor %}
+    <div class="row">
+        <div class="col col-md-6">
+            <div id="canvas" style="overflow: hidden; border: 2px grey solid">
+
             </div>
+        </div>
+        <div class="col col-md-6">
+            <form method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+                {{ form_rest(form) }}
 
-        {% endfor %}
-        <div class="row">
-            <div class="col col-md-6">
-                <div id="canvas" style="overflow: hidden; border: 2px grey solid">
-
-                </div>
-            </div>
-            <div class="col col-md-6">
-                <form method="post" {{ form_enctype(form) }}>
-                    {{ form_errors(form) }}
-                    {{ form_widget(form) }}
-                    {{ form_rest(form) }}
-
-                    <button type="submit" class="btn btn-primary">
-                        Confirmer l'axe
-                    </button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary">
+                    Confirmer l'axe
+                </button>
+            </form>
         </div>
     </div>
 
 {% endblock %}
 
-{% block javascripts %}
+{% block scripts %}
     <script src="{{ asset('js/master.min.js') }}"></script>
 
     <script>

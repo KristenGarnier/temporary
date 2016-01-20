@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AxisType extends AbstractType
+class StlModifType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,15 +15,9 @@ class AxisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('axis', 'choice', array(
-                'choices'  => array(
-                    'X' => 'X',
-                    'Y' => 'Y',
-                    'Z' => 'Z',
-                    'OPERATEUR' => 'Je laisse à l\'apréciation de l\'opérateur'
-                ),
-                    'label' => 'L\'axe vertical de la pièce'
-            ))
+            ->add('name', 'text', array('label' => 'Nom du fichier'))
+            ->add('commentaire', 'textarea', array('label' => 'Dites en nous plus sur le fichier'))
+            ->add('quantite', 'number', array('label' => 'Le nombre de pièces à produire'))
         ;
     }
     
@@ -42,6 +36,6 @@ class AxisType extends AbstractType
      */
     public function getName()
     {
-        return 'finortho_fritage_echangebundle_axis';
+        return 'finortho_fritage_echangebundle_stl_modif';
     }
 }
