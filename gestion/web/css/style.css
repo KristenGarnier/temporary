@@ -270,3 +270,39 @@ h3.title{
     font-weight: 500;
     margin-bottom: 4rem;
 }
+
+h5.date {
+    color: white;
+    background-color: #3498db;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+}
+
+h5.date span{
+    margin-right: 1rem;
+}
+
+.content-single{
+    margin-top: 10rem;
+}
+
+.content-single span {
+    color: #3498db;
+    font-weight: 700;
+}
+
+.content-single .panel-heading a, .content-single .panel-heading span {
+    color:white;
+}
+
+.panel a {
+    color:white;
+}
+
+.panel a .panel-heading {
+    color:white;
+}
+
+.panel .panel-body a {
+    color: #3498db;
+}

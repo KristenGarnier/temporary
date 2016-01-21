@@ -1,0 +1,64 @@
+{% extends 'FinorthoAdminBundle:Interface:index.html.twig' %}
+
+{% block title %}
+    La commande de l'utilisateur{{ commande.user.username }}
+{% endblock %}
+
+{# Resetting the submenu #}
+{% block submenu %}
+{% endblock %}
+
+{% block content -%}
+    <div style="margin-bottom: 2rem">
+        <a href="{{ path('finortho_admin_commandes') }}">
+            <button class="btn start">Retour aux commandes</button>
+        </a>
+        <a href="{{ path('finortho_admin_commandes_single_completed', {'id' : commande.id}) }}" class="pull-right">
+            <button class="btn fileinput-button"><i class="icon ion-checkmark" style="margin-right: 1rem"></i>Commande réalisée</button>
+        </a>
+    </div>
+    <div>
+        <h4 class="pull-left">Commande numéro: {{ commande.id }}</h4>
+        <h5 class="pull-right date"><span
+                    class="glyphicon glyphicon-calendar"></span>{{ commande.date | date('d m Y') }}
+        </h5>
+    </div>
+    <div class="content-single">
+        <h4>Commande de l'utilisateur: <span>{{ commande.user.username | capitalize }}</span></h4>
+        <div id="masonery-container">
+            {% for stl in commande.stls %}
+                <div class="masonery-item">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <a href="{{ path('finortho_fritage_echange_download', { 'id' : stl.id}) }}">
+                                <strong>{{ stl.name }}.stl</strong></a>
+                            <span class="pull-right"> Quantité : {{ stl.quantite }}</span>
+                        </div>
+                        <div class="panel-body">
+                            <div style="margin: 2rem 0;">
+                                <h5>Commentaire: </h5>
+                                <div class="well">
+                                    <p style="word-wrap: break-word; margin-bottom: 0">
+                                        {{ stl.commentaire }}
+                                    </p>
+                                </div>
+                                <h6>Pack : {{ stl.pack.name }} </h6>
+                                <ul class="list-group">
+                                    {% for item in stl.pack.property %}
+                                        <li class="list-group-item">{{ item.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset('js/equire.js') }}"></script>
+    <script src="{{ asset('node_modules/savvior/dist/savvior.min.js') }}"></script>
+    <script src="{{ asset('js/commandes.js') }}"></script>
+{% endblock %}

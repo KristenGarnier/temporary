@@ -72,17 +72,16 @@ class EchangeController extends Controller
                         $stl_file->setQuantite($params['quantite']);
                     }
 
-                    $stl_file->setFonctionnel($params['fonctionnel']);
-                    $stl_file->setClinique($params['clinique']);
-                    $stl_file->setVerification3($params['verification']);
-                    $stl_file->setAssemblage($params['assemblage']);
-
                     $checked = true;
                 }
 
                 $em = $this->getDoctrine()->getManager();
                 $stl_file->setUtilisateur($this->getUser());
                 $stl_file->setDate(new \DateTime());
+                $stl_file->setName(
+                    $this->get('finortho_fritage_echange.rename_file')
+                        ->rename($stl_file->getName(), $this->getUser(), $stl_file->getQuantite())
+                );
                 $stl_file->preUpload();
                 $stl_file->upload();
 
@@ -179,6 +178,12 @@ class EchangeController extends Controller
             if ($form->isValid()) {
 
                 if($name != $stl_file->getName()){
+                    $stl_file->setName(
+                        $stl_file->renomme(
+                            $this->get('finortho_fritage_echange.rename_file')
+                            ->rename($stl_file->getName(), $this->getUser(), $stl_file->getQuantite(), true)
+                        )
+                    );
                     rename($path, $stl_file->getWebPath());
                 }
 

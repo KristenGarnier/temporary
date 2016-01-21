@@ -23,10 +23,12 @@
         {% for commande in commandes %}
             <div class="masonery-item">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <strong>{{ commande.user.username | capitalize }}</strong>
-                        <span class="pull-right">{{ commande.date | date('d-m-Y') }}</span>
-                    </div>
+                    <a href="{{ path('finortho_admin_commandes_single', {'id': commande.id}) }}">
+                        <div class="panel-heading">
+                            <strong>{{ commande.user.username | capitalize }}</strong>
+                            <span class="pull-right">{{ commande.date | date('d-m-Y') }}</span>
+                        </div>
+                    </a>
                     <div class="panel-body">
                         {% for stl in commande.stls %}
                             <div class="well" style="margin: 2rem 0;">
@@ -55,7 +57,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{asset('js/equire.js')}}"></script>
+    <script src="{{ asset('js/equire.js') }}"></script>
     <script src="{{ asset('node_modules/savvior/dist/savvior.min.js') }}"></script>
-    <script src="{{asset('js/commandes.js')}}"></script>
+    <script src="{{ asset('js/commandes.js') }}"></script>
 {% endblock %}

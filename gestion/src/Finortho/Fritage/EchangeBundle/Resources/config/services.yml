@@ -18,6 +18,9 @@ services:
     finortho_fritage_echange.file_tree:
         class: Finortho\Fritage\EchangeBundle\Services\FileTree
 
+    finortho_fritage_echange.rename_file:
+            class: Finortho\Fritage\EchangeBundle\Services\RenamingFile
+
     finortho_fritage_echange.preupload_listener:
         class: Finortho\Fritage\EchangeBundle\Services\PreUploadUser
         arguments: [@session]

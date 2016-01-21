@@ -151,4 +151,27 @@ class Commande
     {
         return $this->stls;
     }
+
+    /**
+     * Set completed
+     *
+     * @param boolean $completed
+     * @return Commande
+     */
+    public function setCompleted($completed)
+    {
+        $this->completed = $completed;
+
+        return $this;
+    }
+
+    /**
+     * Get completed
+     *
+     * @return boolean 
+     */
+    public function getCompleted()
+    {
+        return $this->completed;
+    }
 }

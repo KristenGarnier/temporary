@@ -37,3 +37,11 @@ finortho_admin_commandes:
 finortho_admin_commandes_completed:
     path: /completed
     defaults: { _controller: FinorthoAdminBundle:CommandeManagement:completed }
+
+finortho_admin_commandes_single:
+    path: /commande/{id}
+    defaults: { _controller: FinorthoAdminBundle:CommandeManagement:show }
+
+finortho_admin_commandes_single_completed:
+    path: /commande/complete/{id}
+    defaults: { _controller: FinorthoAdminBundle:CommandeManagement:markComplete }
