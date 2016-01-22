@@ -75,7 +75,6 @@ class CommandeHandler
             $stl->setCommande($commande);
             $commande->addStl($stl);
         }
-
         $this->om->persist($commande);
         $this->om->flush();
     }

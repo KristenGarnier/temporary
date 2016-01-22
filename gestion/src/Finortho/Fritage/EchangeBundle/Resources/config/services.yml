@@ -19,7 +19,11 @@ services:
         class: Finortho\Fritage\EchangeBundle\Services\FileTree
 
     finortho_fritage_echange.rename_file:
-            class: Finortho\Fritage\EchangeBundle\Services\RenamingFile
+        class: Finortho\Fritage\EchangeBundle\Services\RenamingFile
+
+    finortho_fritage_echange.email_admin:
+        class: Finortho\Fritage\EchangeBundle\Services\Email
+        arguments: [@headoo_mailjet_wrapper]
 
     finortho_fritage_echange.preupload_listener:
         class: Finortho\Fritage\EchangeBundle\Services\PreUploadUser
