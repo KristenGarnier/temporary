@@ -40,7 +40,7 @@ class RenamingFile
      * @param $day
      * @return string
      */
-    private function weekDate($day)
+    public function weekDate($day)
     {
         $date = Carbon::now(new \DateTimeZone('Europe/Paris'));
         $weekend = false;
