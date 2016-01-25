@@ -80,6 +80,7 @@ h4 {
 .header {
     padding: 5vh 10vh;
     background: url('../image/header-background.jpg') right no-repeat;
+    background-size: contain;
     background-color: #FFF;
     margin-bottom: 5vh;
     border-bottom: 4px solid #3498db;
@@ -103,6 +104,10 @@ h4 {
     background-color: rgba(255,255,255,0.1);
     border: solid 2px  #3498db;
 
+}
+
+.header.login img {
+    margin-top: 4rem;
 }
 
 strong.heading {
@@ -305,4 +310,43 @@ h5.date span{
 
 .panel .panel-body a {
     color: #3498db;
+}
+
+.login {
+    margin-bottom: 0;
+}
+
+.login-display {
+    margin-top: 15vh;
+    background-color: rgba(255,255,255, 0.95);
+    width: 30%;
+    border-radius: 5px 5px 0 0;
+}
+
+
+.login-display form button {
+    margin-top: 2rem;
+}
+
+.login-display h1 {
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    color: #3498db;
+}
+
+.login-display label {
+    font-weight: 200;
+}
+
+.login-display input.form-control {
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    border-bottom: 2px solid lightgrey;
+    background: transparent;
+    transition: all ease-in-out 0.2s;
+}
+
+.login-display input.form-control:focus {
+    border-bottom: 2px solid #3498db;
 }
