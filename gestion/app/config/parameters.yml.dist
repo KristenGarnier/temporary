@@ -23,3 +23,4 @@ parameters:
 
     email_from: finortho@gmail.com
     email_to: garnier.kristen@icloud.com
+    server: localhost:8000

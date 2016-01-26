@@ -17,12 +17,12 @@ class Email
     private $to; //frittage@finortho.com
     private $host;
 
-    public function __construct($mailjet, $from, $to)
+    public function __construct($mailjet, $from, $to, $server)
     {
         $this->mailjet = $mailjet;
         $this->from = $from;
         $this->to = $to;
-        $this->host = $_SERVER['HTTP_HOST'];
+        $this->host = $server;
     }
 
     /**
