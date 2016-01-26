@@ -5,7 +5,7 @@ services:
 
     pack_handler:
          class: Finortho\ApiBundle\Handler\PackHandler
-         arguments: [@doctrine.orm.entity_manager, 'Finortho\Fritage\EchangeBundle\Entity\Pack']
+         arguments: [@doctrine.orm.entity_manager]
 
     message_handler:
          class: Finortho\ApiBundle\Handler\MessageHandler

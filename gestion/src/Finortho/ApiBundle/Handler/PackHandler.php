@@ -28,22 +28,11 @@ class PackHandler
      * @var ObjectManager
      */
     private $om;
-    /**
-     * Name of the entity
-     * @var
-     */
-    private $entityClass;
-    /**
-     * Rempository of the current entity
-     * @var \Doctrine\Common\Persistence\ObjectRepository
-     */
 
 
-    public function __construct(ObjectManager $om, $entityClass)
+    public function __construct(ObjectManager $om)
     {
         $this->om = $om;
-        $this->entityClass = $entityClass;
-
     }
 
     /**
