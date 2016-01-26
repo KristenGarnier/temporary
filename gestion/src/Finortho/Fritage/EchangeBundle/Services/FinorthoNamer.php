@@ -3,7 +3,6 @@
 namespace Finortho\Fritage\EchangeBundle\Services;
 
 use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
