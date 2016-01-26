@@ -29,10 +29,11 @@ class Email
      * Envoi d'une notification mail à l'administrateur
      *
      * @param User $user
-     * @param int $commande id of the command
+     * @param int  $commande id of the command
      * @return {*}
      */
-    public function sendAdminNotification($user, $commande){
+    public function sendAdminNotification($user, $commande)
+    {
 
         $template = $this->getTemplate(
             $user->getUsername(),
@@ -52,7 +53,8 @@ class Email
         return $this->mailjet->sendEmail($params);
     }
 
-    public function sendAdminNotificationMessage($user, $message){
+    public function sendAdminNotificationMessage($user, $message)
+    {
 
         $template = $this->getTemplate(
             $user->getUsername(),
@@ -73,8 +75,9 @@ class Email
         return $this->mailjet->sendEmail($params);
     }
 
-    private function getTemplate($username, $email, $host, $commande, $message = null){
-        if($message){
+    private function getTemplate($username, $email, $host, $commande, $message = null)
+    {
+        if ($message) {
             return vsprintf("
             <html>L'utilisateur : %s a envoyé un message sur la plateforme d'aide
             <br>

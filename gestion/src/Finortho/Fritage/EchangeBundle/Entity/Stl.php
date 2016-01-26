@@ -4,11 +4,8 @@ namespace Finortho\Fritage\EchangeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * Stl
@@ -285,7 +282,7 @@ class Stl
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
+        return $this->getUploadDir();
     }
 
     /**
