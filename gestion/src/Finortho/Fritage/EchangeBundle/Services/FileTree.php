@@ -21,13 +21,13 @@ class FileTree
      * @param array $extensions
      * @return string
      */
-    public function php_file_tree($directory, $return_link, $extensions = array())
+    public function phpFileTree($directory, $return_link, $extensions = array())
     {
         // Generates a valid XHTML list of all directories, sub-directories, and files in $directory
         // Remove trailing slash
         if (substr($directory, -1) == "/") $directory = substr($directory, 0, strlen($directory) - 1);
         $this->basedir = $directory;
-        $code = $this->php_file_tree_dir($directory, $return_link, $extensions);
+        $code = $this->phpFileTreeDir($directory, $return_link, $extensions);
         return $code;
     }
 
@@ -38,12 +38,12 @@ class FileTree
      * @param bool|true $first_call
      * @return string
      */
-    private function php_file_tree_dir($directory, $return_link, $extensions = array(),  $first_call = true)
+    private function phpFileTreeDir($directory, $return_link, $extensions = array(), $first_call = true)
     {
         // Recursive function called by php_file_tree() to list directories/files
 
         // Get and sort directories/files
-        if (function_exists("scandir")) $file = scandir($directory); else $file = $this->php4_scandir($directory);
+        if (function_exists("scandir")) $file = scandir($directory); else $file = $this->php4Scandir($directory);
         natcasesort($file);
         // Make directories first
         $files = $dirs = array();
@@ -74,7 +74,7 @@ class FileTree
                     if (is_dir("$directory/$this_file")) {
                         // Directory
                         $php_file_tree .= "<li class=\"pft-directory\"><a href=\"#\">" . htmlspecialchars($this_file) . "</a>";
-                        $php_file_tree .= $this->php_file_tree_dir("$directory/$this_file", $return_link, $extensions, false);
+                        $php_file_tree .= $this->phpFileTreeDir("$directory/$this_file", $return_link, $extensions, false);
                         $php_file_tree .= "</li>";
                     } else {
                         // File
@@ -96,7 +96,7 @@ class FileTree
      * @param $dir
      * @return array
      */
-    private function php4_scandir($dir)
+    private function php4Scandir($dir)
     {
         $dh = opendir($dir);
         while (false !== ($filename = readdir($dh))) {

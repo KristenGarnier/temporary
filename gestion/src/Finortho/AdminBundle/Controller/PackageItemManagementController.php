@@ -32,7 +32,6 @@ class PackageItemManagementController extends Controller
     public function createAction(Request $request)
     {
         $entity = new PackItem();
-        $pack = $this->getDoctrine()->getRepository('FinorthoFritageEchangeBundle:Pack')->find(3);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 

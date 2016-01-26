@@ -13,7 +13,7 @@ class MultiUploadController extends Controller
      */
     public function indexAction(){
         $file_tree = $this->get('finortho_fritage_echange.file_tree');
-        $tree = $file_tree->php_file_tree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]" );
+        $tree = $file_tree->phpFileTree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]" );
         return $this->render('FinorthoFritageEchangeBundle:Test:index.html.twig', array('tree' => $tree));
     }
 }

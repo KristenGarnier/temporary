@@ -8,7 +8,7 @@ class FileTreeTest extends \PHPUnit_Framework_TestCase
 {
     public function testShloudRenderString(){
         $filtree = new FileTree();
-        $result = $filtree->php_file_tree(__DIR__.'/../', 'http://test.com');
+        $result = $filtree->phpFileTree(__DIR__.'/../', 'http://test.com');
         $this->assertTrue(is_string($result));
         $this->assertEquals(preg_match("/Services/", $result), 1);
         $this->assertEquals(preg_match("/<ul>/", $result), 1);

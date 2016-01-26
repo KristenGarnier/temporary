@@ -34,10 +34,9 @@ class FinorthoNamer
     /**
      * Méthode permettant de changer le nom d'un fichier envoyé
      *
-     * @param UploadedFile $file
      * @return string
      */
-    public function name(UploadedFile $file)
+    public function name()
     {
         $user = $this->context->getToken()->getUser();
 

@@ -20,8 +20,8 @@ class MultiFileController extends Controller
      */
     public function indexAction()
     {
-        $file_tree = $this->get('finortho_fritage_echange.file_tree');
-        $tree = $file_tree->php_file_tree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]");
+        $fileTree = $this->get('finortho_fritage_echange.file_tree');
+        $tree = $fileTree->phpFilTree($this->get('kernel')->getRootDir() . '/../web/uploads/commandes_utilisateurs', "/uploads/commandes_utilisateurs/[link]");
         return $this->render('FinorthoAdminBundle:Default:index.html.twig', array('tree' => $tree));
     }
 
