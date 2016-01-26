@@ -7,6 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class WebCaseApi extends  WebTestCase
 {
 
+    protected function setUp()
+    {
+        parent::setUp();
+        global $_SERVER;
+        $_SERVER['HTTP_HOST'] = 'localhost:8000';
+    }
+
     protected function assertJsonResponse($response, $statusCode = 200)
     {
         $this->assertEquals(
