@@ -77,6 +77,8 @@ class CommandeHandler
         }
         $this->om->persist($commande);
         $this->om->flush();
+
+        return $commande->getId();
     }
 
 }
