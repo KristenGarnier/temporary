@@ -11,7 +11,6 @@ namespace Finortho\ApiBundle\Handler;
 use Doctrine\Common\Persistence\ObjectManager;
 use Finortho\ApiBundle\Service\ValidateDataReact;
 use Finortho\Fritage\EchangeBundle\Entity\Commande;
-use Finortho\Fritage\EchangeBundle\Entity\PackItem;
 use Carbon\Carbon;
 
 

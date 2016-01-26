@@ -9,7 +9,6 @@
 namespace Finortho\ApiBundle\Handler;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Finortho\ApiBundle\Service\UserExist;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**

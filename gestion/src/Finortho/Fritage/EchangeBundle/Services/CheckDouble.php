@@ -3,7 +3,6 @@
 namespace Finortho\Fritage\EchangeBundle\Services;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 
 /**
  * Class CheckDouble
