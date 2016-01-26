@@ -2,8 +2,6 @@
 
 namespace Finortho\Fritage\EchangeBundle\Services;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 use Finortho\Fritage\EchangeBundle\Entity\User;
 /**
  * Class Email
@@ -15,10 +13,14 @@ use Finortho\Fritage\EchangeBundle\Entity\User;
 class Email
 {
     private $mailjet;
+    private $from;
+    private $to; //frittage@finortho.com
 
-    public function __construct($mailjet)
+    public function __construct($mailjet, $from, $to)
     {
         $this->mailjet = $mailjet;
+        $this->from = $from;
+        $this->to = $to;
     }
 
     /**
@@ -41,10 +43,38 @@ class Email
 
         $params = array(
             "method" => "POST",
-            "from" => "finortho@gmail.com",
-            //"to" => "frittage@finortho.com",
-            "to" => "garnier.kristen@icloud.com",
+            "from" => $this->from,
+            "to" => $this->to,
             "subject" => "Nouveaux fichiers importés sur le serveur",
+            "html" => $template
+        );
+
+        return $this->mailjet->sendEmail($params);
+    }
+
+    public function sendAdminNotificationMessage($user, $message){
+
+        $template = vsprintf("
+            <html>L'utilisateur : %s à envoyé un message sur la plateforme d'aide
+            <br>
+            <br>
+            Message :
+            <br>
+            %s
+            <br>
+            <br>
+            Email de l'utilisateur : %s
+            <br>
+            <a href='http://localhost:8000/admin'>Plateforme d'administration</a>
+            </html>",
+            [$user->getUsername(), $message, $user->getEmail()]
+        );
+
+        $params = array(
+            "method" => "POST",
+            "from" => $this->from,
+            "to" => $this->to,
+            "subject" => "Nouveau message d'aide de l'utilisateur",
             "html" => $template
         );
 

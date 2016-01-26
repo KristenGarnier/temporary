@@ -20,3 +20,6 @@ parameters:
 
     mailjet_api_key: fc66387504b13a13b8f6069b01b4a0c1
     mailjet_secret_key: 69b08837b2eac09af3dc1189896d806b
+
+    email_from: finortho@gmail.com
+    email_to: garnier.kristen@icloud.com

@@ -24,6 +24,7 @@ class MessageController extends FOSRestController
         $user = $request->headers->get('user');
 
         if ($user != NULL) {
+
             return $this->get('getOr404')->check(
                 $this->get('message_handler'),
                 'userMessages',
@@ -47,6 +48,13 @@ class MessageController extends FOSRestController
             if ($this->get('getOr404')->check(null, null, $user, false)) {
                 if ($this->get('message_exist')->check($request->get('text'), $user)) {
                     $this->get('message_handler')->addUserMessage($user, $request->request->all());
+
+                    $this->get('finortho_fritage_echange.email_admin')->sendAdminNotificationMessage(
+                        $this->getDoctrine()
+                            ->getRepository('FinorthoFritageEchangeBundle:User')
+                            ->find($user),
+                        $request->get('text')
+                    );
 
                     $routeOptions = array(
                         '_format' => $request->get('_format')

@@ -23,7 +23,7 @@ services:
 
     finortho_fritage_echange.email_admin:
         class: Finortho\Fritage\EchangeBundle\Services\Email
-        arguments: [@headoo_mailjet_wrapper]
+        arguments: [@headoo_mailjet_wrapper, %email_from%, %email_to%]
 
     finortho_fritage_echange.preupload_listener:
         class: Finortho\Fritage\EchangeBundle\Services\PreUploadUser
