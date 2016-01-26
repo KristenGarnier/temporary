@@ -2,7 +2,7 @@
 
 namespace Finortho\Fritage\EchangeBundle\Controller;
 
-use Finortho\Fritage\EchangeBundle\Form\AxisType;
+use Finortho\Fritage\EchangeBundle\Form\Type\AxisType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 

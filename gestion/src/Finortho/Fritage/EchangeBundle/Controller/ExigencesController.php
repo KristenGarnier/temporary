@@ -2,9 +2,8 @@
 
 namespace Finortho\Fritage\EchangeBundle\Controller;
 
-use Finortho\Fritage\EchangeBundle\Form\ExigenceType;
+use Finortho\Fritage\EchangeBundle\Form\Type\ExigenceType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

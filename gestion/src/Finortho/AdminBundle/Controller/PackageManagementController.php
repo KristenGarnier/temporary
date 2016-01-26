@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Finortho\Fritage\EchangeBundle\Entity\Pack;
-use Finortho\Fritage\EchangeBundle\Form\PackType;
+use Finortho\Fritage\EchangeBundle\Form\Type\PackType;
 
 class PackageManagementController extends Controller
 {

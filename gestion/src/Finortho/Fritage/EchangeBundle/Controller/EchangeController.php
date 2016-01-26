@@ -3,8 +3,8 @@
 namespace Finortho\Fritage\EchangeBundle\Controller;
 
 use Finortho\Fritage\EchangeBundle\Entity\Stl;
-use Finortho\Fritage\EchangeBundle\Form\StlType;
-use Finortho\Fritage\EchangeBundle\Form\StlModifType;
+use Finortho\Fritage\EchangeBundle\Form\Type\StlType;
+use Finortho\Fritage\EchangeBundle\Form\Type\StlModifType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,13 +60,13 @@ class EchangeController extends Controller
                 if ($request->get('same') == 'on') {
                     $params = $this->session->get('params');
 
-                    if($request->get('axis') != null && $request->get('axis') != $stl_file->setAxis($params['axis'])){
+                    if($request->get('axis') !== null && $request->get('axis') !== $stl_file->setAxis($params['axis'])){
                         $stl_file->setAxis($request->get('axis'));
                     }else {
                         $stl_file->setAxis($params['axis']);
                     }
 
-                    if($request->get('quantite') != null){
+                    if($request->get('quantite') !== null){
                         $stl_file->setQuantite($request->get('quantite'));
                     }else{
                         $stl_file->setQuantite($params['quantite']);

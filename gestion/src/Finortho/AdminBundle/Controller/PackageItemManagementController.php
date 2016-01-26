@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Finortho\Fritage\EchangeBundle\Entity\PackItem;
-use Finortho\Fritage\EchangeBundle\Form\PackItemType;
+use Finortho\Fritage\EchangeBundle\Form\Type\PackItemType;
 
 class PackageItemManagementController extends Controller
 {

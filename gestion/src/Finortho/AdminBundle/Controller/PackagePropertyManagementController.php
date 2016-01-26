@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Finortho\Fritage\EchangeBundle\Entity\PackProperty;
-use Finortho\Fritage\EchangeBundle\Form\PackPropertyType;
+use Finortho\Fritage\EchangeBundle\Form\Type\PackPropertyType;
 
 /**
  * PackProperty controller.
