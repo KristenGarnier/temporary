@@ -6,7 +6,7 @@ use Finortho\AdminBundle\Tests\Extended_WebTestCase as WebTestCase;
 class UserMangamentControllerTest extends WebTestCase
 {
 
-    public function testShouldEraseUser(){
+    /*public function testShouldEraseUser(){
         $client = static::createClient();
         $this->adminConnect($client);
 
@@ -18,7 +18,7 @@ class UserMangamentControllerTest extends WebTestCase
             0,
             $crawler->filter('html:contains("test@test.fr")')->count()
         );
-    }
+    }*/
 
     public function testShouldCreateUserPost(){
         $client = static::createClient();
@@ -87,7 +87,7 @@ class UserMangamentControllerTest extends WebTestCase
 
     }
 
-    public function testShouldEraseUser2(){
+    /*public function testShouldEraseUser2(){
         $client = static::createClient();
         $this->adminConnect($client);
 
@@ -99,6 +99,6 @@ class UserMangamentControllerTest extends WebTestCase
             0,
             $crawler->filter('html:contains("test@test.fr")')->count()
         );
-    }
+    }*/
 
 }

@@ -32,7 +32,7 @@ class Email
      * @param int  $commande id of the command
      * @return {*}
      */
-    public function sendAdminNotification($user, $commande)
+    public function sendAdminNotification(User $user, $commande)
     {
 
         $template = $this->getTemplate(
@@ -53,7 +53,7 @@ class Email
         return $this->mailjet->sendEmail($params);
     }
 
-    public function sendAdminNotificationMessage($user, $message)
+    public function sendAdminNotificationMessage(User $user, $message)
     {
 
         $template = $this->getTemplate(
