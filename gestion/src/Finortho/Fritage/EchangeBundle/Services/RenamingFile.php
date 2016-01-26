@@ -3,7 +3,7 @@
 namespace Finortho\Fritage\EchangeBundle\Services;
 
 use Carbon\Carbon;
-
+use Finortho\Fritage\EchangeBundle\Entity\User;
 
 
 /* Class RenamingFile
@@ -24,7 +24,7 @@ class RenamingFile
      * @param string $method
      * @return string
      */
-    public function rename($name, $user, $quantite, $filter = false, $day = 5, $method='EXP'){
+    public function rename($name, User $user, $quantite, $filter = false, $day = 5, $method='EXP'){
 
         $date = $this->weekDate($day);
         if($filter){

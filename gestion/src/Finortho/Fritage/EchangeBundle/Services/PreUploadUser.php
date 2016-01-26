@@ -28,7 +28,7 @@ class PreUploadUser
      *
      * @param PreUploadEvent $event
      */
-    public function onUpload($event)
+    public function onUpload(PreUploadEvent $event)
     {
         $req = $event->getRequest();
         $this->session->set('filename',$req->get('filename') );
