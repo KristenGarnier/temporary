@@ -12,22 +12,24 @@ use Finortho\Fritage\EchangeBundle\Entity\User;
  *
  * @package Finortho\Fritage\EchangeBundle\Services
  */
+
 class RenamingFile
 {
 
     /**
-     * @param        $name
-     * @param        $user
-     * @param        $quantite
+     * @param         $name
+     * @param         $user
+     * @param         $quantite
      * @param boolean $filter
-     * @param int    $day
-     * @param string $method
+     * @param int     $day
+     * @param string  $method
      * @return string
      */
-    public function rename($name, User $user, $quantite, $filter = false, $day = 5, $method='EXP'){
+    public function rename($name, User $user, $quantite, $filter = false, $day = 5, $method = 'EXP')
+    {
 
         $date = $this->weekDate($day);
-        if($filter){
+        if ($filter) {
             $name = $this->extractName($name);
         }
 
@@ -75,7 +77,8 @@ class RenamingFile
      *
      * @return string
      */
-    private function extractName($name){
+    private function extractName($name)
+    {
         $exploded = explode('-', $name);
         return end($exploded);
     }

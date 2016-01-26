@@ -76,9 +76,9 @@ class SessionHandler
             $key = array_search(intval($id), $uploads);
             if (is_numeric($key)) {
                 unset($uploads[$key]);
-                if(empty($uploads)){
+                if (empty($uploads)) {
                     $this->session->remove('uploads');
-                }else {
+                } else {
                     $this->session->set('uploads', $uploads);
                 }
             }
