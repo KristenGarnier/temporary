@@ -15,30 +15,30 @@ class Email
     private $mailjet;
     private $from;
     private $to; //frittage@finortho.com
+    private $host;
 
     public function __construct($mailjet, $from, $to)
     {
         $this->mailjet = $mailjet;
         $this->from = $from;
         $this->to = $to;
+        $this->host = $_SERVER['HTTP_HOST'];
     }
 
     /**
      * Envoi d'une notification mail à l'administrateur
      *
      * @param User $user
+     * @param int $commande id of the command
      * @return {*}
      */
-    public function sendAdminNotification($user){
+    public function sendAdminNotification($user, $commande){
 
-        $template = vsprintf("<html>L'utilisateur : %s a déposé des fichiers sur la plateforme de stockage.
-            <br>
-            <br>
-            Email de l'utilisateur : %s
-            <br>
-            <a href='http://localhost:8000/admin'> Consulter les fichiers </a>
-            </html>",
-            [$user->getUsername(), $user->getEmail()]
+        $template = $this->getTemplate(
+            $user->getUsername(),
+            $user->getEmail(),
+            $this->host,
+            $commande
         );
 
         $params = array(
@@ -54,20 +54,12 @@ class Email
 
     public function sendAdminNotificationMessage($user, $message){
 
-        $template = vsprintf("
-            <html>L'utilisateur : %s à envoyé un message sur la plateforme d'aide
-            <br>
-            <br>
-            Message :
-            <br>
-            %s
-            <br>
-            <br>
-            Email de l'utilisateur : %s
-            <br>
-            <a href='http://localhost:8000/admin'>Plateforme d'administration</a>
-            </html>",
-            [$user->getUsername(), $message, $user->getEmail()]
+        $template = $this->getTemplate(
+            $user->getUsername(),
+            $user->getEmail(),
+            $this->host,
+            null,
+            $message
         );
 
         $params = array(
@@ -79,5 +71,35 @@ class Email
         );
 
         return $this->mailjet->sendEmail($params);
+    }
+
+    private function getTemplate($username, $email, $host, $commande, $message = null){
+        if($message){
+            return vsprintf("
+            <html>L'utilisateur : %s a envoyé un message sur la plateforme d'aide
+            <br>
+            <br>
+            Message :
+            <br>
+            %s
+            <br>
+            <br>
+            Email de l'utilisateur : %s
+            <br>
+            <a href='http://%s/admin'>Plateforme d'administration</a>
+            </html>",
+                [$username, $message, $email, $host]
+            );
+        }
+
+        return vsprintf("<html>L'utilisateur : %s a déposé des fichiers sur la plateforme de stockage.
+            <br>
+            <br>
+            Email de l'utilisateur : %s
+            <br>
+            <a href='http://%s/admin/commande/%s'> Consulter les fichiers </a>
+            </html>",
+            [$username, $email, $host, $commande]
+        );
     }
 }
