@@ -24,12 +24,13 @@ class CommandeController extends FOSRestController
         $user = $request->headers->get('user');
         if ($user != NULL) {
             if ($this->get('getOr404')->check(null, null, $user, false)) {
-                $this->get('commande_handler')->attachProduct($request->request->all(), $user);
+                $commande = $this->get('commande_handler')->attachProduct($request->request->all(), $user);
 
                 $this->get('finortho_fritage_echange.email_admin')->sendAdminNotification(
                     $this->getDoctrine()
                         ->getRepository('FinorthoFritageEchangeBundle:User')
-                        ->find($user)
+                        ->find($user),
+                    $commande
                 );
 
                 $routeOptions = array(
