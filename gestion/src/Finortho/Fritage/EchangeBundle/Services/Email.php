@@ -3,6 +3,8 @@
 namespace Finortho\Fritage\EchangeBundle\Services;
 
 use Finortho\Fritage\EchangeBundle\Entity\User;
+use Headoo\HeadooMailjetBundle\Wrapper\MailjetWrapper;
+
 /**
  * Class Email
  *
@@ -12,9 +14,21 @@ use Finortho\Fritage\EchangeBundle\Entity\User;
  */
 class Email
 {
+    /**
+     * @var MailjetWrapper $mailjet Injection du mailjet pour pouvoir envoyer des mails
+     */
     private $mailjet;
+    /**
+     * @var string $from Adresse email d'ou envoyer les emails
+     */
     private $from;
+    /**
+     * @var string $to Adresse a qui envoyer le mail
+     */
     private $to; //frittage@finortho.com
+    /**
+     * @var string $host adresse du site web pour la redirectin vers le site dans le mail
+     */
     private $host;
 
     public function __construct($mailjet, $from, $to, $server)
@@ -28,9 +42,9 @@ class Email
     /**
      * Envoi d'une notification mail à l'administrateur
      *
-     * @param User $user
+     * @param User $user Utilisateur qui a déclanché la commande
      * @param int  $commande id of the command
-     * @return {*}
+     * @return mixed
      */
     public function sendAdminNotification(User $user, $commande)
     {
@@ -53,6 +67,13 @@ class Email
         return $this->mailjet->sendEmail($params);
     }
 
+    /**
+     * Envoyer à l'administrateur le message qui a été posté sur la plateforme
+     *
+     * @param User $user Utilisateur qui a envoyé le message
+     * @param string $message Message de l'utilisateur
+     * @return mixed
+     */
     public function sendAdminNotificationMessage(User $user, $message)
     {
 
@@ -75,6 +96,19 @@ class Email
         return $this->mailjet->sendEmail($params);
     }
 
+    /**
+     * Génération des templates de mail selon les paramètres envoyés
+     *
+     * Tout dépend du paramètre message, si il est envoyé, alors on renvoie le
+     * template message. Sinon on renvoi le paramètre de commande
+     *
+     * @param string      $username nom de l'utilisateur
+     * @param string      $email email de l'utilisateur
+     * @param string      $host adresse du site web
+     * @param int         $commande id de la commande utilisateur
+     * @param null|string $message Message de l'utilisateur
+     * @return string Template du message
+     */
     private function getTemplate($username, $email, $host, $commande, $message = null)
     {
         if ($message) {
