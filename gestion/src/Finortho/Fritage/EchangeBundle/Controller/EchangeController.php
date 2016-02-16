@@ -57,24 +57,6 @@ class EchangeController extends Controller
                     return $this->render('FinorthoFritageEchangeBundle:fileUpload:index.html.twig', array('form' => $form->createView(), 'commands' => $currentCommand));
                 }
 
-                if ($request->get('same') == 'on') {
-                    $params = $this->session->get('params');
-
-                    if($request->get('axis') !== null && $request->get('axis') !== $stl_file->setAxis($params['axis'])){
-                        $stl_file->setAxis($request->get('axis'));
-                    }else {
-                        $stl_file->setAxis($params['axis']);
-                    }
-
-                    if($request->get('quantite') !== null){
-                        $stl_file->setQuantite($request->get('quantite'));
-                    }else{
-                        $stl_file->setQuantite($params['quantite']);
-                    }
-
-                    $checked = true;
-                }
-
                 $em = $this->getDoctrine()->getManager();
                 $stl_file->setUtilisateur($this->getUser());
                 $stl_file->setDate(new \DateTime());

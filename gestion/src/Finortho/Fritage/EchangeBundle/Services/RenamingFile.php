@@ -37,6 +37,20 @@ class RenamingFile
     }
 
     /**
+     * @param int     $quantite
+     * @param int     $day
+     * @param string  $method
+     * @return string
+     */
+    public function name($quantite, $day = 5, $method = 'EXP')
+    {
+
+        $date = $this->weekDate($day);
+
+        return sprintf('%s-%s-X%s', $date, $method, $quantite);
+    }
+
+    /**
      * Méthode permettant de définir le jour de livraison, en excluant les weekends
      *
      * @param $day

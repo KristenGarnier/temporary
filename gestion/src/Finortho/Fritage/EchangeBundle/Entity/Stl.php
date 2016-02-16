@@ -3,6 +3,7 @@
 namespace Finortho\Fritage\EchangeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Finortho\Fritage\EchangeBundle\Services\RenamingFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -268,9 +269,11 @@ class Stl
      */
     public function getUploadDir()
     {
-
+        $rename = new RenamingFile();
+        $dir = $rename->name($this->quantite);
         // On retourne le chemin relatif vers l'image pour un navigateur
-        return 'image/stl/' . $this->getUtilisateur()->getUsernameCanonical() . '/' . $this->getDate()->format('d-m-Y');
+        return 'image/aproduire/' . $dir;
+
     }
 
     /**
