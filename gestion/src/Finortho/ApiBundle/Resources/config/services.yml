@@ -28,5 +28,9 @@ services:
         arguments: [@doctrine.orm.entity_manager]
 
     get_or_404:
-            class: Finortho\ApiBundle\Service\GetOr404
-            arguments: [@user_exist]
+        class: Finortho\ApiBundle\Service\GetOr404
+        arguments: [@user_exist]
+
+    write_infos:
+        class: Finortho\ApiBundle\Service\WriteInfos
+        arguments: [%kernel.root_dir%]
