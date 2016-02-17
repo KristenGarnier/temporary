@@ -47,7 +47,7 @@ class WriteInfos
         fwrite($f, "\r\n");
         fwrite($f, "Date d'expédition : " . $date->formatLocalized('%A %d %B %Y'));
         fwrite($f, "\r\n\r\n");
-        fwrite($f, "Axe vertical de la pièce  : " . $file->getAxis());
+        fwrite($f, "Axe vertical de la pièce  : " . $stl->getAxis());
         fwrite($f, "\r\n\r\n");
         fwrite($f, "Commentaire : \r\n");
         fwrite($f, "\t");
