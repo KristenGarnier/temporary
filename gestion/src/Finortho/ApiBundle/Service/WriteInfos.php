@@ -9,7 +9,6 @@ use Finortho\Fritage\EchangeBundle\Entity\Commande;
 class WriteInfos
 {
 
-    private $om;
     private $rootdir;
 
     public function __construct($root)
@@ -47,6 +46,8 @@ class WriteInfos
         fwrite($f, $stl->getName() . '.stl' . "\r\n");
         fwrite($f, "\r\n");
         fwrite($f, "Date d'expédition : " . $date->formatLocalized('%A %d %B %Y'));
+        fwrite($f, "\r\n\r\n");
+        fwrite($f, "Axe vertical de la pièce  : " . $file->getAxis());
         fwrite($f, "\r\n\r\n");
         fwrite($f, "Commentaire : \r\n");
         fwrite($f, "\t");
