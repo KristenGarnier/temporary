@@ -12,4 +12,5 @@
 app/config/config.yml
 /web/node_modules
 /web/uploads
+/web/image
 
