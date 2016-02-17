@@ -45,9 +45,9 @@ class WriteInfos
         fwrite($f, "\t");
         fwrite($f, $stl->getName() . '.stl' . "\r\n");
         fwrite($f, "\r\n");
-        fwrite($f, "Date d'expédition : " . $date->formatLocalized('%A %d %B %Y'));
+        fwrite($f, "Date d'expédition : " . $date->format('d m Y'));
         fwrite($f, "\r\n\r\n");
-        fwrite($f, "Axe vertical de la pièce  : " . $stl->getAxis());
+        fwrite($f, "Axe vertical de la pièce : " . $stl->getAxis());
         fwrite($f, "\r\n\r\n");
         fwrite($f, "Commentaire : \r\n");
         fwrite($f, "\t");
