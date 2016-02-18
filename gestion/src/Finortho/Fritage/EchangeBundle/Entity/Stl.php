@@ -57,7 +57,7 @@ class Stl
      * @var $utilisateur Utilisateur attaché à la piece
      *
      * @ORM\ManyToOne(targetEntity="Finortho\Fritage\EchangeBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $utilisateur;
 
@@ -78,7 +78,7 @@ class Stl
     /**
      * @var integer quantité de pièces sur ce modèle
      *
-     * @ORM\Column(name="quantite", type="integer", nullable=true)
+     * @ORM\Column(name="quantite", type="integer", nullable=false)
      * @Expose
      */
     private $quantite;

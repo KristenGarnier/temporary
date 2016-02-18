@@ -2,6 +2,7 @@
 
 namespace Finortho\Fritage\EchangeBundle\Form\Type;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,7 +18,7 @@ class StlType extends AbstractType
         $builder
             ->add('file', 'file', array('label' => 'Votre fichier .stl'))
             ->add('name', 'text', array('label' => 'Nom du fichier'))
-            ->add('commentaire', 'textarea', array('label' => 'Dites en nous plus sur le fichier'))
+            ->add('commentaire', 'textarea', array('label' => 'Dites en nous plus sur le fichier', 'required' => false))
             ->add('quantite', 'number', array('label' => 'Le nombre de pièces à produire'))
         ;
     }
