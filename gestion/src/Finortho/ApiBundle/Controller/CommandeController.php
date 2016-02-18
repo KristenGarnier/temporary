@@ -4,6 +4,7 @@ namespace Finortho\ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -15,6 +16,43 @@ class CommandeController extends FOSRestController
 {
     /**
      * Attatch product to packitems
+     *
+     * @ApiDoc(
+     *  resource= true,
+     *  description="Register a command into the db",
+     *  requirements={
+     *      {
+     *          "name"="packId",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="id of the chosen pack"
+     *      },
+     *     {
+     *          "name"="category",
+     *          "dataType"="string",
+     *          "description"="Nome of the exigence cathegoty"
+     *      },
+     *     {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Id ot the product"
+     *      },
+     *     {
+     *          "name"="id",
+     *          "dataType"="integer",
+     *          "requirement"="\d+",
+     *          "description"="Id ot the product"
+     *     }
+     *  },
+     *  statusCodes={
+     *      200="Returned when successful",
+     *      403="Returned when the user is not allowed",
+     *      404={
+     *          "Returned when the user is not found",
+     *      }
+     * }
+     * )
      *
      * @param Request $request
      * @return \FOS\RestBundle\View\View

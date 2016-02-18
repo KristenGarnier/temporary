@@ -3,6 +3,10 @@ finortho_api:
     prefix:   /api
     resource: "@FinorthoApiBundle/Resources/config/routing.yml"
 
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
 finortho_admin:
     resource: "@FinorthoAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
